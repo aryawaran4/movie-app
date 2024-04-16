@@ -9,8 +9,6 @@
   align-items: center;
 
   .landing-page-area {
-    width: 80%;
-
     .title {
       font-size: 6.4rem;
       font-weight: bold;
@@ -29,22 +27,6 @@
       align-items: center;
       gap: 5rem;
 
-      .login {
-        font-size: 2.4rem;
-        font-weight: bold;
-        color: #fff;
-        padding: 1.6rem 2.4rem;
-        background: $primary-btn-color;
-        border: none;
-        border-radius: 10px;
-        transition: all 0.5s ease;
-      }
-
-      .login:hover {
-        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-        background-color: #FF4081;                
-      }
-
       .divider {
         content: '';
         width: 1px;
@@ -54,19 +36,7 @@
         align-items: center;
         justify-content: center;
       }
-
-      .register {
-        font-size: 2.4rem;
-        font-weight: bold;
-        color: #fff;
-        border: none;
-        background: transparent;
-        transition: all 0.5s ease;
-      }
-
-      .register:hover{
-        color: #EA1E63;
-      }
+      
     }
   }
 }

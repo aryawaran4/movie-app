@@ -1,5 +1,21 @@
-<form (ngSubmit)="register(email.value, password.value)">
-  <input type="text" placeholder="Email" #email required>
-  <input type="password" placeholder="Password" #password required>
-  <button type="submit">Register</button>
-</form>
+<app-navbar *ngIf="showNavbar"></app-navbar>
+
+<div class="login-page">
+  <div class="login-page-area area-width">
+    <div class="illustration">
+
+    </div>
+    <div class="form">
+      <h2 class="h2-ttl">Register</h2>
+      <form [formGroup]="registerForm" (ngSubmit)="register()" class="form-area">
+        <div class="input-area">
+          <input type="email" placeholder="Email" formControlName="email">
+          <input type="username" placeholder="username" formControlName="username">          
+          <input type="password" placeholder="Password" formControlName="password">          
+        </div>
+        <button type="submit" [disabled]="registerForm.invalid" class="primary-btn">Register</button>
+      </form>
+      
+    </div>
+  </div>
+</div>

@@ -1,7 +1,20 @@
-<form (ngSubmit)="login(email.value, password.value)">
-  <input type="text" placeholder="Email" #email required>
-  <input type="password" placeholder="Password" #password required>
-  <button type="submit">Login</button>
-</form>
+<app-navbar *ngIf="showNavbar"></app-navbar>
 
-<button (click)="logout()">Logout</button>
+<div class="login-page">
+  <div class="login-page-area area-width">
+    <div class="illustration">
+
+    </div>
+    <div class="form">
+      <h2 class="h2-ttl">Ready to Explore?<br>Sign In Now!</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="login()" class="form-area">
+        <div class="input-area">
+          <input type="email" placeholder="Email" formControlName="email">
+          <input type="password" placeholder="Password" formControlName="password">          
+        </div>
+        <button type="submit" [disabled]="loginForm.invalid" class="primary-btn">Login</button>
+      </form>
+      
+    </div>
+  </div>
+</div>
