@@ -1,0 +1,50 @@
+@import '/src/styles.scss';
+
+.navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: $primary-bg-color;
+  display: flex;
+  justify-content: center;
+
+  .navbar-area {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    padding: 4.5rem 1rem;
+
+    .logo {
+      h1 {
+        font-size: 3.6rem;
+        color: $primary-header-color;
+        font-weight: bold;
+      }
+    }
+
+    .nav-links {
+      list-style-type: none;
+      display: flex;
+
+      li {
+        margin-right: 3.6rem;
+
+        a {
+          font-size: 2rem;
+          font-weight: bold;
+          color: #fff;
+          text-decoration: none;
+          cursor: pointer;
+        }
+
+        a:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
