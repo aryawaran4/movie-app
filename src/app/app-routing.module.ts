@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 //component
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 const routes: Routes = [
   {
@@ -11,6 +13,8 @@ const routes: Routes = [
     redirectTo: '/landing-page',
   },
   { path: 'landing-page', component: LandingPageComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   // {
   //   path: '**',
   //   component: Error404Component,
