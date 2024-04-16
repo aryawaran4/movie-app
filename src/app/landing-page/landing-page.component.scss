@@ -1,20 +1,8 @@
 @import '/src/styles.scss';
 
 .landing-page {
-  width: 100%;
-  height: 100vh;
-  background-color: $primary-bg-color;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
-  .landing-page-area {
-    .title {
-      font-size: 6.4rem;
-      font-weight: bold;
-      margin-bottom: 2rem;
-      color: $primary-header-color;
-    }
+  .landing-page-area {    
 
     .text-content {
       font-size: 2.4rem;

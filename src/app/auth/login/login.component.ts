@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,10 +17,7 @@ export class LoginComponent {
     password: new FormControl('', Validators.required),
   })
 
-  constructor(private authService: AuthService) { }
-
-  ngOnInit(): void {
-  }
+  constructor(private router: Router,private authService: AuthService) { }
 
   login(): void {
     if (this.loginForm.valid) {
@@ -34,6 +32,7 @@ export class LoginComponent {
             if (loggedIn) {
               console.log('Login successful');
               // Redirect or perform actions after successful login
+              this.router.navigateByUrl('/dashboard');
             } else {
               console.error('Login failed');
               // Handle login failure
