@@ -53,7 +53,6 @@ export class LoginComponent {
     }
   }
 
-
   logout(): void {
     this.authService.logout();
     // Perform any additional logout-related tasks, such as navigating to the login page

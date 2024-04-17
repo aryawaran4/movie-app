@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { UserType } from './auth.type';
 import { v4 as uuidv4 } from 'uuid';
+import { UserFavouriteType } from '../shared/types/movie.type';
 
 @Injectable({
   providedIn: 'root'
@@ -15,20 +16,31 @@ export class AuthService {
   }
 
   login(authData: Partial<UserType>): Observable<boolean> {
-    const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    const storedUsers = JSON.parse(localStorage.getItem('users') || '[]') as UserType[];
     console.log('Stored Users:', storedUsers); // Log the stored users array to see its contents
 
-    const user = storedUsers.find((u: UserType) => u.email === authData.email && u.password === authData.password);
-    console.log('User found:', user); // Log the user object found
+    let foundUser: UserType | undefined; // Define a variable to store the found user
 
-    if (user) {
+    // Iterate over storedUsers array to find the matching user
+    storedUsers.forEach((u: UserType) => {
+      if (u.email === authData.email && u.password === authData.password) {
+        foundUser = u; // Store the found user
+      }
+    });
+
+    console.log('User found:', foundUser); // Log the found user object
+
+    if (foundUser) {
       localStorage.setItem('token', 'dummyToken');
+      localStorage.setItem('user', JSON.stringify(foundUser));
+      this.createUsersData(foundUser); // Pass the found user data to createUsersData function
       return of(true);
     } else {
       console.error('Login failed: Invalid credentials');
       return of(false);
     }
   }
+
 
 
   register(authData: Partial<UserType>): Observable<boolean> {
@@ -54,8 +66,39 @@ export class AuthService {
     }
   }
 
+  createUsersData(userData: Partial<UserType>): void {
+    // Retrieve existing usersData array from localStorage or initialize it if it doesn't exist
+    let usersData: UserFavouriteType[] = JSON.parse(localStorage.getItem('usersData') || '[]');
+
+    // Check if the provided userData has a valid uuid
+    if (userData.uuid) {
+      // Check if the provided uuid already exists in usersData
+      const existingUser = usersData.find(user => user.uuid === userData.uuid);
+
+      if (!existingUser) {
+        // Create a new entry for userData
+        const newUserEntry = {
+          username: userData.username || '',
+          email: userData.email || '',
+          uuid: userData.uuid || '',
+          favourites: [] // Initialize favourite as an empty array
+        };
+
+        // Push the new user entry to the usersData array
+        usersData.push(newUserEntry);
+
+        // Save the updated usersData array back to localStorage
+        localStorage.setItem('usersData', JSON.stringify(usersData));
+      } else {
+        console.log('User with the provided UUID already exists in usersData');
+      }
+    } else {
+      console.error('Invalid userData: UUID is missing');
+    }
+  }
 
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
   }
 }
