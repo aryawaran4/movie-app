@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// plugin
+// library
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 
@@ -13,12 +13,12 @@ import { LandingPageModule } from './landing-page/landing-page.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { AccountModule } from './account/account.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +28,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
     LandingPageModule,
     SharedModule,
     AuthModule,
-    DashboardModule
+    DashboardModule,
+    AccountModule
   ],
   providers: [],
   bootstrap: [AppComponent]
