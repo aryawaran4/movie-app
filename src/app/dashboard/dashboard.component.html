@@ -2,6 +2,12 @@
 
 <div class="dashborad container-02 area-padding">
   <div class="dashborad-area area-width">
-    
+    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)"
+      (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
+      <div ngxSlickItem *ngFor="let discovery of discoveries" class="slide">
+        <img [src]="getImageUrl(discovery.backdrop_path)" alt="" width="100%">
+        <h3 class="ttl-02">{{discovery.title}}</h3>
+      </div>
+    </ngx-slick-carousel>
   </div>
 </div>

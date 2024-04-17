@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import { Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 const routes: Routes = [
   {
@@ -16,7 +17,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
-    
+    SlickCarouselModule
   ]
 })
 export class DashboardModule { }
