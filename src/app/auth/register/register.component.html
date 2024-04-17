@@ -9,13 +9,13 @@
       <h2 class="ttl-02 txt-primary">Register</h2>
       <form [formGroup]="registerForm" (ngSubmit)="register()" class="form-area">
         <div class="input-area">
+          <input type="username" placeholder="username" formControlName="username">
           <input type="email" placeholder="Email" formControlName="email">
-          <input type="username" placeholder="username" formControlName="username">          
-          <input type="password" placeholder="Password" formControlName="password">          
+          <input type="password" placeholder="Password" formControlName="password">
         </div>
         <button type="submit" [disabled]="registerForm.invalid" class="primary-btn">Register</button>
       </form>
-      
+
     </div>
   </div>
 </div>

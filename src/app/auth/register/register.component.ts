@@ -12,8 +12,8 @@ export class RegisterComponent {
   showNavbar = true;
 
   registerForm = new FormGroup({
-    email: new FormControl('', Validators.required),
     username: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   })
 
@@ -22,12 +22,12 @@ export class RegisterComponent {
   register(): void {
     if (this.registerForm.valid) {
       const formValue = this.registerForm.value;
-      const { email, username, password } = formValue;
+      const { username, email, password } = formValue;
 
       // Check if email and password are not null or undefined
-      if (email && password && username) {
+      if (password && email && username) {
         // Call the register function with valid credentials
-        this.authService.register({ email, username, password }).subscribe(
+        this.authService.register({ username, email, password }).subscribe(
           (loggedIn: boolean) => {
             if (loggedIn) {
               console.log('register successful');
