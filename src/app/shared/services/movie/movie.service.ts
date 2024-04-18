@@ -7,14 +7,6 @@ import { DiscoverResponse, FavouriteType, UserFavouriteType } from '../../types/
 })
 export class MovieService {
   private apiUrl = 'https://api.themoviedb.org/3';
-  private apiKey = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NTRkZmM5MmQ2MzBjYmU4NjRhMzllMWU3NmJjYzdlNSIsInN1YiI6IjYxNmU4YzMzMTA4OWJhMDA0NGM2NzU0NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.P3DryXumKOqJdhTMRDQN7MEhsIilwlhYbNIF710Q6VQ'; // Replace with your actual API key
-
-  private options = {
-    headers: {
-      accept: 'application/json',
-      Authorization: `Bearer ${this.apiKey}`
-    }
-  };
 
   constructor(private http: HttpClient) { }
 
@@ -22,7 +14,7 @@ export class MovieService {
     try {
       const url = `${this.apiUrl}/discover/movie?language=en-US&page=1&sort_by=popularity.desc`;
 
-      const response = await this.http.get<DiscoverResponse>(url, this.options).toPromise();
+      const response = await this.http.get<DiscoverResponse>(url).toPromise();
       if (!response) {
         throw new Error('Response is undefined');
       }
@@ -36,7 +28,7 @@ export class MovieService {
   async getMovieDetails(movieId: number): Promise<FavouriteType> {
     const url = `${this.apiUrl}/movie/${movieId}`;
     try {
-      const response = await this.http.get<FavouriteType>(url, this.options).toPromise();
+      const response = await this.http.get<FavouriteType>(url).toPromise();
       if (response) {
         return response;
       } else {

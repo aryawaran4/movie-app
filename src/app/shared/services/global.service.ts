@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserType } from 'src/app/auth/auth.type';
+import { UserType } from 'src/app/shared/types/auth.type';
 
 @Injectable({
   providedIn: 'root'

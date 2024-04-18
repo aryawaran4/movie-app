@@ -12,9 +12,10 @@ import player from 'lottie-web';
 import { LandingPageModule } from './landing-page/landing-page.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { AccountModule } from './account/account.module';
+import { AuthInterceptorService } from './shared/services/auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { AccountModule } from './account/account.module';
     DashboardModule,
     AccountModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

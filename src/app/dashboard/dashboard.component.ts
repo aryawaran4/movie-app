@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { GlobalService } from '../shared/services/global.service';
 import { MovieService } from '../shared/services/movie/movie.service';
 import { FavouriteType, MovieType } from '../shared/types/movie.type';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../shared/services/auth/auth.service';
 import { Router } from '@angular/router';
-import { UserType } from '../auth/auth.type';
+import { UserType } from '../shared/types/auth.type';
 
 @Component({
   selector: 'app-dashboard',

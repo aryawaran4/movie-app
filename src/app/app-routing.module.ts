@@ -7,6 +7,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountComponent } from './account/account.component';
+import { AuthGuardService } from './shared/services/auth/auth-guard.service';
+import { AuthLoginGuardService } from './shared/services/auth/auth-login-guard.service';
 
 const routes: Routes = [
   {
@@ -14,11 +16,11 @@ const routes: Routes = [
     pathMatch: 'full',
     redirectTo: '/landing-page',
   },
-  { path: 'landing-page', component: LandingPageComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'landing-page', component: LandingPageComponent, canActivate: [AuthLoginGuardService] },
+  { path: 'login', component: LoginComponent, canActivate: [AuthLoginGuardService] },
   { path: 'register', component: RegisterComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'account', component: AccountComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
+  { path: 'account', component: AccountComponent, canActivate: [AuthGuardService] },
   // {
   //   path: '**',
   //   component: Error404Component,
@@ -29,4 +31,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

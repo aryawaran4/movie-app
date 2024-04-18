@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { UserType } from './auth.type';
+import { UserType } from '../../types/auth.type';
 import { v4 as uuidv4 } from 'uuid';
-import { UserFavouriteType } from '../shared/types/movie.type';
+import { UserFavouriteType } from '../../types/movie.type';
 
 @Injectable({
   providedIn: 'root'
