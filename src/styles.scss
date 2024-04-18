@@ -11,26 +11,44 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-$primary-header-color: #EA1E63;
-$primary-btn-color: #EA1E63;
-$primary-bg-color: #261037;
+// Dark Theme:
+// Main Background: #121212 (Dark charcoal black)
+// Secondary Background: #1E1E1E (Slightly lighter black)
+// Text Color: #FFFFFF (White)
+// Accent Color: #FFD700 (Gold or yellow for highlighting)
+
+// Light Theme:
+// Main Background: #F8F9FA (Light grayish-blue)
+// Secondary Background: #FFFFFF (White)
+// Text Color: #333333 (Dark gray for better readability)
+// Accent Color: #007BFF (Blue for highlighting)
+
+$main-background: #121212;
+$secondary-background: #1E1E1E;
+$text-color: #FFFFFF;
+$accent-color: #FFD700;
+$accent-color-hover: #dfa92c;
+$accent-color-fade: #FFD7001a;
+$main-background-fade: #121212b3;
+$secondary-background-fade: #1E1E1Eb3;
 
 /**********************************************/
 /*                template                    */
 /**********************************************/
-.container-01{
+.container-01 {
   width: 100%;
   height: 100vh;
-  background-color: $primary-bg-color;
+  padding-top: 10rem;
+  background-color: $secondary-background;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.container-02{
+.container-02 {
   width: 100%;
   height: 100%;
-  background-color: $primary-bg-color;
+  background-color: $secondary-background;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,8 +58,17 @@ $primary-bg-color: #261037;
   width: 80%;
 }
 
-.area-padding{
-  padding: 20rem 0 15rem;
+.area-full {
+  width: 100%;
+  max-width: 100%;
+}
+
+.area-center {
+  margin: 0 auto;
+}
+
+.area-padding {
+  padding: 12.5rem 0;
 }
 
 /**********************************************/
@@ -54,38 +81,78 @@ button {
 .primary-btn {
   font-size: 2.4rem;
   font-weight: bold;
-  color: #fff;
+  color: $text-color;
   padding: 1.6rem 2.4rem;
-  background: $primary-btn-color;
+  background: $accent-color;
   border: none;
   border-radius: 10px;
   transition: all 0.5s ease;
+  color: $main-background;
 }
 
-.primary-btn:hover {
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  background-color: #FF4081;
+.primary-btn-icon {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: $text-color;
+  padding: 1.6rem 2.4rem;
+  background: $accent-color;
+  border: none;
+  border-radius: 10px;
+  transition: all 0.5s ease;
+  color: $main-background;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.primary-btn:hover, .primary-btn-icon:hover {
+  box-shadow: 0 4px 6px -1px $accent-color-fade, 0 2px 4px -2px $accent-color-fade;
+  background-color: $accent-color-hover;
 }
 
 .primary-cta {
   font-size: 2.4rem;
   font-weight: bold;
-  color: #fff;
+  color: $text-color;
   border: none;
   background: transparent;
   transition: all 0.5s ease;
 }
 
 .primary-cta:hover {
-  color: #EA1E63;
+  color: $accent-color;
 }
 
 
 /**********************************************/
 /*                Typography                  */
 /**********************************************/
-.txt-primary{
-  color: $primary-header-color;
+.txt-primary {
+  color: $text-color;
+}
+
+.txt-accent {
+  color: $accent-color;
+}
+
+.txt-center {
+  text-align: center !important;
+}
+
+.txt-left {
+  text-align: left !important;
+}
+
+.font-bold {
+  font-weight: bold !important;
+}
+
+.font-medium {
+  font-weight: 500 !important;
+}
+
+.font-normal {
+  font-weight: normal !important;
 }
 
 .ttl-01 {
@@ -95,7 +162,67 @@ button {
 }
 
 .ttl-02 {
-  font-size: 3.2rem;  
+  font-size: 3.2rem;
   font-weight: bold;
   text-align: center;
+  margin-bottom: 2rem;
+}
+
+.txt-01 {
+  font-size: 2.4rem;
+  font-weight: normal;
+}
+
+.txt-02 {
+  font-size: 1.6rem;
+  font-weight: normal;
+}
+
+.material-symbols-outlined {
+  font-size: 2.4rem;
+  color: inherit;
+}
+
+/**********************************************/
+/*                INPUT                       */
+/**********************************************/
+
+input {
+  font-size: 1.8rem;
+  border-radius: 10px;
+  transition: all 0.5s;
+  padding: 1.6rem;
+}
+
+input:focus {
+  border-color: $accent-color-fade;
+  box-shadow: 0 0 1rem $accent-color;
+  outline: 0 none;
+}
+
+/**********************************************/
+/*                SLICK                       */
+/**********************************************/
+
+.slick-next,
+.slick-prev {
+  z-index: 10;
+  width: 8rem !important;
+  height: 8rem !important;
+}
+
+.slick-prev {
+  left: 1rem !important;
+}
+
+.slick-next {
+  right: 1rem !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 8rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

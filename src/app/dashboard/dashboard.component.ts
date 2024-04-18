@@ -14,7 +14,7 @@ import { UserType } from '../auth/auth.type';
 export class DashboardComponent {
   showNavbar = true;
   userLogin = false
-  userInfo! : UserType
+  userInfo!: UserType
 
   discoveries!: MovieType[];
   favourite!: FavouriteType;
@@ -35,7 +35,7 @@ export class DashboardComponent {
 
   // ***SLICK***
   slides = [];
-  slideConfig = { "slidesToShow": 3, "slidesToScroll": 1 };
+  slideConfig = { "slidesToShow": 1, "slidesToScroll": 1, 'arrows': false };
 
   slickInit(e: any) {
     console.log('slick initialized');
@@ -69,7 +69,7 @@ export class DashboardComponent {
   getImageUrl(backdropPath: string | null): string {
     if (backdropPath) {
       const baseUrl = 'https://image.tmdb.org/t/p/';
-      const size = 'w500'; // Adjust the size as needed
+      const size = 'w1280'; // Adjust the size as needed
       return `${baseUrl}${size}${backdropPath}`;
     } else {
       // Provide a default image URL if backdropPath is not provided
@@ -79,7 +79,7 @@ export class DashboardComponent {
 
   async addFavourite(movieId: number) {
     try {
-      const favourite = await this.movieService.addFavouriteMovie(this.userInfo.uuid, movieId);           
+      const favourite = await this.movieService.addFavouriteMovie(this.userInfo.uuid, movieId);
     } catch (error) {
       console.error('Error fetching movies:', error);
     } finally {

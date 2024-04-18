@@ -1,13 +1,32 @@
 <app-navbar *ngIf="showNavbar"></app-navbar>
 
-<div class="dashborad container-02 area-padding">
-  <div class="dashborad-area area-width">
+<div class="dashboard container-02 area-padding">
+  <div class="dashboard-area area-full">
+    <h2 class="ttl-02 txt-left txt-primary area-width area-center">TRENDING THIS WEEK</h2>
     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)"
       (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
       <div ngxSlickItem *ngFor="let discovery of discoveries" class="slide">
         <img [src]="getImageUrl(discovery.backdrop_path)" alt="" width="100%">
-        <h3 class="ttl-02">{{discovery.title}}</h3>
-        <button (click)="addFavourite(discovery.id)">add to favourite</button>
+        <div class="slide-info">
+          <div class="slide-info-area">
+            <div class="genre-list">
+              <div class="genre font-medium txt-02">animation</div>
+              <div class="genre font-medium txt-02">fantasy</div>
+            </div>
+            <h3 class="ttl-02 txt-left txt-primary">{{discovery.title}}</h3>
+            <p class="txt-02 txt-primary">{{discovery.overview}}</p>
+            <div class="slide-action-area">
+              <div class="action-common">
+                <p class="txt-02 txt-primary rating">{{discovery.vote_average | number : '1.1-1'}}</p>
+                <button class="favourite-btn" (click)="addFavourite(discovery.id)">add to favourite</button>
+              </div>
+              <button class="primary-btn-icon"><span class="material-symbols-outlined">
+                  info
+                </span>
+                See More</button>
+            </div>
+          </div>
+        </div>
       </div>
     </ngx-slick-carousel>
   </div>
