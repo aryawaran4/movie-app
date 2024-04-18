@@ -90,24 +90,46 @@ button {
   color: $main-background;
 }
 
-.primary-btn-icon {
+.primary-btn.outlined {
   font-size: 1.6rem;
-  font-weight: bold;
-  color: $text-color;
-  padding: 1.6rem 2.4rem;
-  background: $accent-color;
-  border: none;
-  border-radius: 10px;
-  transition: all 0.5s ease;
-  color: $main-background;
+  background: $main-background-fade;
+  border: 1px solid $accent-color;
+  color: $accent-color
+}
+
+.primary-btn.icon {
+  font-size: 1.6rem;
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.primary-btn:hover, .primary-btn-icon:hover {
+.primary-btn.icon.circle {
+  font-size: 1.6rem;
+  padding: 1.6rem;
+  background: $main-background-fade;
+  border: 1px solid $accent-color;
+  border-radius: 9999px;
+  transition: all 0.5s ease;
+  color: $main-background;
+}
+
+.primary-btn.icon.circle .material-symbols-outlined{
+  color: $accent-color;
+}
+
+.primary-btn:hover {
   box-shadow: 0 4px 6px -1px $accent-color-fade, 0 2px 4px -2px $accent-color-fade;
   background-color: $accent-color-hover;
+}
+
+.primary-btn.icon.circle:hover {  
+  background-color: $secondary-background;
+}
+
+.primary-btn.outlined:hover {  
+  background-color: $accent-color;
+  color: $main-background;
 }
 
 .primary-cta {

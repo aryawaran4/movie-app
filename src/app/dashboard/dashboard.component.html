@@ -5,25 +5,44 @@
     <h2 class="ttl-02 txt-left txt-primary area-width area-center">TRENDING THIS WEEK</h2>
     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)"
       (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
-      <div ngxSlickItem *ngFor="let discovery of discoveries" class="slide">
-        <img [src]="getImageUrl(discovery.backdrop_path)" alt="" width="100%">
+      <div ngxSlickItem *ngFor="let trendShow of trends" class="slide">
+        <img [src]="getImageUrl(trendShow.backdrop_path)" alt="" width="100%">
         <div class="slide-info">
           <div class="slide-info-area">
             <div class="genre-list">
               <div class="genre font-medium txt-02">animation</div>
               <div class="genre font-medium txt-02">fantasy</div>
             </div>
-            <h3 class="ttl-02 txt-left txt-primary">{{discovery.title}}</h3>
-            <p class="txt-02 txt-primary">{{discovery.overview}}</p>
+            <h3 class="ttl-02 txt-left txt-primary">{{trendShow.media_type === "movie" ? trendShow.title : trendShow.name}}</h3>
+            <p class="txt-02 txt-primary">{{trendShow.overview}}</p>
             <div class="slide-action-area">
               <div class="action-common">
-                <p class="txt-02 txt-primary rating">{{discovery.vote_average | number : '1.1-1'}}</p>
-                <button class="favourite-btn" (click)="addFavourite(discovery.id)">add to favourite</button>
+                <p class="txt-01 txt-primary icon rating">
+                  <span class="material-symbols-outlined">
+                    star_rate
+                  </span>
+                  {{trendShow.vote_average | number : '1.1-1'}} / 10
+                </p>
+                <p class="txt-01 txt-primary icon person">
+                  <span class="material-symbols-outlined">
+                    person
+                  </span>
+                  {{trendShow.vote_count}}
+                </p>                
+                <div class="icon favorite">
+                  <span class="favorite-icon"></span>
+                  <span class="favorite-icon active"></span>
+                  <span class="favourite-txt" (click)="addFavourite(trendShow.id, trendShow.media_type)">Add to favourite</span>
+                  <span class="favourite-txt" (click)="removeFavourite(trendShow.id, trendShow.media_type)">Remove favourite</span>
+                </div>                
               </div>
-              <button class="primary-btn-icon"><span class="material-symbols-outlined">
-                  info
-                </span>
-                See More</button>
+              <div class="action-btn">
+                <button class="primary-btn icon"><span class="material-symbols-outlined">
+                    play_arrow
+                  </span>
+                  Watch Trailer</button>
+                <button class="primary-btn outlined">See More</button>
+              </div>
             </div>
           </div>
         </div>

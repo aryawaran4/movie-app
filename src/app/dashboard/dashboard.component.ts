@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { GlobalService } from '../shared/services/global.service';
 import { MovieService } from '../shared/services/movie/movie.service';
-import { FavouriteType, MovieType } from '../shared/types/movie.type';
+import { FavouriteType, TrendingType } from '../shared/types/movie.type';
 import { AuthService } from '../shared/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { UserType } from '../shared/types/auth.type';
@@ -15,8 +15,9 @@ export class DashboardComponent {
   showNavbar = true;
   userLogin = false
   userInfo!: UserType
+  isMenuOpen = true
 
-  discoveries!: MovieType[];
+  trends!: TrendingType[];
   favourite!: FavouriteType;
 
   constructor(private globalService: GlobalService, private movieService: MovieService, private authService: AuthService, private router: Router) { }
@@ -35,7 +36,10 @@ export class DashboardComponent {
 
   // ***SLICK***
   slides = [];
-  slideConfig = { "slidesToShow": 1, "slidesToScroll": 1, 'arrows': false };
+  slideConfig = {
+    "slidesToShow": 1, "slidesToScroll": 1, 'arrows': false, 'autoplay': true,
+    'autoplaySpeed': 7000,
+  };
 
   slickInit(e: any) {
     console.log('slick initialized');
@@ -56,9 +60,9 @@ export class DashboardComponent {
 
   async getMovies() {
     try {
-      const movies = await this.movieService.discoverMovies();
+      const movies = await this.movieService.trendingMovies();
       console.log('Movies:', movies);
-      this.discoveries = movies.results
+      this.trends = movies.results
     } catch (error) {
       console.error('Error fetching movies:', error);
     } finally {
@@ -77,9 +81,19 @@ export class DashboardComponent {
     }
   }
 
-  async addFavourite(movieId: number) {
+  async addFavourite(movieId: number, mediaType:string) {
     try {
-      const favourite = await this.movieService.addFavouriteMovie(this.userInfo.uuid, movieId);
+      const favourite = await this.movieService.addFavourite(this.userInfo.uuid, movieId, mediaType);
+    } catch (error) {
+      console.error('Error fetching movies:', error);
+    } finally {
+      console.log('API call completed.');
+    }
+  }
+
+  async removeFavourite(movieId: number, mediaType:string) {
+    try {
+      const favourite = await this.movieService.removeFavourite(this.userInfo.uuid, movieId, mediaType);
     } catch (error) {
       console.error('Error fetching movies:', error);
     } finally {

@@ -81,7 +81,10 @@ export class AuthService {
           username: userData.username || '',
           email: userData.email || '',
           uuid: userData.uuid || '',
-          favourites: [] // Initialize favourite as an empty array
+          favourites: {
+            movies: [],
+            tv: []
+          } // Initialize favourite as an empty array
         };
 
         // Push the new user entry to the usersData array

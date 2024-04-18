@@ -5,10 +5,12 @@
     .carousel {
       .slide {
         position: relative;
-        img{
+
+        img {
           object-fit: cover;
           height: 56rem;
         }
+
         .slide-info {
           background: linear-gradient(to top right, $main-background, transparent);
           position: absolute;
@@ -16,12 +18,14 @@
           left: 0;
           top: 0;
           bottom: 0;
+
           .slide-info-area {
             width: 100%;
             padding: 4.5rem 6rem;
             position: absolute;
             left: 0;
             bottom: 0;
+
             .genre-list {
               display: flex;
               align-items: center;
@@ -30,8 +34,9 @@
 
               .genre {
                 padding: .4rem 1.6rem;
-                background: $text-color;
-                color: $main-background;
+                background: $main-background-fade;
+                border: 1px solid $accent-color;
+                color: $accent-color;
                 border-radius: 10px;
               }
 
@@ -51,6 +56,59 @@
               .action-common {
                 display: flex;
                 align-items: center;
+                gap: 2.6rem;
+
+                .icon {
+                  display: flex;
+                  align-items: center;
+                  gap: .8rem;
+
+                  span {
+                    font-size: 3.2rem;
+                    color: $accent-color;
+                  }
+                }
+
+                .favorite {
+                  cursor: pointer;
+                  .material-symbols-outlined {
+                    color: #FF5733;
+                  }
+                  .favourite-txt{
+                    color: $text-color;
+                    font-size: 1.6rem;
+                  }
+                  .favourite-txt:hover{
+                    text-decoration: underline;
+                  }
+                  .favorite-icon{
+                    content: '';
+                    background: url('/assets/icons/favorite_outline.svg');
+                    background-size: 100% 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 32px;
+                    height: 32px;                    
+                  }
+                  .favorite-icon.active{
+                    content: '';
+                    background: url('/assets/icons/favorite.svg');
+                    background-size: 100% 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 32px;
+                    height: 32px;                    
+                  }
+                }
+
+              }
+
+              .action-btn {
+                display: flex;
+                align-items: center;
+                gap: 1.6rem;
               }
             }
           }
