@@ -23,6 +23,10 @@ body {
 // Text Color: #333333 (Dark gray for better readability)
 // Accent Color: #007BFF (Blue for highlighting)
 
+/**********************************************/
+/*                common                      */
+/**********************************************/
+
 $main-background: #121212;
 $secondary-background: #1E1E1E;
 $text-color: #FFFFFF;
@@ -31,6 +35,10 @@ $accent-color-hover: #dfa92c;
 $accent-color-fade: #FFD7001a;
 $main-background-fade: #121212b3;
 $secondary-background-fade: #1E1E1Eb3;
+
+.none{
+  display: none !important;
+}
 
 /**********************************************/
 /*                template                    */

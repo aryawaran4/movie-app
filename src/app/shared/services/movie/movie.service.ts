@@ -105,6 +105,7 @@ export class MovieService {
 
     // Update the localStorage with the modified users array
     localStorage.setItem('usersData', JSON.stringify(users));
+
   }
 
   async removeFavourite(userId: string, showId: number, mediaType: string): Promise<void> {
@@ -155,6 +156,7 @@ export class MovieService {
 
     // Update the localStorage with the modified users array
     localStorage.setItem('usersData', JSON.stringify(users));
+
   }
 
 }

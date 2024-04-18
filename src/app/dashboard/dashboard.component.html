@@ -13,7 +13,8 @@
               <div class="genre font-medium txt-02">animation</div>
               <div class="genre font-medium txt-02">fantasy</div>
             </div>
-            <h3 class="ttl-02 txt-left txt-primary">{{trendShow.media_type === "movie" ? trendShow.title : trendShow.name}}</h3>
+            <h3 class="ttl-02 txt-left txt-primary">{{trendShow.media_type === "movie" ? trendShow.title :
+              trendShow.name}}</h3>
             <p class="txt-02 txt-primary">{{trendShow.overview}}</p>
             <div class="slide-action-area">
               <div class="action-common">
@@ -28,12 +29,15 @@
                     person
                   </span>
                   {{trendShow.vote_count}}
-                </p>                
+                </p>
                 <div class="icon favorite">
-                  <span class="favorite-icon"></span>
-                  <span class="favorite-icon active"></span>
-                  <span class="favourite-txt" (click)="addFavourite(trendShow.id, trendShow.media_type)">Add to favourite</span>
-                  <span class="favourite-txt" (click)="removeFavourite(trendShow.id, trendShow.media_type)">Remove favourite</span>
+                  <span
+                    [ngClass]="isFavorite(trendShow.id, trendShow.media_type) ? 'favorite-icon active' : 'favorite-icon'"></span>
+                  <span
+                    [ngClass]="isFavorite(trendShow.id, trendShow.media_type) ? 'favorite-txt remove' : 'favorite-txt add'"
+                    (click)="toggleFavorite(trendShow.id, trendShow.media_type)">
+                    {{ isFavorite(trendShow.id, trendShow.media_type) ? 'Remove from favorites' : 'Add to favorites' }}
+                  </span>
                 </div>                
               </div>
               <div class="action-btn">
