@@ -8,6 +8,9 @@
       <li><a routerLink="/">Tv Shows</a></li>
       <li><a routerLink="/">People</a></li>
       <li><a (click)="navigateTo('/account')">Account</a></li>
+      <li *ngIf="isLoggedIn"><a (click)="logout()"><span class="material-symbols-outlined">
+            logout
+          </span></a></li>
     </ul>
   </div>
 </nav>
