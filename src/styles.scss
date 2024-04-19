@@ -80,6 +80,39 @@ $secondary-background-fade: #1E1E1Eb3;
 }
 
 /**********************************************/
+/*                animate                     */
+/**********************************************/
+
+.inView {
+  opacity: 1 !important;
+  transform: translateY(0px) rotate(0deg) translateZ(0) !important;
+}
+
+.animated-fade-in {
+  -webkit-transform: translateY(50px) translateZ(0);
+  transform: translateY(50px) translateZ(0);
+  opacity: 0;
+}
+
+.first-show {
+  -webkit-transition-delay: all 1s;
+  -o-transition-delay: all 1s;
+  transition-delay: all 1s;
+  -webkit-transition: all 0.9s;
+  -o-transition: all 0.9s;
+  transition: all 0.9s;
+}
+
+.second-show {
+  -webkit-transition-delay: all 1.5s;
+  -o-transition-delay: all 1.5s;
+  transition-delay: all 1.5s;
+  -webkit-transition: all 1.4s;
+  -o-transition: all 1.4s;
+  transition: all 1.4s;
+}
+
+/**********************************************/
 /*                btn style                   */
 /**********************************************/
 button {
@@ -234,7 +267,7 @@ button {
 input {
   font-size: 1.8rem;
   border-radius: 10px;
-  transition: all 0.5s;
+  transition: all .5s;
   padding: 1.6rem;
 }
 
@@ -242,6 +275,33 @@ input:focus {
   border-color: $accent-color-fade;
   box-shadow: 0 0 1rem $accent-color;
   outline: 0 none;
+}
+
+.search-bar-area {
+  position: relative;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+
+  input:focus {
+    border-color: none;
+    box-shadow: none;
+  }
+}
+
+.search-bar {
+  display: block;
+  background: $main-background;
+  color: $text-color;
+  border: none;
+  width: 100%;
+  padding-right: 12%;
+}
+
+.search-btn {
+  width: 10%;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 /**********************************************/

@@ -39,14 +39,14 @@ export interface TvType {
   vote_count: number;
 }
 
-export interface TrendingType {
+export interface MediaType {
   backdrop_path: string;
   id: number;
   original_title?: string;
   original_name?: string;
   overview: string;
   poster_path: string;
-  media_type: 'movie' | 'tv' | 'person';
+  media_type: 'movie' | 'tv';
   adult: boolean;
   title?: string;
   name?: string;

@@ -20,6 +20,21 @@ export class MovieService {
     }
   }
 
+  async searchMulti(searchValue: string): Promise<GetResponse> {
+    try {
+      const url = `${this.apiUrl}/search/multi?query=${searchValue}&language=en-US`;
+
+      const response = await this.http.get<GetResponse>(url).toPromise();
+      if (!response) {
+        throw new Error('Response is undefined');
+      }
+      return response;
+    } catch (error) {
+      console.error('Error fetching search:', error);
+      throw error;
+    }
+  }
+
   async trendingShows(): Promise<GetResponse> {
     try {
       const url = `${this.apiUrl}/trending/all/week?language=en-US`;

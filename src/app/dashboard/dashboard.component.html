@@ -3,7 +3,11 @@
 <div class="dashboard container-02 area-padding">
   <div class="dashboard-area area-full">
     <div class="main-slide-area">
-      <h2 class="ttl-02 txt-primary area-width area-center">TRENDING THIS WEEK</h2>
+      <form [formGroup]="searchForm" (ngSubmit)="search()" class="search-bar-area area-width area-center">
+        <input class="search-bar" type="text" placeholder="Search for a movie or tv show" formControlName="search">
+        <button type="submit" [disabled]="searchForm.invalid" class="search-btn primary-btn outlined">Search</button>
+      </form>
+      <h2 class="ttl-02 txt-primary area-width area-center">Trending This Week</h2>
       <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="mainSlideConfig">
         <div ngxSlickItem *ngFor="let trendShow of trends" class="main slide">
           <div class="img-wrapper">
@@ -58,14 +62,13 @@
         </div>
       </ngx-slick-carousel>
     </div>
-    <div class="section-slide-area">
+    <div class="section-slide-area animated-fade-in first-show">
       <h3 class="ttl-03 txt-primary area-width area-center">Popular on theater</h3>
       <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sectionSlideConfig">
         <div ngxSlickItem *ngFor="let show of popularMovies" class="slide">
           <div class="slide-area">
             <div class="img-wrapper" [routerLink]="['/', 'movie', show.id]">
-              <img [src]="movieService.getImageUrl(show.poster_path, 'w342')" alt="" width="100%"
-                (error)="handleImageError($event)" (load)="handleImageLoad()">
+              <img [src]="movieService.getImageUrl(show.poster_path, 'w342')" alt="" width="100%">
             </div>
             <div class="slide-info">
               <div class="slide-info-area">
@@ -86,7 +89,7 @@
         </div>
       </ngx-slick-carousel>
     </div>
-    <div class="section-slide-area">
+    <div class="section-slide-area animated-fade-in second-show">
       <h3 class="ttl-03 txt-primary area-width area-center">Popular TV Series</h3>
       <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sectionSlideConfig">
         <div ngxSlickItem *ngFor="let show of popularTvShows" class="slide">

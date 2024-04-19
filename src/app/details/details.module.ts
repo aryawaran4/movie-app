@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MovieComponent } from './movie/movie.component';
 import { TvComponent } from './tv/tv.component';
 import { Routes } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [{
   path: 'movie/:id',
@@ -20,7 +21,8 @@ const routes: Routes = [{
     TvComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ]
 })
 export class DetailsModule { }

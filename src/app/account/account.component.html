@@ -28,7 +28,7 @@
       <p *ngIf="(usersData.favourites.movies.length === 0) && (usersData.favourites.tv.length === 0)"
         class="txt-01 txt-primary">You haven't added any favorite shows.</p>
       <div class="my-favorite-area">
-        <div *ngIf="usersData.favourites.movies.length !== 0" class="favorite-section">
+        <div *ngIf="usersData.favourites.movies.length !== 0" class="favorite-section animated-fade-in first-show">
           <p class="txt-01 txt-primary">Movies</p>
           <div class="list-favorite">
             <div *ngFor="let movie of usersData.favourites.movies" class="card-favorite">
@@ -69,7 +69,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="usersData.favourites.tv.length !== 0" class="favorite-section">
+        <div *ngIf="usersData.favourites.tv.length !== 0" class="favorite-section animated-fade-in second-show">
           <p class="txt-01 txt-primary">Tv Shows</p>
           <div class="list-favorite">
             <div *ngFor="let tv of usersData.favourites.tv" class="card-favorite">

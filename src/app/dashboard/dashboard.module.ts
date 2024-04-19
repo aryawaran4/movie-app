@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -18,7 +19,9 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     SlickCarouselModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class DashboardModule { }
