@@ -11,7 +11,7 @@ export class SnackbarService {
     document.body.appendChild(this.snackbarElement);
   }
 
-  show(message: string, duration: number = 4000): void {
+  show(message: string, duration: number = 3000): void {
     this.snackbarElement.textContent = message;
     this.snackbarElement.classList.add('show');
     setTimeout(() => {

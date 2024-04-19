@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SnackbarService } from 'src/app/shared/template/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,10 @@ export class RegisterComponent {
     password: new FormControl('', Validators.required),
   })
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackbar: SnackbarService) { }
 
   register(): void {
     if (this.registerForm.valid) {
@@ -33,24 +37,29 @@ export class RegisterComponent {
             if (loggedIn) {
               console.log('register successful');
               // Redirect or perform actions after successful register
+              this.snackbar.show('register successful');
               this.router.navigateByUrl('/login');
             } else {
               console.error('register failed');
               // Handle register failure
+              this.snackbar.show('register failed');
             }
           },
           error => {
             console.error('An error occurred during register:', error);
             // Handle register error
+            this.snackbar.show('An error occurred during register:');
           }
         );
       } else {
         console.error('Invalid email or password');
         // Handle invalid email or password
+        this.snackbar.show('Invalid email or password');
       }
     } else {
       console.error('Invalid form data');
       // Handle invalid form data
+      this.snackbar.show('Invalid form data');
     }
   }
 }

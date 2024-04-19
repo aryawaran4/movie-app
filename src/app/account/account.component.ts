@@ -3,6 +3,7 @@ import { GlobalService } from '../shared/services/global.service';
 import { UserFavouriteType } from '../shared/types/movie.type';
 import { UserType } from '../shared/types/auth.type';
 import { MovieService } from '../shared/services/movie/movie.service';
+import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-account',
@@ -17,7 +18,8 @@ export class AccountComponent {
 
   constructor(
     private globalService: GlobalService,
-    public movieService: MovieService
+    public movieService: MovieService,
+    private snackbar: SnackbarService
   ) {
     this.userInfo = this.globalService.getMe()
     this.usersData = this.globalService.getUsersData()
@@ -39,6 +41,7 @@ export class AccountComponent {
       }
     } catch (error) {
       console.error('Error toggling favorite:', error);
+      this.snackbar.show('Error toggling favorite');
     }
   }
 
