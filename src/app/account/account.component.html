@@ -4,7 +4,7 @@
   <div class="account-area area-full">
     <div class="account-info">
       <div class="account-info-area area-width area-center">
-        <h2 class="ttl-02 txt-left txt-primary">{{userInfo.username}}</h2>
+        <h2 class="ttl-02 txt-primary">{{userInfo.username}}</h2>
         <p class="txt-primary txt-02">Total favorites :</p>
         <div class="account-favorite">
           <div class="txt-primary account-favorite-area">
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="my-favorite area-width area-center">
-      <h2 class="ttl-02 txt-left txt-primary">My Favourites</h2>
+      <h2 class="ttl-02 txt-primary">My Favourites</h2>
       <p *ngIf="(usersData.favourites.movies.length === 0) && (usersData.favourites.tv.length === 0)" class="txt-01 txt-primary">You haven't added any favorite shows.</p>
       <div class="my-favorite-area">
         <div *ngIf="usersData.favourites.movies.length !== 0" class="favorite-section">
@@ -36,7 +36,7 @@
               </div>
               <div class="card-info">
                 <div class="card-info-area">
-                  <p class="ttl-02 txt-primary txt-left ttl">{{movie.title}}</p>
+                  <p class="ttl-02 txt-primary ttl">{{movie.title}}</p>
                   <p class="txt-02 txt-primary overview">{{movie.overview}}</p>
                 </div>
                 <div class="card-action">
@@ -77,7 +77,7 @@
               </div>
               <div class="card-info">
                 <div class="card-info-area">
-                  <p class="ttl-02 txt-primary txt-left ttl">{{tv.name}}</p>
+                  <p class="ttl-02 txt-primary ttl">{{tv.name}}</p>
                   <p class="txt-02 txt-primary overview">{{tv.overview}}</p>
                 </div>
                 <div class="card-action">

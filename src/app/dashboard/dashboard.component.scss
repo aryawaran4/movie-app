@@ -2,81 +2,204 @@
 
 .dashboard {
   .dashboard-area {
-    .carousel {
-      .slide {
-        position: relative;
+    .main-slide-area {
+      .carousel {
+        .slide {
+          position: relative;
 
-        .img-wrapper {
-          overflow: hidden;
-          height: 56rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          img {
-            object-fit: cover;
-            transition: all 20s
+          .img-wrapper {
+            overflow: hidden;
+            height: 56rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+              object-fit: cover;
+              transition: all 20s
+            }
+          }
+
+          .slide-info {
+            background: linear-gradient(to top right, $main-background, transparent);
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            .slide-info-area {
+              width: 100%;
+              padding: 4.5rem 6rem;
+              position: absolute;
+              left: 0;
+              bottom: 0;
+
+              .genre-list {
+                display: flex;
+                align-items: center;
+                gap: 2rem;
+                margin-bottom: 1.6rem;
+
+                .genre {
+                  padding: .4rem 1.6rem;
+                  background: $main-background-fade;
+                  border: 1px solid $accent-color;
+                  color: $accent-color;
+                  border-radius: 10px;
+                }
+
+              }
+
+              h3 {
+                margin-bottom: .8rem;
+              }
+
+              .slide-action-area {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                margin-top: 2.4rem;
+                justify-content: space-between;
+
+                .action-common {
+                  display: flex;
+                  align-items: center;
+                  gap: 2.6rem;
+
+                  .icon {
+                    display: flex;
+                    align-items: center;
+                    gap: .8rem;
+
+                    span {
+                      font-size: 3.2rem;
+                      color: $accent-color;
+                    }
+                  }
+
+                  .favorite {
+                    cursor: pointer;
+
+                    .material-symbols-outlined {
+                      color: #FF5733;
+                    }
+
+                    .favorite-txt {
+                      color: $text-color;
+                      font-size: 1.6rem;
+                    }
+
+                    .favorite-txt:hover {
+                      text-decoration: underline;
+                    }
+
+                    .favorite-icon {
+                      content: '';
+                      background: url('/assets/icons/favorite_outline.svg');
+                      background-size: 100% 100%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      width: 32px;
+                      height: 32px;
+                    }
+
+                    .favorite-icon.active {
+                      content: '';
+                      background: url('/assets/icons/favorite.svg');
+                      background-size: 100% 100%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      width: 32px;
+                      height: 32px;
+                    }
+                  }
+
+                }
+
+                .action-btn {
+                  display: flex;
+                  align-items: center;
+                  gap: 1.6rem;
+                }
+              }
+            }
           }
         }
 
-        .slide-info {
-          background: linear-gradient(to top right, $main-background, transparent);
-          position: absolute;
-          width: 100%;
-          left: 0;
-          top: 0;
-          bottom: 0;
+        .main.slide:hover {
+          .img-wrapper {
+            img {
+              transform: scale(1.1) translateY(15%);
+              ;
+            }
+          }
+        }
+      }
+    }
 
-          .slide-info-area {
-            width: 100%;
-            padding: 4.5rem 6rem;
-            position: absolute;
-            left: 0;
-            bottom: 0;
+    .section-slide-area {
+      margin-top: 6rem;
 
-            .genre-list {
+      h3 {
+        margin-bottom: 4rem;
+      }
+
+      .carousel {
+        .slide {
+          width: 20rem !important;
+          margin-right: 3rem;
+
+          .slide-area {
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+
+            .img-wrapper {
+              width: 20rem;
+              height: 30rem;
+              height: auto;
               display: flex;
               align-items: center;
-              gap: 2rem;
-              margin-bottom: 1.6rem;
+              justify-content: center;
 
-              .genre {
-                padding: .4rem 1.6rem;
-                background: $main-background-fade;
-                border: 1px solid $accent-color;
-                color: $accent-color;
-                border-radius: 10px;
+              img {
+                object-fit: cover;
+                width: 20rem;
+                height: 30rem;
               }
-
             }
 
-            h3 {
-              margin-bottom: .8rem;
-            }
-
-            .slide-action-area {
+            .slide-info {
+              background: linear-gradient(to top, $main-background, transparent);
+              position: absolute;
               width: 100%;
-              display: flex;
-              align-items: center;
-              margin-top: 2.4rem;
-              justify-content: space-between;
+              left: 0;
+              top: 0;
+              bottom: 0;
 
-              .action-common {
-                display: flex;
-                align-items: center;
-                gap: 2.6rem;
-
-                .icon {
+              .slide-info-area {
+                .rating {
+                  position: absolute;
+                  bottom: 1rem;
+                  left: 1rem;
                   display: flex;
                   align-items: center;
-                  gap: .8rem;
+                  gap: .5rem;
 
                   span {
                     font-size: 3.2rem;
                     color: $accent-color;
                   }
                 }
-
                 .favorite {
+                  position: absolute;
+                  bottom: 1rem;
+                  right: 1rem;
                   cursor: pointer;
 
                   .material-symbols-outlined {
@@ -114,25 +237,11 @@
                     height: 32px;
                   }
                 }
-
-              }
-
-              .action-btn {
-                display: flex;
-                align-items: center;
-                gap: 1.6rem;
               }
             }
           }
-        }
-      }
 
-      .slide:hover {
-        .img-wrapper {
-          img {
-            transform: scale(1.1) translateY(15%);
-            ;
-          }
+
         }
       }
     }

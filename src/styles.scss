@@ -36,7 +36,7 @@ $accent-color-fade: #FFD7001a;
 $main-background-fade: #121212b3;
 $secondary-background-fade: #1E1E1Eb3;
 
-.none{
+.none {
   display: none !important;
 }
 
@@ -122,7 +122,7 @@ button {
   color: $main-background;
 }
 
-.primary-btn.icon.circle .material-symbols-outlined{
+.primary-btn.icon.circle .material-symbols-outlined {
   color: $accent-color;
 }
 
@@ -131,11 +131,11 @@ button {
   background-color: $accent-color-hover;
 }
 
-.primary-btn.icon.circle:hover {  
+.primary-btn.icon.circle:hover {
   background-color: $secondary-background;
 }
 
-.primary-btn.outlined:hover {  
+.primary-btn.outlined:hover {
   background-color: $accent-color;
   color: $main-background;
 }
@@ -194,7 +194,12 @@ button {
 .ttl-02 {
   font-size: 3.2rem;
   font-weight: bold;
-  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.ttl-03 {
+  font-size: 2.6rem;
+  font-weight: bold;
   margin-bottom: 2rem;
 }
 
@@ -246,8 +251,8 @@ input:focus {
 .slick-next,
 .slick-prev {
   z-index: 10;
-  width: 8rem !important;
-  height: 8rem !important;
+  width: 3.5rem !important;
+  height: 3.5rem !important;
 }
 
 .slick-prev {
@@ -260,8 +265,34 @@ input:focus {
 
 .slick-prev:before,
 .slick-next:before {
-  font-size: 8rem !important;
+  font-size: 3.5rem !important;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+//for slick problem flicked on the last slide
+.slick-slide,
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  -ms-perspective: 1000;
+  perspective: 1000;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
