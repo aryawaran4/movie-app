@@ -18,8 +18,9 @@ export class GlobalService {
     return JSON.parse(userString) as UserType;
   }
   
-  getUsersData(): UserFavouriteType[] {
+  getUsersData(): UserFavouriteType {
+    const uuid = this.getMe().uuid
     const usersData = localStorage.getItem('usersData') || '{}';
-    return JSON.parse(usersData) as UserFavouriteType[];
+    return JSON.parse(usersData).find((user: { uuid: string; }) => user.uuid === uuid)
   }
 }

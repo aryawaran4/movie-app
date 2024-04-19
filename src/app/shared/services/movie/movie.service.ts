@@ -10,6 +10,16 @@ export class MovieService {
 
   constructor(private http: HttpClient) { }
 
+  getImageUrl(backdropPath: string | null, size: string): string {
+    if (backdropPath) {
+      const baseUrl = 'https://image.tmdb.org/t/p/';
+      return `${baseUrl}${size}${backdropPath}`;
+    } else {
+      // Provide a default image URL if backdropPath is not provided
+      return 'path_to_default_image.jpg';
+    }
+  }
+
   async trendingMovies(): Promise<GetResponse> {
     try {
       const url = `${this.apiUrl}/trending/all/week?language=en-US`;

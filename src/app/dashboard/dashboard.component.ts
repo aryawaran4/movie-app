@@ -11,33 +11,26 @@ import { UserType } from '../shared/types/auth.type';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  showNavbar = true;
-  userLogin = false
+  showNavbar = true;  
   userInfo!: UserType
   isMenuOpen = true
 
   trends!: TrendingType[];
   favourite!: FavouriteType;
-  favoriteIds!: UserFavouriteType[]
+  usersData!: UserFavouriteType
 
   genresMovie!: GenresType
   genresTv!: GenresType
 
   constructor(
     private globalService: GlobalService,
-    private movieService: MovieService,
-    private router: Router,) { }
+    public movieService: MovieService,
+    private router: Router,) {       
+      this.userInfo = this.globalService.getMe()
+      this.usersData = this.globalService.getUsersData()
+    }
 
   ngOnInit() {
-    const token = this.globalService.getToken()
-    if (token) {
-      this.userLogin = true
-    } else {
-      this.userLogin = false
-    }
-    console.log(this.userLogin);
-    this.userInfo = this.globalService.getMe()
-    this.favoriteIds = this.globalService.getUsersData()
     this.getMovies()
     this.getGenres()
   }
@@ -82,27 +75,16 @@ export class DashboardComponent {
     }
   }
 
-  getImageUrl(backdropPath: string | null): string {
-    if (backdropPath) {
-      const baseUrl = 'https://image.tmdb.org/t/p/';
-      const size = 'w1280'; // Adjust the size as needed
-      return `${baseUrl}${size}${backdropPath}`;
-    } else {
-      // Provide a default image URL if backdropPath is not provided
-      return 'path_to_default_image.jpg';
-    }
-  }
-
   async toggleFavorite(showId: number, mediaType: string): Promise<void> {
     try {
       if (this.isFavorite(showId, mediaType)) {
         const favourite = await this.movieService.removeFavourite(this.userInfo.uuid, showId, mediaType);
         // this.refreshFavoriteUI(showId, mediaType, 'remove')
-        this.favoriteIds = this.globalService.getUsersData()
+        this.usersData = this.globalService.getUsersData()
       } else {
         const favourite = await this.movieService.addFavourite(this.userInfo.uuid, showId, mediaType);
         // this.refreshFavoriteUI(showId, mediaType, 'add')
-        this.favoriteIds = this.globalService.getUsersData()
+        this.usersData = this.globalService.getUsersData()
       }
     } catch (error) {
       console.error('Error toggling favorite:', error);
@@ -110,7 +92,7 @@ export class DashboardComponent {
   }
 
   isFavorite(showId: number, mediaType: string): boolean {
-    const user = this.favoriteIds.find((user) => user.uuid === this.userInfo.uuid);
+    const user = this.usersData
     if (user) {
       if (mediaType === 'movie') {
         return user.favourites.movies.some((movie) => movie.id === showId);

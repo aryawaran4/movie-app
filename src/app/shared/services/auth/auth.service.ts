@@ -56,7 +56,8 @@ export class AuthService {
     // Register the user if the email is unique
     if (authData.email && authData.username && authData.password) {
       const uuid = uuidv4();
-      storedUsers.push({ email: authData.email, username: authData.username, password: authData.password, uuid });
+      const createdAt = new Date()
+      storedUsers.push({ email: authData.email, username: authData.username, password: authData.password, uuid, createdAt });
       localStorage.setItem('users', JSON.stringify(storedUsers));
       console.log('Stored Users after registration:', storedUsers); // Log the stored users array after registration
       return of(true);

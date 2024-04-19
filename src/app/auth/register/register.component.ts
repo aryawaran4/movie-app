@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,7 @@ export class RegisterComponent {
     password: new FormControl('', Validators.required),
   })
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   register(): void {
     if (this.registerForm.valid) {
@@ -32,6 +33,7 @@ export class RegisterComponent {
             if (loggedIn) {
               console.log('register successful');
               // Redirect or perform actions after successful register
+              this.router.navigateByUrl('/login');
             } else {
               console.error('register failed');
               // Handle register failure
