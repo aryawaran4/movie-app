@@ -62,8 +62,8 @@
       <h3 class="ttl-03 txt-primary area-width area-center">Popular on theater</h3>
       <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sectionSlideConfig">
         <div ngxSlickItem *ngFor="let show of popularMovies" class="slide">
-          <div class="slide-area" [routerLink]="['/', 'movie', show.id]">
-            <div class="img-wrapper">
+          <div class="slide-area">
+            <div class="img-wrapper" [routerLink]="['/', 'movie', show.id]">
               <img [src]="movieService.getImageUrl(show.poster_path, 'w342')" alt="" width="100%">
             </div>
             <div class="slide-info">
@@ -89,8 +89,8 @@
       <h3 class="ttl-03 txt-primary area-width area-center">Popular TV Series</h3>
       <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sectionSlideConfig">
         <div ngxSlickItem *ngFor="let show of popularTvShows" class="slide">
-          <div class="slide-area" [routerLink]="['/', 'tv', show.id]">
-            <div class="img-wrapper">
+          <div class="slide-area">
+            <div class="img-wrapper" [routerLink]="['/', 'tv', show.id]">
               <img [src]="movieService.getImageUrl(show.poster_path, 'w342')" alt="" width="100%">
             </div>
             <div class="slide-info">

@@ -13,7 +13,7 @@ export class LandingPageComponent {
   showNavbar = true;
 
   constructor(private router: Router) {
-  }  
+  }
 
   navigateTo(url: string): void {
     this.router.navigateByUrl(url);
