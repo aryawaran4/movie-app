@@ -39,7 +39,7 @@ export class DashboardComponent {
     this.getGenres()
   }
 
-  navigateTo(url: string): void {
+  navigateTo(url: any): void {
     this.router.navigateByUrl(url);
   }
 

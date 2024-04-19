@@ -25,7 +25,8 @@
     </div>
     <div class="my-favorite area-width area-center">
       <h2 class="ttl-02 txt-primary">My Favourites</h2>
-      <p *ngIf="(usersData.favourites.movies.length === 0) && (usersData.favourites.tv.length === 0)" class="txt-01 txt-primary">You haven't added any favorite shows.</p>
+      <p *ngIf="(usersData.favourites.movies.length === 0) && (usersData.favourites.tv.length === 0)"
+        class="txt-01 txt-primary">You haven't added any favorite shows.</p>
       <div class="my-favorite-area">
         <div *ngIf="usersData.favourites.movies.length !== 0" class="favorite-section">
           <p class="txt-01 txt-primary">Movies</p>
@@ -62,7 +63,7 @@
                       </span>
                     </div>
                   </div>
-                  <button class="primary-btn outlined">See More</button>
+                  <button class="primary-btn outlined" [routerLink]="['/', 'movie', movie.id]">See More</button>
                 </div>
               </div>
             </div>
@@ -103,7 +104,7 @@
                       </span>
                     </div>
                   </div>
-                  <button class="primary-btn outlined">See More</button>
+                  <button class="primary-btn outlined" [routerLink]="['/', 'tv', tv.id]">See More</button>
                 </div>
               </div>
             </div>

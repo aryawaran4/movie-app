@@ -9,6 +9,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountComponent } from './account/account.component';
 import { AuthGuardService } from './shared/services/auth/auth-guard.service';
 import { AuthLoginGuardService } from './shared/services/auth/auth-login-guard.service';
+import { MovieComponent } from './details/movie/movie.component';
+import { TvComponent } from './details/tv/tv.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'account', component: AccountComponent, canActivate: [AuthGuardService] },
+  { path: 'movie/:id', component: MovieComponent, canActivate: [AuthGuardService] },
+  { path: 'tv/:id', component: TvComponent, canActivate: [AuthGuardService] },
   // {
   //   path: '**',
   //   component: Error404Component,
