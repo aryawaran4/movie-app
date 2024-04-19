@@ -1,13 +1,13 @@
 <nav class="navbar">
   <div class="navbar-area area-width">
-    <div class="logo" (click)="navigateTo('/')">
+    <div class="logo" [routerLink]="['/']">
       <h1>#Movie-app</h1>
     </div>
     <ul class="nav-links">
       <li><a routerLink="/">Movie</a></li>
       <li><a routerLink="/">Tv Shows</a></li>
       <li><a routerLink="/">People</a></li>
-      <li><a (click)="navigateTo('/account')">Account</a></li>
+      <li><a [routerLink]="['/', 'account']">Account</a></li>
       <li *ngIf="isLoggedIn"><a (click)="logout()"><span class="material-symbols-outlined">
             logout
           </span></a></li>

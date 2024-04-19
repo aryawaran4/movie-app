@@ -12,11 +12,7 @@ import { AnimationOptions } from 'ngx-lottie';
 export class LandingPageComponent {
   showNavbar = true;
 
-  constructor(private router: Router) {
-  }
-
-  navigateTo(url: string): void {
-    this.router.navigateByUrl(url);
+  constructor() {
   }
 
   animationOptions: AnimationOptions = {

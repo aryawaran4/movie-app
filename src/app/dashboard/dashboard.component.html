@@ -64,7 +64,8 @@
         <div ngxSlickItem *ngFor="let show of popularMovies" class="slide">
           <div class="slide-area">
             <div class="img-wrapper" [routerLink]="['/', 'movie', show.id]">
-              <img [src]="movieService.getImageUrl(show.poster_path, 'w342')" alt="" width="100%">
+              <img [src]="movieService.getImageUrl(show.poster_path, 'w342')" alt="" width="100%"
+                (error)="handleImageError($event)" (load)="handleImageLoad()">
             </div>
             <div class="slide-info">
               <div class="slide-info-area">

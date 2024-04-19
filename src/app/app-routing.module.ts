@@ -18,13 +18,47 @@ const routes: Routes = [
     pathMatch: 'full',
     redirectTo: '/landing-page',
   },
-  { path: 'landing-page', component: LandingPageComponent, canActivate: [AuthLoginGuardService] },
-  { path: 'login', component: LoginComponent, canActivate: [AuthLoginGuardService] },
-  { path: 'register', component: RegisterComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
-  { path: 'account', component: AccountComponent, canActivate: [AuthGuardService] },
-  { path: 'movie/:id', component: MovieComponent, canActivate: [AuthGuardService] },
-  { path: 'tv/:id', component: TvComponent, canActivate: [AuthGuardService] },
+  {
+    path: 'landing-page',
+    component: LandingPageComponent,
+    canActivate: [AuthLoginGuardService],
+    loadChildren: () => import('./landing-page/landing-page.module').then(m => m.LandingPageModule)
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [AuthLoginGuardService],
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuardService],
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+  },
+  {
+    path: 'account',
+    component: AccountComponent,
+    canActivate: [AuthGuardService],
+    loadChildren: () => import('./account/account.module').then(m => m.AccountModule)
+  },
+  {
+    path: 'movie/:id',
+    component: MovieComponent,
+    canActivate: [AuthGuardService],
+    loadChildren: () => import('./details/details.module').then(m => m.DetailsModule)
+  },
+  {
+    path: 'tv/:id',
+    component: TvComponent,
+    canActivate: [AuthGuardService],
+    loadChildren: () => import('./details/details.module').then(m => m.DetailsModule)
+  },
   // {
   //   path: '**',
   //   component: Error404Component,

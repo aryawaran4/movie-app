@@ -18,10 +18,6 @@ export class NavbarComponent {
     }
   }
 
-  navigateTo(url: string): void {
-    this.router.navigateByUrl(url);
-  } 
-
   logout() {
     this.authService.logout()
     this.router.navigateByUrl('login');

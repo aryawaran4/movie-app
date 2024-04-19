@@ -5,9 +5,9 @@
     <h2 class="ttl-01 txt-primary">Discover Your Shows.</h2>
     <p class="text-content">Explore thousands of movies, TV shows, and documentaries all in one place. With our user-friendly interface and curated collections, finding your next favorite film has never been easier.</p>
     <div class="btn-area">
-      <button class="login primary-btn" (click)="navigateTo('/login')">Login Now</button>
+      <button class="login primary-btn" [routerLink]="['/login']">Login Now</button>
       <div class="divider"></div>
-      <button class="register primary-cta" (click)="navigateTo('/register')">Make an Account</button>
+      <button class="register primary-cta" [routerLink]="['/register']">Make an Account</button>
     </div>
   </div>
 

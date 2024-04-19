@@ -13,8 +13,8 @@ import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
 })
 export class DashboardComponent {
   showNavbar = true;
+  loading: boolean = false
   userInfo!: UserType
-  isMenuOpen = true
 
   trends!: TrendingType[];
   popularMovies!: MovieType[]
@@ -28,7 +28,6 @@ export class DashboardComponent {
   constructor(
     private globalService: GlobalService,
     public movieService: MovieService,
-    private router: Router,
     private snackbar: SnackbarService
   ) {
     this.userInfo = this.globalService.getMe()
@@ -40,10 +39,6 @@ export class DashboardComponent {
     this.getPopularMovies()
     this.getPopularTvShows()
     this.getGenres()
-  }
-
-  navigateTo(url: any): void {
-    this.router.navigateByUrl(url);
   }
 
   // ***SLICK***
@@ -93,6 +88,14 @@ export class DashboardComponent {
     } finally {
       console.log('API call completed.');
     }
+  }
+
+  handleImageError(event: any) {
+    this.loading = true;
+  }
+
+  handleImageLoad() {
+    this.loading = true;
   }
 
   async toggleFavorite(showId: number, mediaType: string): Promise<void> {

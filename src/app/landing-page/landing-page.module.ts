@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 //components
 import { LandingPageComponent } from './landing-page.component';
@@ -21,7 +21,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
-    LottieModule
+    LottieModule,
+    RouterModule
   ]
 })
 export class LandingPageModule { }

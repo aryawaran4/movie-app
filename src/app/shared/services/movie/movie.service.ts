@@ -16,7 +16,7 @@ export class MovieService {
       return `${baseUrl}${size}${backdropPath}`;
     } else {
       // Provide a default image URL if backdropPath is not provided
-      return 'path_to_default_image.jpg';
+      return '/assets/img/img_placeholder.webp';
     }
   }
 
