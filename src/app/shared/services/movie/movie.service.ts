@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GetResponse, FavouriteType, UserFavouriteType, MovieDetailsType, TvDetailsType } from '../../types/movie.type';
+import { GetResponse, FavouriteType, UserFavouriteType, MovieDetailsType, TvDetailsType, GenresType } from '../../types/movie.type';
 
 @Injectable({
   providedIn: 'root'
@@ -157,6 +157,20 @@ export class MovieService {
     // Update the localStorage with the modified users array
     localStorage.setItem('usersData', JSON.stringify(users));
 
+  }
+
+  async GenresList(mediaType: string): Promise<GenresType> {
+    const url = `${this.apiUrl}/genre/${mediaType}/list?language=en`;
+    try {
+      const response = await this.http.get<GenresType>(url).toPromise();
+      if (!response) {
+        throw new Error('Response is undefined');
+      }
+      return response;
+    } catch (error) {
+      console.error('Error fetching genres:', error);
+      throw error;
+    }
   }
 
 }

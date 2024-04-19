@@ -6,12 +6,15 @@
     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)"
       (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
       <div ngxSlickItem *ngFor="let trendShow of trends" class="slide">
-        <img [src]="getImageUrl(trendShow.backdrop_path)" alt="" width="100%">
+        <div class="img-wrapper">
+          <img [src]="getImageUrl(trendShow.backdrop_path)" alt="" width="100%">
+        </div>
         <div class="slide-info">
           <div class="slide-info-area">
             <div class="genre-list">
-              <div class="genre font-medium txt-02">animation</div>
-              <div class="genre font-medium txt-02">fantasy</div>
+              <div class="genre font-medium txt-02" *ngFor="let genreId of trendShow.genre_ids">
+                {{ getGenreName(genreId, trendShow.media_type) }}
+              </div>              
             </div>
             <h3 class="ttl-02 txt-left txt-primary">{{trendShow.media_type === "movie" ? trendShow.title :
               trendShow.name}}</h3>
@@ -38,14 +41,14 @@
                     (click)="toggleFavorite(trendShow.id, trendShow.media_type)">
                     {{ isFavorite(trendShow.id, trendShow.media_type) ? 'Remove from favorites' : 'Add to favorites' }}
                   </span>
-                </div>                
+                </div>
               </div>
               <div class="action-btn">
                 <button class="primary-btn icon"><span class="material-symbols-outlined">
                     play_arrow
                   </span>
                   Watch Trailer</button>
-                <button class="primary-btn outlined">See More</button>
+                <button class="primary-btn outlined" (click)="navigateTo('/')">See More</button>
               </div>
             </div>
           </div>

@@ -6,9 +6,16 @@
       .slide {
         position: relative;
 
-        img {
-          object-fit: cover;
+        .img-wrapper {
+          overflow: hidden;
           height: 56rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          img {
+            object-fit: cover;
+            transition: all 20s
+          }
         }
 
         .slide-info {
@@ -71,17 +78,21 @@
 
                 .favorite {
                   cursor: pointer;
+
                   .material-symbols-outlined {
                     color: #FF5733;
                   }
-                  .favorite-txt{
+
+                  .favorite-txt {
                     color: $text-color;
                     font-size: 1.6rem;
                   }
-                  .favorite-txt:hover{
+
+                  .favorite-txt:hover {
                     text-decoration: underline;
                   }
-                  .favorite-icon{
+
+                  .favorite-icon {
                     content: '';
                     background: url('/assets/icons/favorite_outline.svg');
                     background-size: 100% 100%;
@@ -89,9 +100,10 @@
                     align-items: center;
                     justify-content: center;
                     width: 32px;
-                    height: 32px;                    
+                    height: 32px;
                   }
-                  .favorite-icon.active{
+
+                  .favorite-icon.active {
                     content: '';
                     background: url('/assets/icons/favorite.svg');
                     background-size: 100% 100%;
@@ -99,7 +111,7 @@
                     align-items: center;
                     justify-content: center;
                     width: 32px;
-                    height: 32px;                    
+                    height: 32px;
                   }
                 }
 
@@ -111,6 +123,15 @@
                 gap: 1.6rem;
               }
             }
+          }
+        }
+      }
+
+      .slide:hover {
+        .img-wrapper {
+          img {
+            transform: scale(1.1) translateY(15%);
+            ;
           }
         }
       }

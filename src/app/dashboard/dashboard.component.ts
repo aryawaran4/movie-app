@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { GlobalService } from '../shared/services/global.service';
 import { MovieService } from '../shared/services/movie/movie.service';
-import { FavouriteType, TrendingType, UserFavouriteType } from '../shared/types/movie.type';
+import { FavouriteType, GenresType, TrendingType, UserFavouriteType } from '../shared/types/movie.type';
 import { Router } from '@angular/router';
 import { UserType } from '../shared/types/auth.type';
 
@@ -20,7 +20,8 @@ export class DashboardComponent {
   favourite!: FavouriteType;
   favoriteIds!: UserFavouriteType[]
 
-  subscription: any;
+  genresMovie!: GenresType
+  genresTv!: GenresType
 
   constructor(
     private globalService: GlobalService,
@@ -38,6 +39,11 @@ export class DashboardComponent {
     this.userInfo = this.globalService.getMe()
     this.favoriteIds = this.globalService.getUsersData()
     this.getMovies()
+    this.getGenres()
+  }
+
+  navigateTo(url: string): void {
+    this.router.navigateByUrl(url);
   }
 
   // ***SLICK***
@@ -114,5 +120,25 @@ export class DashboardComponent {
     }
     return false;
   }
-  
+
+  async getGenres() {
+    try {
+      // Fetch genres for both movies and TV shows concurrently
+      const [movieGenres, tvGenres] = await Promise.all([
+        this.movieService.GenresList('movie'),
+        this.movieService.GenresList('tv')
+      ]);
+      this.genresMovie = movieGenres;
+      this.genresTv = tvGenres;
+    } catch (error) {
+      console.error('Error fetching genres:', error);
+    }
+  }
+
+  getGenreName(genreId: number, mediaType: string): string {
+    const genresList = mediaType === 'movie' ? this.genresMovie : this.genresTv;
+    const genre = genresList.genres.find(genre => genre.id === genreId);
+    return genre ? genre.name : 'Unknown Genre';
+  }
+
 }

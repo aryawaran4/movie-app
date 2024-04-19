@@ -187,5 +187,14 @@ export interface UserFavouriteType {
 
 export interface FavouriteType {
   movies: MovieDetailsType[]
-  tv : TvDetailsType[]
+  tv: TvDetailsType[]
+}
+
+export interface GenresType {
+  genres: [
+    {
+      id: number,
+      name: string
+    },
+  ]
 }
