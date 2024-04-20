@@ -11,6 +11,7 @@ import { AuthGuardService } from './shared/services/auth/auth-guard.service';
 import { AuthLoginGuardService } from './shared/services/auth/auth-login-guard.service';
 import { MovieComponent } from './details/movie/movie.component';
 import { TvComponent } from './details/tv/tv.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,12 @@ const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuardService],
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+  },
+  {
+    path: 'search',
+    component: SearchResultComponent,
+    canActivate: [AuthGuardService],
+    loadChildren: () => import('./search-result/search-result.module').then(m => m.SearchResultModule)
   },
   {
     path: 'account',

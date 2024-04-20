@@ -38,6 +38,7 @@ export class DashboardComponent {
     private snackbar: SnackbarService,
     private renderer: Renderer2,
     private element: ElementRef,
+    private router: Router
   ) {
     this.userInfo = this.globalService.getMe()
     this.usersData = this.globalService.getUsersData()
@@ -90,10 +91,13 @@ export class DashboardComponent {
 
           this.searchArray = search.results;
           console.log(this.searchArray);
+
           if (this.searchArray.length === 0) {
             console.log('No results found.');
             this.snackbar.show('No results found');
             // Show a message to the user indicating no results found            
+          }else{
+            this.router.navigateByUrl(`/search?query=${formValue.search}`);
           }
 
         }
