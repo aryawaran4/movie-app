@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../shared/services/auth/auth.service';
 import { Router } from '@angular/router';
+
+// services
+import { AuthService } from '../../shared/services/auth/auth.service';
 import { SnackbarService } from 'src/app/shared/template/snackbar/snackbar.service';
 import { AnimationOptions } from 'ngx-lottie';
 
@@ -13,10 +15,12 @@ import { AnimationOptions } from 'ngx-lottie';
 export class LoginComponent {
 
   showNavbar = true;
+
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
   });
+
   animationOptions: AnimationOptions = {
     path: '/assets/animations/cinema.json',
     autoplay: true,

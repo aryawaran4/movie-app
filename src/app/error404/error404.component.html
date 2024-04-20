@@ -1,0 +1,11 @@
+<app-navbar *ngIf="showNavbar"></app-navbar>
+
+<div class="error-page container-01">
+  <div class="error-page-area area-width">
+    <div class="illustration">
+      <!-- Add your illustration or animation here -->
+      <ng-lottie [options]="animationOptions" class="animation"></ng-lottie>
+      <button class="primary-btn txt-02 font-bold" [routerLink]="['/']">Back to the home</button>
+    </div>
+  </div>
+</div>

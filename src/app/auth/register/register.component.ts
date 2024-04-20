@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../shared/services/auth/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
+// services
+import { AuthService } from '../../shared/services/auth/auth.service';
 import { SnackbarService } from 'src/app/shared/template/snackbar/snackbar.service';
 
 @Component({

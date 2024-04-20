@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+//service
+import { AuthGuardService } from './shared/services/auth/auth-guard.service';
+import { AuthLoginGuardService } from './shared/services/auth/auth-login-guard.service';
+
 //component
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountComponent } from './account/account.component';
-import { AuthGuardService } from './shared/services/auth/auth-guard.service';
-import { AuthLoginGuardService } from './shared/services/auth/auth-login-guard.service';
 import { MovieComponent } from './details/movie/movie.component';
 import { TvComponent } from './details/tv/tv.component';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { Error404Component } from './error404/error404.component';
 
 const routes: Routes = [
   {
@@ -38,12 +41,12 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent,    
+    component: DashboardComponent,
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
     path: 'search',
-    component: SearchResultComponent,    
+    component: SearchResultComponent,
     loadChildren: () => import('./search-result/search-result.module').then(m => m.SearchResultModule)
   },
   {
@@ -54,18 +57,19 @@ const routes: Routes = [
   },
   {
     path: 'movie/:id',
-    component: MovieComponent,    
+    component: MovieComponent,
     loadChildren: () => import('./details/details.module').then(m => m.DetailsModule)
   },
   {
     path: 'tv/:id',
-    component: TvComponent,    
+    component: TvComponent,
     loadChildren: () => import('./details/details.module').then(m => m.DetailsModule)
   },
-  // {
-  //   path: '**',
-  //   component: Error404Component,
-  // },
+  {
+    path: '**',
+    component: Error404Component,
+    loadChildren: () => import('./error404/error404.module').then(m => m.Error404Module)
+  },
 ];
 
 @NgModule({

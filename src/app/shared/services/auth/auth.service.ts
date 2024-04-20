@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { UserType } from '../../types/auth.type';
 import { v4 as uuidv4 } from 'uuid';
+
+// type
+import { UserType } from '../../types/auth.type';
 import { UserFavouriteType } from '../../types/movie.type';
 
 @Injectable({

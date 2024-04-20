@@ -16,6 +16,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { AccountModule } from './account/account.module';
 import { AuthInterceptorService } from './shared/services/auth/auth-interceptor.service';
+import { Error404Component } from './error404/error404.component';
 
 @NgModule({
   declarations: [
