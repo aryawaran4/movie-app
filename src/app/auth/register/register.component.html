@@ -6,15 +6,42 @@
 
     </div>
     <div class="form">
-      <h2 class="ttl-02 txt-accent txt-center"><span class="txt-01 txt-primary">The fun’s awaits you to join</span><br>Register</h2>
+      <h2 class="ttl-02 txt-accent txt-center"><span class="txt-01 txt-primary">The fun’s awaits you to
+          join</span><br>Register</h2>
       <form [formGroup]="registerForm" (ngSubmit)="register()" class="form-area">
         <div class="input-area">
-          <input type="username" placeholder="username" formControlName="username">
-          <input type="email" placeholder="Email" formControlName="email">
-          <input type="password" placeholder="Password" formControlName="password">
+          <div class="input-wrap">
+            <input type="username" placeholder="Username" formControlName="username">
+            <!-- Display error message for username -->
+            <div
+              *ngIf="registerForm.get('username')?.invalid && (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)"
+              class="error-message">
+              <p *ngIf="registerForm.get('username')?.errors?.['required']">Username is required.</p>
+            </div>
+          </div>
+          <div class="input-wrap">
+            <input type="email" placeholder="Email" formControlName="email">
+            <!-- Display error message for email -->
+            <div
+              *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)"
+              class="error-message">
+              <p *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</p>
+              <p *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format.</p>
+            </div>
+          </div>
+          <div class="input-wrap">
+            <input type="password" placeholder="Password" formControlName="password">
+            <!-- Display error message for password -->
+            <div
+              *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)"
+              class="error-message">
+              <p *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</p>
+            </div>
+          </div>
         </div>
         <button type="submit" [disabled]="registerForm.invalid" class="primary-btn">Register</button>
-        <p class="login-link txt-primary">Already have an account ?<span class="txt-accent" [routerLink]="['/', 'login']">Login now</span></p>
+        <p class="login-link txt-primary">Already have an account ?<span class="txt-accent"
+            [routerLink]="['/', 'login']">Login now</span></p>
       </form>
 
     </div>

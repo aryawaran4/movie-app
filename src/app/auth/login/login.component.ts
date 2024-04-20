@@ -13,12 +13,10 @@ import { AnimationOptions } from 'ngx-lottie';
 export class LoginComponent {
 
   showNavbar = true;
-
   loginForm = new FormGroup({
-    email: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
-  })
-
+  });
   animationOptions: AnimationOptions = {
     path: '/assets/animations/cinema.json',
     autoplay: true,
@@ -33,57 +31,31 @@ export class LoginComponent {
 
   login(): void {
     if (this.loginForm.valid) {
-      const formValue = this.loginForm.value;
-      const { email, password } = formValue;
-
-      // Check if email and password are not null or undefined
-      if (email && password) {
-        this.snackbar.showLoading(true)
-        try {
-          // Call the login function with valid credentials
-          this.authService.login({ email, password }).subscribe(
-            (loggedIn: boolean) => {
-              if (loggedIn) {
-                console.log('Login successful');
-                // Redirect or perform actions after successful login
-                this.snackbar.show('Login successful');
-                this.router.navigateByUrl('/dashboard');
-              } else {
-                console.error('Login failed');
-                // Handle login failure
-                this.snackbar.show('Login failed');
-              }
-            },
-            error => {
-              console.error('An error occurred during login:', error);
-              // Handle login error
-              this.snackbar.show('An error occurred during login');
-            }
-          );
-        } catch (error) {
-          console.error('An unexpected error occurred:', error);
-          // Handle unexpected error
-          this.snackbar.show('An unexpected error occurred during login');
-        } finally {
-          console.log('Login attempt completed');
-          // Perform cleanup or final actions
-          this.snackbar.showLoading(false)
+      const { email, password } = this.loginForm.value;
+      this.snackbar.showLoading(true);
+      this.authService.login({ email, password }).subscribe(
+        (loggedIn: boolean) => {
+          this.snackbar.showLoading(false);
+          if (loggedIn) {
+            this.router.navigateByUrl('/dashboard');
+            this.snackbar.show('Login successful');
+          } else {
+            this.snackbar.show('Invalid email or password');
+          }
+        },
+        error => {
+          this.snackbar.showLoading(false);
+          this.snackbar.show('An error occurred during login');
+          console.error('An error occurred during login:', error);
         }
-      } else {
-        console.error('Invalid email or password');
-        // Handle invalid email or password
-        this.snackbar.show('Invalid email or password');
-      }
+      );
     } else {
-      console.error('Invalid form data');
-      // Handle invalid form data
-      this.snackbar.show('Invalid form data');
+      // Form is invalid, do nothing as the error messages will be displayed in the HTML
     }
   }
 
-
   logout(): void {
     this.authService.logout();
-    // Perform any additional logout-related tasks, such as navigating to the login page
+    // Additional logout-related tasks
   }
 }

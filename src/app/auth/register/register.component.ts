@@ -15,51 +15,35 @@ export class RegisterComponent {
 
   registerForm = new FormGroup({
     username: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
-  })
+  });
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private snackbar: SnackbarService) { }
+    private snackbar: SnackbarService
+  ) { }
 
   register(): void {
     if (this.registerForm.valid) {
-      const formValue = this.registerForm.value;
-      const { username, email, password } = formValue;
-
-      // Check if email and password are not null or undefined
-      if (password && email && username) {
-        // Call the register function with valid credentials
-        this.authService.register({ username, email, password }).subscribe(
-          (loggedIn: boolean) => {
-            if (loggedIn) {
-              console.log('register successful');
-              // Redirect or perform actions after successful register
-              this.snackbar.show('register successful');
-              this.router.navigateByUrl('/login');
-            } else {
-              console.error('register failed');
-              // Handle register failure
-              this.snackbar.show('register failed');
-            }
-          },
-          error => {
-            console.error('An error occurred during register:', error);
-            // Handle register error
-            this.snackbar.show('An error occurred during register:');
+      const { username, email, password } = this.registerForm.value;
+      this.authService.register({ username, email, password }).subscribe(
+        (loggedIn: boolean) => {
+          if (loggedIn) {
+            this.router.navigateByUrl('/login');
+            this.snackbar.show('Registration successful');
+          } else {
+            this.snackbar.show('Registration failed');
           }
-        );
-      } else {
-        console.error('Invalid email or password');
-        // Handle invalid email or password
-        this.snackbar.show('Invalid email or password');
-      }
+        },
+        error => {
+          console.error('An error occurred during registration:', error);
+          this.snackbar.show('An error occurred during registration');
+        }
+      );
     } else {
-      console.error('Invalid form data');
-      // Handle invalid form data
-      this.snackbar.show('Invalid form data');
+      // Form is invalid, do nothing as the error messages will be displayed in the HTML
     }
   }
 }

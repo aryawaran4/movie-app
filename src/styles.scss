@@ -316,6 +316,22 @@ input:focus {
   right: 0;
 }
 
+.input-wrap {
+  position: relative;
+  width: 100%;
+
+  input {
+    width: 100%;
+  }
+
+  .error-message {
+    color: $text-color;
+    position: absolute;
+    bottom: -2rem;
+    right: .5rem;
+  }
+}
+
 /**********************************************/
 /*                SLICK                       */
 /**********************************************/
@@ -498,6 +514,7 @@ input:focus {
 .img-wrapper.card {
   position: relative;
   width: 100%;
+
   .overview-layer {
     height: 100%;
     width: 100%;
@@ -505,14 +522,15 @@ input:focus {
     top: 999px;
     padding: 1rem 1rem 0;
     transition: all .75s;
-    p{
+
+    p {
       width: 100%;
     }
   }
 }
 
 .img-wrapper.card:hover {
-  .overview-layer {    
+  .overview-layer {
     background: #12121243;
     top: 0;
   }
