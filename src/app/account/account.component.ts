@@ -15,8 +15,6 @@ export class AccountComponent {
   showNavbar = true;
   elementsArray!: NodeListOf<Element>;
 
-  loading$ = new BehaviorSubject<boolean>(false);
-
   userInfo!: UserType;
   usersData!: UserFavouriteType;
 
@@ -56,7 +54,7 @@ export class AccountComponent {
   }
 
   async toggleFavorite(showId: number, mediaType: string): Promise<void> {
-    this.loading$.next(true); // Start loading
+    this.snackbar.showLoading(true)
     try {
       if (this.isFavorite(showId, mediaType)) {
         const favourite = await this.movieService.removeFavourite(this.userInfo.uuid, showId, mediaType);        
@@ -68,13 +66,13 @@ export class AccountComponent {
     } catch (error) {
       console.error('Error toggling favorite:', error);
       // this.snackbar.show('Error toggling favorite');
-    } finally {
-      this.loading$.next(false); // Stop loading
+    } finally {      
       setTimeout(() => {
         this.elementsArray =
           this.element.nativeElement.querySelectorAll('.animated-fade-in');
         this.fadeIn();
       }, 500);
+      this.snackbar.showLoading(false)
     }
 }
 

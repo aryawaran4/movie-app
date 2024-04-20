@@ -38,26 +38,37 @@ export class LoginComponent {
 
       // Check if email and password are not null or undefined
       if (email && password) {
-        // Call the login function with valid credentials
-        this.authService.login({ email, password }).subscribe(
-          (loggedIn: boolean) => {
-            if (loggedIn) {
-              console.log('Login successful');
-              // Redirect or perform actions after successful login
-              this.snackbar.show('Login successful');
-              this.router.navigateByUrl('/dashboard');
-            } else {
-              console.error('Login failed');
-              // Handle login failure
-              this.snackbar.show('Login failed');
+        this.snackbar.showLoading(true)
+        try {
+          // Call the login function with valid credentials
+          this.authService.login({ email, password }).subscribe(
+            (loggedIn: boolean) => {
+              if (loggedIn) {
+                console.log('Login successful');
+                // Redirect or perform actions after successful login
+                this.snackbar.show('Login successful');
+                this.router.navigateByUrl('/dashboard');
+              } else {
+                console.error('Login failed');
+                // Handle login failure
+                this.snackbar.show('Login failed');
+              }
+            },
+            error => {
+              console.error('An error occurred during login:', error);
+              // Handle login error
+              this.snackbar.show('An error occurred during login');
             }
-          },
-          error => {
-            console.error('An error occurred during login:', error);
-            // Handle login error
-            this.snackbar.show('An error occurred during login');
-          }
-        );
+          );
+        } catch (error) {
+          console.error('An unexpected error occurred:', error);
+          // Handle unexpected error
+          this.snackbar.show('An unexpected error occurred during login');
+        } finally {
+          console.log('Login attempt completed');
+          // Perform cleanup or final actions
+          this.snackbar.showLoading(false)
+        }
       } else {
         console.error('Invalid email or password');
         // Handle invalid email or password
@@ -69,6 +80,7 @@ export class LoginComponent {
       this.snackbar.show('Invalid form data');
     }
   }
+
 
   logout(): void {
     this.authService.logout();

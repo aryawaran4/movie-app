@@ -1,4 +1,3 @@
-// snackbar.service.ts
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
@@ -11,11 +10,27 @@ export class SnackbarService {
     document.body.appendChild(this.snackbarElement);
   }
 
-  show(message: string, duration: number = 3000): void {
+  show(message: string, loading?: boolean): void {
+    const duration: number = 1000;
     this.snackbarElement.textContent = message;
     this.snackbarElement.classList.add('show');
+
     setTimeout(() => {
       this.snackbarElement.classList.remove('show');
     }, duration);
+
+  }
+
+  showLoading(loading: boolean): void {
+    const duration: number = 1000;
+    if (loading) {
+      this.snackbarElement.textContent = 'loading...';
+      this.snackbarElement.classList.add('show');
+    }else{      
+      setTimeout(() => {
+        // this.snackbarElement.classList.add('show');
+        this.snackbarElement.classList.remove('show');
+      }, duration);
+    }
   }
 }

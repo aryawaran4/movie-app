@@ -80,6 +80,7 @@ export class DashboardComponent {
   }
 
   async search() {
+    this.snackbar.showLoading(true)
     try {
       if (this.searchForm.valid) {
         const formValue = this.searchForm.value;
@@ -91,8 +92,8 @@ export class DashboardComponent {
           console.log(this.searchArray);
           if (this.searchArray.length === 0) {
             console.log('No results found.');
-            // Show a message to the user indicating no results found
-            this.snackbar.show('No results found.');
+            this.snackbar.show('No results found');
+            // Show a message to the user indicating no results found            
           }
 
         }
@@ -100,32 +101,36 @@ export class DashboardComponent {
     } catch (error) {
       console.error('Error fetching trends:', error);
       // Show an error message to the user
-      this.snackbar.show('Error fetching search');
+      // this.snackbar.showLoading(false)
     } finally {
       console.log('API call completed.');
+      this.snackbar.showLoading(false)
     }
   }
 
 
   async getTrending() {
+    this.snackbar.showLoading(true)
     try {
       const trends = await this.movieService.trendingShows();
       this.trends = trends.results
     } catch (error) {
       console.error('Error fetching trends:', error);
-      this.snackbar.show('Error fetching trends');
+      // this.snackbar.show('Error fetching trends');
+      this.snackbar.showLoading(false)
     } finally {
       console.log('API call completed.');
     }
   }
 
   async getPopularMovies() {
+    this.snackbar.showLoading(true)
     try {
       const popular = await this.movieService.popularMovies();
       this.popularMovies = popular.results
     } catch (error) {
       console.error('Error fetching movies:', error);
-      this.snackbar.show('Error fetching movies');
+      // this.snackbar.show('Error fetching movies');
     } finally {
       console.log('API call completed.');
       setTimeout(() => {
@@ -133,27 +138,31 @@ export class DashboardComponent {
           this.element.nativeElement.querySelectorAll('.animated-fade-in');
         this.fadeIn();
       }, 500);
+      this.snackbar.showLoading(false)
     }
   }
 
   async getPopularTvShows() {
+    this.snackbar.showLoading(true)
     try {
       const popular = await this.movieService.popularTvShows();
       this.popularTvShows = popular.results
     } catch (error) {
       console.error('Error fetching tv shows:', error);
-      this.snackbar.show('Error fetching tv shows');
+      // this.snackbar.show('Error fetching tv shows');
     } finally {
       console.log('API call completed.');
       setTimeout(() => {
-      this.elementsArray =
-        this.element.nativeElement.querySelectorAll('.animated-fade-in');
-      this.fadeIn();
-    }, 500);
+        this.elementsArray =
+          this.element.nativeElement.querySelectorAll('.animated-fade-in');
+        this.fadeIn();
+      }, 500);
+      this.snackbar.showLoading(false)
     }
   }
 
   async toggleFavorite(showId: number, mediaType: string): Promise<void> {
+    this.snackbar.showLoading(true)
     try {
       if (this.isFavorite(showId, mediaType)) {
         const favourite = await this.movieService.removeFavourite(this.userInfo.uuid, showId, mediaType);
@@ -164,7 +173,10 @@ export class DashboardComponent {
       }
     } catch (error) {
       console.error('Error toggling favorite:', error);
-      this.snackbar.show('Error toggling favorite');
+      // this.snackbar.show('Error toggling favorite');      
+    }
+    finally{
+      this.snackbar.showLoading(false)
     }
   }
 
@@ -181,6 +193,7 @@ export class DashboardComponent {
   }
 
   async getGenres() {
+    this.snackbar.showLoading(true)
     try {
       // Fetch genres for both movies and TV shows concurrently
       const [movieGenres, tvGenres] = await Promise.all([
@@ -191,7 +204,9 @@ export class DashboardComponent {
       this.genresTv = tvGenres;
     } catch (error) {
       console.error('Error fetching genres:', error);
-      this.snackbar.show('Error fetching genres');
+      // this.snackbar.show('Error fetching genres');
+    }finally{
+      this.snackbar.showLoading(false)
     }
   }
 
