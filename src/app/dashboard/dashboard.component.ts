@@ -19,6 +19,8 @@ export class DashboardComponent {
   userInfo!: UserType
 
   trends!: MediaType[];
+  testUndefined: any = undefined
+  testArrVoid: any = []
   searchArray!: MediaType[];
   popularMovies!: MovieType[]
   popularTvShows!: TvType[]
@@ -85,11 +87,11 @@ export class DashboardComponent {
     this.snackbar.showLoading(true)
     try {
       const key = await this.movieService.getLinkVideoId(linkId, mediaType);
-      this.videoDialogService.openVideoDialog(key);            
+      this.videoDialogService.openVideoDialog(key);
     } catch (error) {
       console.error('Error opening video dialog:', error);
       // Handle error appropriately, e.g., show error message
-    }finally{
+    } finally {
       this.snackbar.showLoading(false)
     }
   }
@@ -132,7 +134,7 @@ export class DashboardComponent {
     this.snackbar.showLoading(true)
     try {
       const trends = await this.movieService.trendingShows();
-      this.trends = trends.results
+      this.trends = trends.results;      
     } catch (error) {
       console.error('Error fetching trends:', error);
       // this.snackbar.show('Error fetching trends');
@@ -146,7 +148,9 @@ export class DashboardComponent {
     this.snackbar.showLoading(true)
     try {
       const popular = await this.movieService.popularMovies();
-      this.popularMovies = popular.results
+      // setTimeout(() => {
+        this.popularMovies = popular.results
+      // }, 3000);
     } catch (error) {
       console.error('Error fetching movies:', error);
       // this.snackbar.show('Error fetching movies');

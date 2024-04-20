@@ -1,0 +1,9 @@
+<div class="error-empty-template">
+  <div class="error-empty-message" *ngIf="messageType === 'error'">
+    <div class="img-wrapper">
+      <img src="/assets/img/img_not_found.svg" alt="">
+    </div>
+    <p class="error-empty-description txt-primary txt-02 font-bold txt-center">{{ getTitleAndDescription().description}}</p>
+  </div>
+  <div *ngIf="messageType === 'loading'" class="circular-loading-spinner"></div>
+</div>

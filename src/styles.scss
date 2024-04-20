@@ -7,6 +7,10 @@
   font-size: 10px;
 }
 
+.debug-slick{
+  min-width: 0;
+}
+
 body {
   font-family: "Poppins", sans-serif;
 }
@@ -81,6 +85,14 @@ $secondary-background-fade: #1E1E1Eb3;
 
 .dialog-open {
   overflow: hidden;
+}
+
+/* CSS for the container */
+.error-empty-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /**********************************************/

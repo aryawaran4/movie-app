@@ -8,120 +8,189 @@
         <button type="submit" [disabled]="searchForm.invalid" class="search-btn primary-btn outlined">Search</button>
       </form>
       <h2 class="ttl-02 txt-primary area-width area-center">Trending This Week</h2>
-      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="mainSlideConfig">
-        <div ngxSlickItem *ngFor="let trendShow of trends" class="main slide">
-          <div class="img-wrapper">
-            <img [src]="movieService.getImageUrl(trendShow.backdrop_path, 'w1280')" alt="" width="100%">
-          </div>
-          <div class="slide-info">
-            <div class="slide-info-area">
-              <div class="genre-list">
-                <div class="genre font-medium txt-02" *ngFor="let genreId of trendShow.genre_ids">
-                  {{ getGenreName(genreId, trendShow.media_type) }}
-                </div>
-              </div>
-              <h3 class="ttl-02 txt-primary">{{trendShow.media_type === "movie" ? trendShow.title :
-                trendShow.name}}</h3>
-              <p class="txt-02 txt-primary ellipsis">{{trendShow.overview}}</p>
-              <div class="slide-action-area">
-                <div class="action-common">
-                  <p class="txt-01 txt-primary icon rating">
-                    <span class="material-symbols-outlined">
-                      star_rate
-                    </span>
-                    {{trendShow.vote_average | number : '1.1-1'}} / 10
-                  </p>
-                  <p class="txt-01 txt-primary icon person">
-                    <span class="material-symbols-outlined">
-                      person
-                    </span>
-                    {{trendShow.vote_count}}
-                  </p>
-                  <div class="icon favorite">
-                    <span
-                      [ngClass]="isFavorite(trendShow.id, trendShow.media_type) ? 'favorite-icon active' : 'favorite-icon'"></span>
-                    <span
-                      [ngClass]="isFavorite(trendShow.id, trendShow.media_type) ? 'favorite-txt remove' : 'favorite-txt add'"
-                      (click)="toggleFavorite(trendShow.id, trendShow.media_type)">
-                      {{ isFavorite(trendShow.id, trendShow.media_type) ? 'Remove from favorites' : 'Add to favorites'
-                      }}
-                    </span>
+      <div class="carousel-wrap">
+        <ng-container *ngIf="trends === undefined">
+          <!-- Show loading message or spinner while data is being fetched -->
+          <ng-container *ngIf="loading">
+            <ng-container *ngTemplateOutlet="loading"></ng-container>
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="trends !== undefined && trends.length === 0">
+          <!-- Show empty state message if trends data is available but empty -->
+          <ng-container *ngIf="empty">
+            <ng-container *ngTemplateOutlet="empty"></ng-container>
+          </ng-container>
+        </ng-container>
+
+        <ngx-slick-carousel *ngIf="trends && trends.length > 0" class="carousel" #slickModal="slick-carousel"
+          [config]="mainSlideConfig">
+          <div ngxSlickItem *ngFor="let trendShow of trends" class="main slide">
+            <div class="img-wrapper">
+              <img [src]="movieService.getImageUrl(trendShow.backdrop_path, 'w1280')" alt="" width="100%">
+            </div>
+            <div class="slide-info">
+              <div class="slide-info-area">
+                <div class="genre-list">
+                  <div class="genre font-medium txt-02" *ngFor="let genreId of trendShow.genre_ids">
+                    {{ getGenreName(genreId, trendShow.media_type) }}
                   </div>
                 </div>
-                <div class="action-btn">
-                  <button class="primary-btn icon" (click)="openVideoDialog(trendShow.id, trendShow.media_type)"><span class="material-symbols-outlined">
-                      play_arrow
-                    </span>
-                    Watch Trailer</button>
-                  <button class="primary-btn outlined" [routerLink]="['/', trendShow.media_type, trendShow.id]">See
-                    More</button>
+                <h3 class="ttl-02 txt-primary">{{trendShow.media_type === "movie" ? trendShow.title :
+                  trendShow.name}}</h3>
+                <p class="txt-02 txt-primary ellipsis">{{trendShow.overview}}</p>
+                <div class="slide-action-area">
+                  <div class="action-common">
+                    <p class="txt-01 txt-primary icon rating">
+                      <span class="material-symbols-outlined">
+                        star_rate
+                      </span>
+                      {{trendShow.vote_average | number : '1.1-1'}} / 10
+                    </p>
+                    <p class="txt-01 txt-primary icon person">
+                      <span class="material-symbols-outlined">
+                        person
+                      </span>
+                      {{trendShow.vote_count}}
+                    </p>
+                    <div class="icon favorite">
+                      <span
+                        [ngClass]="isFavorite(trendShow.id, trendShow.media_type) ? 'favorite-icon active' : 'favorite-icon'"></span>
+                      <span
+                        [ngClass]="isFavorite(trendShow.id, trendShow.media_type) ? 'favorite-txt remove' : 'favorite-txt add'"
+                        (click)="toggleFavorite(trendShow.id, trendShow.media_type)">
+                        {{ isFavorite(trendShow.id, trendShow.media_type) ? 'Remove from favorites' : 'Add to favorites'
+                        }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="action-btn">
+                    <button class="primary-btn icon" (click)="openVideoDialog(trendShow.id, trendShow.media_type)"><span
+                        class="material-symbols-outlined">
+                        play_arrow
+                      </span>
+                      Watch Trailer</button>
+                    <button class="primary-btn outlined" [routerLink]="['/', trendShow.media_type, trendShow.id]">See
+                      More</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </ngx-slick-carousel>
+        </ngx-slick-carousel>
+      </div>
     </div>
     <div class="section-slide-area animated-fade-in first-show">
       <h3 class="ttl-03 txt-primary area-width area-center">Popular on theater</h3>
-      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sectionSlideConfig">
-        <div ngxSlickItem *ngFor="let show of popularMovies" class="slide">
-          <div class="slide-area">
-            <div class="img-wrapper card" [routerLink]="['/', 'movie', show.id]">
-              <div class="overview-layer">
-                <p class="txt-02 txt-primary ellipsis-2">{{show.overview}}</p>              
-              </div>
-              <img [src]="movieService.getImageUrl(show.poster_path, 'w342')" alt="" width="100%">
-            </div>
-            <div class="slide-info">
-              <div class="slide-info-area">
-                <p class="txt-02 txt-primary icon rating">
-                  <span class="material-symbols-outlined">
-                    star_rate
-                  </span>
-                  {{show.vote_average | number : '1.1-1'}} / 10
-                </p>
-                <div class="icon favorite card">
-                  <span [ngClass]="isFavorite(show.id, 'movie') ? 'favorite-icon active' : 'favorite-icon'"
-                    (click)="toggleFavorite(show.id, 'movie')"></span>
+      <div class="card-slider-wrap">
+        <div class="card-slider-area debug-slick">
+          <ng-container *ngIf="popularMovies === undefined">
+            <!-- Show loading message or spinner while data is being fetched -->
+            <ng-container *ngIf="loading">
+              <ng-container *ngTemplateOutlet="loading"></ng-container>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="popularMovies !== undefined && popularMovies.length === 0">
+            <!-- Show empty state message if popularMovies data is available but empty -->
+            <ng-container *ngIf="empty">
+              <ng-container *ngTemplateOutlet="empty"></ng-container>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="popularMovies && popularMovies.length > 0">
+            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sectionSlideConfig">
+              <div ngxSlickItem *ngFor="let show of popularMovies" class="slide">
+                <div class="slide-area">
+                  <div class="img-wrapper card" [routerLink]="['/', 'movie', show.id]">
+                    <div class="overview-layer">
+                      <p class="txt-02 txt-primary ellipsis-2">{{show.overview}}</p>
+                    </div>
+                    <img [src]="movieService.getImageUrl(show.poster_path, 'w342')" alt="" width="100%">
+                  </div>
+                  <div class="slide-info">
+                    <div class="slide-info-area">
+                      <p class="txt-02 txt-primary icon rating">
+                        <span class="material-symbols-outlined">
+                          star_rate
+                        </span>
+                        {{show.vote_average | number : '1.1-1'}} / 10
+                      </p>
+                      <div class="icon favorite card">
+                        <span [ngClass]="isFavorite(show.id, 'movie') ? 'favorite-icon active' : 'favorite-icon'"
+                          (click)="toggleFavorite(show.id, 'movie')"></span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                <p class="txt-02 txt-primary">{{show.title}}</p>
               </div>
-            </div>
-          </div>
-          <p class="txt-02 txt-primary">{{show.title}}</p>
+            </ngx-slick-carousel>
+          </ng-container>
         </div>
-      </ngx-slick-carousel>
+      </div>
     </div>
     <div class="section-slide-area animated-fade-in second-show">
       <h3 class="ttl-03 txt-primary area-width area-center">Popular TV Series</h3>
-      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sectionSlideConfig">
-        <div ngxSlickItem *ngFor="let show of popularTvShows" class="slide">
-          <div class="slide-area">
-            <div class="img-wrapper card" [routerLink]="['/', 'tv', show.id]">
-              <div class="overview-layer">
-                <p class="txt-02 txt-primary ellipsis-2">{{show.overview}}</p>              
-              </div>
-              <img [src]="movieService.getImageUrl(show.poster_path, 'w342')" alt="" width="100%">
-            </div>
-            <div class="slide-info">
-              <div class="slide-info-area">
-                <p class="txt-02 txt-primary icon rating">
-                  <span class="material-symbols-outlined">
-                    star_rate
-                  </span>
-                  {{show.vote_average | number : '1.1-1'}} / 10
-                </p>
-                <div class="icon favorite card">
-                  <span [ngClass]="isFavorite(show.id, 'tv') ? 'favorite-icon active' : 'favorite-icon'"
-                    (click)="toggleFavorite(show.id, 'tv')"></span>
+      <div class="card-slider-wrap">
+        <div class="card-slider-area debug-slick">
+          <ng-container *ngIf="popularMovies === undefined">
+            <!-- Show loading message or spinner while data is being fetched -->
+            <ng-container *ngIf="loading">
+              <ng-container *ngTemplateOutlet="loading"></ng-container>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="popularMovies !== undefined && popularMovies.length === 0">
+            <!-- Show empty state message if popularMovies data is available but empty -->
+            <ng-container *ngIf="empty">
+              <ng-container *ngTemplateOutlet="empty"></ng-container>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="popularMovies && popularMovies.length > 0">
+            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sectionSlideConfig">
+              <div ngxSlickItem *ngFor="let show of popularTvShows" class="slide">
+                <div class="slide-area">
+                  <div class="img-wrapper card" [routerLink]="['/', 'tv', show.id]">
+                    <div class="overview-layer">
+                      <p class="txt-02 txt-primary ellipsis-2">{{show.overview}}</p>
+                    </div>
+                    <img [src]="movieService.getImageUrl(show.poster_path, 'w342')" alt="" width="100%">
+                  </div>
+                  <div class="slide-info">
+                    <div class="slide-info-area">
+                      <p class="txt-02 txt-primary icon rating">
+                        <span class="material-symbols-outlined">
+                          star_rate
+                        </span>
+                        {{show.vote_average | number : '1.1-1'}} / 10
+                      </p>
+                      <div class="icon favorite card">
+                        <span [ngClass]="isFavorite(show.id, 'tv') ? 'favorite-icon active' : 'favorite-icon'"
+                          (click)="toggleFavorite(show.id, 'tv')"></span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                <p class="txt-02 txt-primary">{{show.name}}</p>
               </div>
-            </div>
-          </div>
-          <p class="txt-02 txt-primary">{{show.name}}</p>
+            </ngx-slick-carousel>
+          </ng-container>
         </div>
-      </ngx-slick-carousel>
+      </div>
     </div>
+
   </div>
 
-</div>
+  <ng-template #empty>
+    <div class="error-empty-container">
+      <app-error-empty [messageType]="'error'"></app-error-empty>
+    </div>
+  </ng-template>
+
+  <ng-template #loading>
+    <div class="error-empty-container">
+      <app-error-empty [messageType]="'loading'"></app-error-empty>
+    </div>
+  </ng-template>
