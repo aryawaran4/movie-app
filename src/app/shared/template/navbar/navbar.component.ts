@@ -9,12 +9,14 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class NavbarComponent {
   isLoggedIn = false
+  routerAccount = 'landing-page' 
 
-  constructor(private router: Router, private authService:AuthService) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     if (this.authService.isLoggedIn()) {
       this.isLoggedIn = true
+      this.routerAccount = 'account'
     }
   }
 

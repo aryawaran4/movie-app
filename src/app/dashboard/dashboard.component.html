@@ -67,7 +67,10 @@
       <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sectionSlideConfig">
         <div ngxSlickItem *ngFor="let show of popularMovies" class="slide">
           <div class="slide-area">
-            <div class="img-wrapper" [routerLink]="['/', 'movie', show.id]">
+            <div class="img-wrapper card" [routerLink]="['/', 'movie', show.id]">
+              <div class="overview-layer">
+                <p class="txt-02 txt-primary ellipsis-2">{{show.overview}}</p>              
+              </div>
               <img [src]="movieService.getImageUrl(show.poster_path, 'w342')" alt="" width="100%">
             </div>
             <div class="slide-info">
@@ -78,7 +81,7 @@
                   </span>
                   {{show.vote_average | number : '1.1-1'}} / 10
                 </p>
-                <div class="icon favorite">
+                <div class="icon favorite card">
                   <span [ngClass]="isFavorite(show.id, 'movie') ? 'favorite-icon active' : 'favorite-icon'"
                     (click)="toggleFavorite(show.id, 'movie')"></span>
                 </div>
@@ -94,7 +97,10 @@
       <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sectionSlideConfig">
         <div ngxSlickItem *ngFor="let show of popularTvShows" class="slide">
           <div class="slide-area">
-            <div class="img-wrapper" [routerLink]="['/', 'tv', show.id]">
+            <div class="img-wrapper card" [routerLink]="['/', 'tv', show.id]">
+              <div class="overview-layer">
+                <p class="txt-02 txt-primary ellipsis-2">{{show.overview}}</p>              
+              </div>
               <img [src]="movieService.getImageUrl(show.poster_path, 'w342')" alt="" width="100%">
             </div>
             <div class="slide-info">
@@ -105,7 +111,7 @@
                   </span>
                   {{show.vote_average | number : '1.1-1'}} / 10
                 </p>
-                <div class="icon favorite">
+                <div class="icon favorite card">
                   <span [ngClass]="isFavorite(show.id, 'tv') ? 'favorite-icon active' : 'favorite-icon'"
                     (click)="toggleFavorite(show.id, 'tv')"></span>
                 </div>

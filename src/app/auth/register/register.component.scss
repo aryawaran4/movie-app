@@ -28,8 +28,26 @@
         .input-area {
           display: flex;
           flex-direction: column;
-          gap: 4.8rem;
-          margin: 2.8rem 0 4.8rem;
+          gap: 3rem;
+          margin: 2rem 0 3rem;
+        }
+      }
+
+      .login-link{
+        font-size: 1.4rem;
+        text-align: center;
+        margin-top: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
+        span{
+          margin-right: 1rem;
+          cursor: pointer;
+          font-size: inherit;
+        }
+        span:hover{
+          text-decoration: underline;
         }
       }
     }

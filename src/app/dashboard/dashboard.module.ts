@@ -6,13 +6,6 @@ import { SharedModule } from '../shared/shared.module';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-const routes: Routes = [
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-  },
-];
-
 @NgModule({
   declarations: [DashboardComponent],
   imports: [

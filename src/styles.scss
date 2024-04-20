@@ -260,6 +260,14 @@ button {
   overflow: hidden;
 }
 
+.ellipsis-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 9;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 /**********************************************/
 /*                INPUT                       */
 /**********************************************/
@@ -428,5 +436,80 @@ input:focus {
   to {
     bottom: 0;
     opacity: 0;
+  }
+}
+
+/**********************************************/
+/*                ICON                        */
+/**********************************************/
+.favorite {
+  cursor: pointer;
+
+  .material-symbols-outlined {
+    color: #FF5733;
+  }
+
+  .favorite-txt {
+    color: $text-color !important;
+    font-size: 1.6rem !important;
+  }
+
+  .favorite-txt:hover {
+    text-decoration: underline;
+  }
+
+  .favorite-icon {
+    content: '';
+    background: url('/assets/icons/favorite_outline.svg');
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+  }
+
+  .favorite-icon.active {
+    content: '';
+    background: url('/assets/icons/favorite.svg');
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.favorite.card {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+/**********************************************/
+/*                Card                        */
+/**********************************************/
+
+.img-wrapper.card {
+  position: relative;
+  width: 100%;
+  .overview-layer {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 999px;
+    padding: 1rem 1rem 0;
+    transition: all .75s;
+    p{
+      width: 100%;
+    }
+  }
+}
+
+.img-wrapper.card:hover {
+  .overview-layer {    
+    background: #12121243;
+    top: 0;
   }
 }

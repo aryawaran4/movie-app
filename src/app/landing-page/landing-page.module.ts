@@ -9,13 +9,6 @@ import { LandingPageComponent } from './landing-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { LottieModule } from 'ngx-lottie';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: LandingPageComponent,
-  },
-];
-
 @NgModule({
   declarations: [LandingPageComponent],
   imports: [

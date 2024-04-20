@@ -78,45 +78,6 @@
                     }
                   }
 
-                  .favorite {
-                    cursor: pointer;
-
-                    .material-symbols-outlined {
-                      color: #FF5733;
-                    }
-
-                    .favorite-txt {
-                      color: $text-color;
-                      font-size: 1.6rem;
-                    }
-
-                    .favorite-txt:hover {
-                      text-decoration: underline;
-                    }
-
-                    .favorite-icon {
-                      content: '';
-                      background: url('/assets/icons/favorite_outline.svg');
-                      background-size: 100% 100%;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      width: 32px;
-                      height: 32px;
-                    }
-
-                    .favorite-icon.active {
-                      content: '';
-                      background: url('/assets/icons/favorite.svg');
-                      background-size: 100% 100%;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      width: 32px;
-                      height: 32px;
-                    }
-                  }
-
                 }
 
                 .action-btn {
@@ -195,47 +156,6 @@
                   span {
                     font-size: 3.2rem;
                     color: $accent-color;
-                  }
-                }
-                .favorite {
-                  position: absolute;
-                  bottom: 1rem;
-                  right: 1rem;
-                  cursor: pointer;
-
-                  .material-symbols-outlined {
-                    color: #FF5733;
-                  }
-
-                  .favorite-txt {
-                    color: $text-color;
-                    font-size: 1.6rem;
-                  }
-
-                  .favorite-txt:hover {
-                    text-decoration: underline;
-                  }
-
-                  .favorite-icon {
-                    content: '';
-                    background: url('/assets/icons/favorite_outline.svg');
-                    background-size: 100% 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    width: 32px;
-                    height: 32px;
-                  }
-
-                  .favorite-icon.active {
-                    content: '';
-                    background: url('/assets/icons/favorite.svg');
-                    background-size: 100% 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    width: 32px;
-                    height: 32px;
                   }
                 }
               }

@@ -11,17 +11,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { LottieModule } from 'ngx-lottie';
 
-const routes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-  },
-];
-
 @NgModule({
   declarations: [
     LoginComponent,

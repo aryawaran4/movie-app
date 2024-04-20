@@ -17,7 +17,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/landing-page',
+    redirectTo: '/dashboard',
   },
   {
     path: 'landing-page',
@@ -38,14 +38,12 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuardService],
+    component: DashboardComponent,    
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
     path: 'search',
-    component: SearchResultComponent,
-    canActivate: [AuthGuardService],
+    component: SearchResultComponent,    
     loadChildren: () => import('./search-result/search-result.module').then(m => m.SearchResultModule)
   },
   {
@@ -56,14 +54,12 @@ const routes: Routes = [
   },
   {
     path: 'movie/:id',
-    component: MovieComponent,
-    canActivate: [AuthGuardService],
+    component: MovieComponent,    
     loadChildren: () => import('./details/details.module').then(m => m.DetailsModule)
   },
   {
     path: 'tv/:id',
-    component: TvComponent,
-    canActivate: [AuthGuardService],
+    component: TvComponent,    
     loadChildren: () => import('./details/details.module').then(m => m.DetailsModule)
   },
   // {

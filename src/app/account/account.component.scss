@@ -63,13 +63,14 @@
         display: flex;
         flex-direction: column;
         gap: 5rem;
-        .favorite-section{
+
+        .favorite-section {
           .list-favorite {
             margin-top: 2rem;
             display: flex;
             flex-direction: column;
             gap: 2rem;
-  
+
             .card-favorite {
               background: $main-background;
               border-radius: 10px;
@@ -78,7 +79,7 @@
               align-items: start;
               gap: 2.4rem;
               box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  
+
               .img-container {
                 min-width: 300px;
                 max-width: 300px;
@@ -86,7 +87,7 @@
                 max-height: 250px;
                 overflow: hidden;
                 border-radius: 10px;
-  
+
                 img {
                   cursor: pointer;
                   object-fit: cover;
@@ -97,17 +98,17 @@
                   max-height: 250px;
                 }
               }
-  
+
               .card-info {
                 height: 100%;
                 display: flex;
                 flex-direction: column;
-  
+
                 .card-info-area {
                   .ttl {
                     margin-bottom: 1rem;
                   }
-  
+
                   .overview {
                     margin-bottom: 1rem;
                     display: -webkit-box;
@@ -118,69 +119,31 @@
                     height: 120px;
                   }
                 }
-  
+
                 .card-action {
                   margin-top: 1rem;
                   width: 100%;
                   display: flex;
                   align-items: center;
                   justify-content: space-between;
-  
+
                   .action-common {
                     display: flex;
                     align-items: center;
                     gap: 2.6rem;
-  
+
                     .icon {
                       display: flex;
                       align-items: center;
                       gap: .8rem;
-  
+
                       span {
                         font-size: 3.2rem;
                         color: $accent-color;
                       }
                     }
-  
-                    .favorite {
-                      cursor: pointer;
-  
-                      .material-symbols-outlined {
-                        color: #FF5733;
-                      }
-  
-                      .favorite-txt {
-                        color: $text-color;
-                        font-size: 1.6rem;
-                      }
-  
-                      .favorite-txt:hover {
-                        text-decoration: underline;
-                      }
-  
-                      .favorite-icon {
-                        content: '';
-                        background: url('/assets/icons/favorite_outline.svg');
-                        background-size: 100% 100%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        width: 32px;
-                        height: 32px;
-                      }
-  
-                      .favorite-icon.active {
-                        content: '';
-                        background: url('/assets/icons/favorite.svg');
-                        background-size: 100% 100%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        width: 32px;
-                        height: 32px;
-                      }
-                    }
-  
+
+
                   }
                 }
               }
