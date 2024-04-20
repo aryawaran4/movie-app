@@ -7,6 +7,8 @@ import { UserFavouriteType } from '../types/movie.type';
 })
 export class GlobalService {
 
+  private isOpen: boolean = false; 
+
   constructor() { }
 
   getToken(): string | null {

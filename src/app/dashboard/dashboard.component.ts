@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { UserType } from '../shared/types/auth.type';
 import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { VideoDialogService } from '../shared/template/video-dialog/video-dialog.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,7 +38,8 @@ export class DashboardComponent {
     private snackbar: SnackbarService,
     private renderer: Renderer2,
     private element: ElementRef,
-    private router: Router
+    private router: Router,
+    private videoDialogService: VideoDialogService
   ) {
     this.userInfo = this.globalService.getMe()
     this.usersData = this.globalService.getUsersData()
@@ -79,6 +81,20 @@ export class DashboardComponent {
     }
   }
 
+  async openVideoDialog(linkId: number, mediaType: string): Promise<void> {
+    this.snackbar.showLoading(true)
+    try {
+      const key = await this.movieService.getLinkVideoId(linkId, mediaType);
+      this.videoDialogService.openVideoDialog(key);            
+    } catch (error) {
+      console.error('Error opening video dialog:', error);
+      // Handle error appropriately, e.g., show error message
+    }finally{
+      this.snackbar.showLoading(false)
+    }
+  }
+
+
   async search() {
     this.snackbar.showLoading(true)
     try {
@@ -95,7 +111,7 @@ export class DashboardComponent {
             console.log('No results found.');
             this.snackbar.show('No results found');
             // Show a message to the user indicating no results found            
-          }else{
+          } else {
             this.router.navigateByUrl(`/search?query=${formValue.search}`);
           }
 
@@ -165,7 +181,7 @@ export class DashboardComponent {
   }
 
   async toggleFavorite(showId: number, mediaType: string): Promise<void> {
-    if(this.globalService.getToken()){
+    if (this.globalService.getToken()) {
       this.snackbar.showLoading(true)
       try {
         if (this.isFavorite(showId, mediaType)) {
@@ -179,11 +195,11 @@ export class DashboardComponent {
         console.error('Error toggling favorite:', error);
         // this.snackbar.show('Error toggling favorite');      
       }
-      finally{
+      finally {
         this.snackbar.showLoading(false)
       }
-    }else{
-      this.snackbar.show('Need to login first');      
+    } else {
+      this.snackbar.show('Need to login first');
     }
   }
 
@@ -212,7 +228,7 @@ export class DashboardComponent {
     } catch (error) {
       console.error('Error fetching genres:', error);
       // this.snackbar.show('Error fetching genres');
-    }finally{
+    } finally {
       this.snackbar.showLoading(false)
     }
   }

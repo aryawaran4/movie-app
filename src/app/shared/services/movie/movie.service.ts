@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GetResponse, FavouriteType, UserFavouriteType, MovieDetailsType, TvDetailsType, GenresType } from '../../types/movie.type';
+import { GetResponse, UserFavouriteType, MovieDetailsType, TvDetailsType, GenresType, VideoType, VideoResult } from '../../types/movie.type';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { GetResponse, FavouriteType, UserFavouriteType, MovieDetailsType, TvDeta
 export class MovieService {
   private apiUrl = 'https://api.themoviedb.org/3';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
 
   getImageUrl(backdropPath: string | null, size: string): string {
     if (backdropPath) {
@@ -19,6 +20,37 @@ export class MovieService {
       return '/assets/img/img_placeholder.webp';
     }
   }
+
+  async getLinkVideoId(linkId: number, mediaType: string): Promise<string> {
+    try {
+      let videoId: string = ''; // Initialize videoId with an empty string
+      const url = `${this.apiUrl}/${mediaType}/${linkId}/videos?language=en-US`;
+
+      // Cast the URL to a string for sanitization
+      const safeUrl: string = url.toString();
+
+      const response = await this.http.get<VideoType>(safeUrl).toPromise();
+
+      if (!response) {
+        throw new Error('Response is undefined');
+      }
+
+      const officialTrailer = response.results.find(video => video.type === "Trailer");
+
+      if (officialTrailer) {
+        videoId = officialTrailer.key;
+        
+        // Return the video ID
+        return videoId;
+      } else {
+        throw new Error('Official Trailer not found');
+      }
+    } catch (error) {
+      console.error('Error fetching search:', error);
+      throw error;
+    }
+  }
+
 
   async searchMulti(searchValue: string): Promise<GetResponse> {
     try {

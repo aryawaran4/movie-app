@@ -15,6 +15,6 @@ import { VideoDialogComponent } from './template/video-dialog/video-dialog.compo
     CommonModule,
     RouterModule
   ],
-  exports: [NavbarComponent]
+  exports: [NavbarComponent, VideoDialogComponent]
 })
 export class SharedModule { }
