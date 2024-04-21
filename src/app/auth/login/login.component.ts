@@ -21,12 +21,6 @@ export class LoginComponent {
     password: new FormControl('', Validators.required),
   });
 
-  animationOptions: AnimationOptions = {
-    path: '/assets/animations/cinema.json',
-    autoplay: true,
-    loop: false
-  };
-
   constructor(
     private router: Router,
     private authService: AuthService,

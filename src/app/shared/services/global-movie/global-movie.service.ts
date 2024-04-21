@@ -51,9 +51,9 @@ export class GlobalMovieService {
     }
   }
 
-  async fetchMultiSearch(searchValue: string): Promise<GetResponse> {
+  async fetchMultiSearch(searchValue: string, pageNumber: number): Promise<GetResponse> {
     try {
-      const url = `${this.apiUrl}/search/multi?query=${searchValue}&language=en-US`;
+      const url = `${this.apiUrl}/search/multi?query=${searchValue}&language=en-US&page=${pageNumber}`;
 
       const response = await this.http.get<GetResponse>(url).toPromise();
       if (!response) {

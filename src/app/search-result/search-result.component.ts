@@ -15,11 +15,15 @@ import { UserType } from '../shared/types/auth.type';
 export class SearchResultComponent {
   showNavbar = true;
   elementsArray!: NodeListOf<Element>;
-  searchArray!: MediaType[];
+  searchArray: MediaType[] = []
+  newSearchArray!: MediaType[];
   usersData!: UserFavouriteType
   userInfo!: UserType
 
   query: string | null = null;
+
+  currentPage = 1
+  loading = false
 
   searchForm = new FormGroup({
     search: new FormControl('', Validators.required),
@@ -46,12 +50,37 @@ export class SearchResultComponent {
         search: [this.query]
       });
     });
-    this.search()
+    this.search(this.currentPage)
   }
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     this.fadeIn();
+
+    const windowHeight = window.innerHeight + 20;
+    const scrollY = window.scrollY;
+    const bodyHeight = document.body.offsetHeight;
+
+    // Check if the user has scrolled to the bottom of the page
+    if (windowHeight + scrollY >= bodyHeight) {
+      this.fetchNextPage();
+    }
+  }
+
+  fetchNextPage() {
+    if (!this.loading) {
+      // Set loading indicator to true to prevent multiple requests
+      this.loading = true;
+
+      // Increment the page number to fetch the next page
+      this.currentPage++;
+
+      // Fetch movies for the next page
+      this.search(this.currentPage).then(() => {
+        // Reset loading indicator after the request is completed
+        this.loading = false;
+      });
+    }
   }
 
   fadeIn() {
@@ -65,7 +94,7 @@ export class SearchResultComponent {
     }
   }
 
-  async search() {
+  async search(pageNumber: number) {
     this.snackbar.showLoading(true);
 
     try {
@@ -73,8 +102,15 @@ export class SearchResultComponent {
         const formValue = this.searchForm.value;
         if (formValue.search) {
           console.log(formValue.search);
-          const search = await this.movieService.fetchMultiSearch(formValue.search);
-          this.searchArray = search.results;
+          const search = await this.movieService.fetchMultiSearch(formValue.search, pageNumber);
+          this.newSearchArray = search.results;
+
+          if (this.newSearchArray.length === 0) {
+            // No more search available, stop fetching
+            this.snackbar.show('No more search available');
+            return;
+          }
+          this.searchArray.push(...this.newSearchArray);
           setTimeout(() => {
             this.elementsArray =
               this.element.nativeElement.querySelectorAll('.animated-fade-in');

@@ -4,7 +4,7 @@
   <div class="dashboard-area area-full">
     <div class="main-slide-area">
       <div class="area-padding-x">
-        <form [formGroup]="searchForm" (ngSubmit)="search()" class="search-bar-area area-width area-center">
+        <form [formGroup]="searchForm" (ngSubmit)="search(currentPage)" class="search-bar-area area-width area-center">
           <input class="search-bar area-width" type="text"
             [placeholder]="isSmallScreen ? 'Search...' : 'Search for a movie or tv show'" formControlName="search">
           <button type="submit" [disabled]="searchForm.invalid" class="search-btn primary-btn outlined">Search</button>
