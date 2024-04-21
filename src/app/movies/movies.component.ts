@@ -35,11 +35,6 @@ export class MoviesComponent {
 
   ngOnInit() {
     this.getTopRatedMovies()
-    setTimeout(() => {
-      this.elementsArray =
-        this.element.nativeElement.querySelectorAll('.animated-fade-in');
-      this.fadeIn();
-    }, 500);
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -62,7 +57,12 @@ export class MoviesComponent {
     this.snackbar.showLoading(true)
     try {
       const movies = await this.moviesService.topRatedMovies();
-      this.TopRatedMovies = movies.results;      
+      this.TopRatedMovies = movies.results;
+      setTimeout(() => {
+        this.elementsArray =
+          this.element.nativeElement.querySelectorAll('.animated-fade-in');
+        this.fadeIn();
+      }, 500);
     } catch (error) {
       console.error('Error fetching movies:', error);
       // this.snackbar.show('Error fetching movies');

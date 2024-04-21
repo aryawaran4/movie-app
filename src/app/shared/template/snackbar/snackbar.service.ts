@@ -26,9 +26,8 @@ export class SnackbarService {
     if (loading) {
       this.snackbarElement.textContent = 'loading...';
       this.snackbarElement.classList.add('show');
-    }else{      
+    } else {
       setTimeout(() => {
-        // this.snackbarElement.classList.add('show');
         this.snackbarElement.classList.remove('show');
       }, duration);
     }

@@ -47,11 +47,6 @@ export class SearchResultComponent {
       });
     });
     this.search()
-    setTimeout(() => {
-      this.elementsArray =
-        this.element.nativeElement.querySelectorAll('.animated-fade-in');
-      this.fadeIn();
-    }, 500);
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -80,7 +75,11 @@ export class SearchResultComponent {
           console.log(formValue.search);
           const search = await this.movieService.searchMulti(formValue.search);
           this.searchArray = search.results;
-          console.log(this.searchArray);
+          setTimeout(() => {
+            this.elementsArray =
+              this.element.nativeElement.querySelectorAll('.animated-fade-in');
+            this.fadeIn();
+          }, 500);
 
           if (this.searchArray.length === 0) {
             console.log('No results found.');
@@ -100,7 +99,7 @@ export class SearchResultComponent {
 
 
   async toggleFavorite(showId: number, mediaType: string): Promise<void> {
-    if(this.globalService.getToken()){
+    if (this.globalService.getToken()) {
       this.snackbar.showLoading(true)
       try {
         if (this.isFavorite(showId, mediaType)) {
@@ -114,11 +113,11 @@ export class SearchResultComponent {
         console.error('Error toggling favorite:', error);
         // this.snackbar.show('Error toggling favorite');      
       }
-      finally{
+      finally {
         this.snackbar.showLoading(false)
       }
-    }else{
-      this.snackbar.show('Need to login first');      
+    } else {
+      this.snackbar.show('Need to login first');
     }
   }
 

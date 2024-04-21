@@ -1,12 +1,13 @@
 <app-navbar *ngIf="showNavbar"></app-navbar>
 
-<div class="search container-02 area-padding">
+<div class="search container-02 area-padding-y area-padding-x">
   <div class="search-area area-full">
     <div class="search-info">
       <form [formGroup]="searchForm" (ngSubmit)="search()" class="search-bar-area area-width area-center">
-        <input class="search-bar area-width" type="text" placeholder="Search for a movie or tv show" formControlName="search">
+        <input class="search-bar area-width" type="text" placeholder="Search for a movie or tv show"
+          formControlName="search">
         <button type="submit" [disabled]="searchForm.invalid" class="search-btn primary-btn outlined">Search</button>
-      </form>      
+      </form>
 
       <div class="search-results-wrap">
         <div class="search-results animated-fade-in first-show area-width area-center">
@@ -14,7 +15,7 @@
             <div class="card-area">
               <div class="img-wrapper card" [routerLink]="['/', 'movie', search.id]">
                 <div class="overview-layer">
-                  <p class="txt-02 txt-primary ellipsis-2">{{search.overview}}</p>              
+                  <p class="txt-02 txt-primary ellipsis-2">{{search.overview}}</p>
                 </div>
                 <img [src]="movieService.getImageUrl(search.poster_path, 'w342')" alt="" width="100%">
               </div>

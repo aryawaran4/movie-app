@@ -52,11 +52,6 @@ export class DashboardComponent {
     this.getPopularMovies()
     this.getPopularTvShows()
     this.getGenres()
-    setTimeout(() => {
-      this.elementsArray =
-        this.element.nativeElement.querySelectorAll('.animated-fade-in');
-      this.fadeIn();
-    }, 500);
   }
 
   // ***SLICK***
@@ -134,12 +129,16 @@ export class DashboardComponent {
     }
   }
 
-
   async getTrending() {
     this.snackbar.showLoading(true)
     try {
       const trends = await this.dashboardService.trendingShows();
       this.trends = trends.results;
+      setTimeout(() => {
+        this.elementsArray =
+          this.element.nativeElement.querySelectorAll('.animated-fade-in');
+        this.fadeIn();
+      }, 500);
     } catch (error) {
       console.error('Error fetching trends:', error);
       // this.snackbar.show('Error fetching trends');
@@ -155,6 +154,11 @@ export class DashboardComponent {
     try {
       const popular = await this.dashboardService.popularMovies();
       this.popularMovies = popular.results
+      setTimeout(() => {
+        this.elementsArray =
+          this.element.nativeElement.querySelectorAll('.animated-fade-in');
+        this.fadeIn();
+      }, 500);
     } catch (error) {
       console.error('Error fetching movies:', error);
       // this.snackbar.show('Error fetching movies');
@@ -169,6 +173,11 @@ export class DashboardComponent {
     try {
       const popular = await this.dashboardService.popularTvShows();
       this.popularTvShows = popular.results
+      setTimeout(() => {
+        this.elementsArray =
+          this.element.nativeElement.querySelectorAll('.animated-fade-in');
+        this.fadeIn();
+      }, 500);
     } catch (error) {
       console.error('Error fetching tv shows:', error);
       // this.snackbar.show('Error fetching tv shows');

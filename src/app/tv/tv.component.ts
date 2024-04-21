@@ -36,11 +36,6 @@ export class TvComponent {
 
   ngOnInit() {
     this.getTopRatedTvs()
-    setTimeout(() => {
-      this.elementsArray =
-        this.element.nativeElement.querySelectorAll('.animated-fade-in');
-      this.fadeIn();
-    }, 500);
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -63,9 +58,12 @@ export class TvComponent {
     this.snackbar.showLoading(true)
     try {
       const tvs = await this.tvService.topRatedTvs();
-      // setTimeout(() => {
       this.TopRatedTvs = tvs.results;
-      // }, 3000);
+      setTimeout(() => {
+        this.elementsArray =
+          this.element.nativeElement.querySelectorAll('.animated-fade-in');
+        this.fadeIn();
+      }, 500);
     } catch (error) {
       console.error('Error fetching tvs:', error);
       // this.snackbar.show('Error fetching tvs');

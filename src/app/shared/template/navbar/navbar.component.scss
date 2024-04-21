@@ -25,6 +25,7 @@
         color: $text-color;
         font-weight: bold;
       }
+
       cursor: pointer;
     }
 
@@ -41,10 +42,18 @@
           color: $text-color;
           text-decoration: none;
           cursor: pointer;
+          transition: all .5s;
+        }
+
+        .logout {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
         }
 
         a:hover {
-          text-decoration: underline;
+          text-decoration: none;
+          color: $accent-color;
         }
       }
     }

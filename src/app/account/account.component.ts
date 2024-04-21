@@ -56,24 +56,19 @@ export class AccountComponent {
     this.snackbar.showLoading(true)
     try {
       if (this.isFavorite(showId, mediaType)) {
-        const favourite = await this.movieService.removeFavourite(this.userInfo.uuid, showId, mediaType);        
+        const favourite = await this.movieService.removeFavourite(this.userInfo.uuid, showId, mediaType);
         this.usersData = this.globalService.getUsersData();
       } else {
-        const favourite = await this.movieService.addFavourite(this.userInfo.uuid, showId, mediaType);        
+        const favourite = await this.movieService.addFavourite(this.userInfo.uuid, showId, mediaType);
         this.usersData = this.globalService.getUsersData();
       }
     } catch (error) {
       console.error('Error toggling favorite:', error);
       // this.snackbar.show('Error toggling favorite');
-    } finally {      
-      setTimeout(() => {
-        this.elementsArray =
-          this.element.nativeElement.querySelectorAll('.animated-fade-in');
-        this.fadeIn();
-      }, 500);
+    } finally {
       this.snackbar.showLoading(false)
     }
-}
+  }
 
   isFavorite(showId: number, mediaType: string): boolean {
     const user = this.usersData

@@ -65,11 +65,11 @@ $secondary-background-fade: #1E1E1Eb3;
 
 .area-width {
   width: 100%;
-  max-width: 1152px;  
+  max-width: 1152px;
 }
 
 .area-full {
-  width: 100%;
+  width: 100% !important;
   max-width: 100%;
 }
 
@@ -77,8 +77,12 @@ $secondary-background-fade: #1E1E1Eb3;
   margin: 0 auto;
 }
 
-.area-padding {
-  padding: 12.5rem 1.5rem;
+.area-padding-y {
+  padding: 12.5rem 0;
+}
+
+.area-padding-x {
+  padding: 0 1.5rem;
 }
 
 .dialog-open {
@@ -134,7 +138,7 @@ button {
 }
 
 .primary-btn {
-  width: 100%;
+  width: fit-content;
   min-width: 115px;
   font-size: 2.4rem;
   font-weight: bold;
