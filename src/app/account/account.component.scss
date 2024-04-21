@@ -112,12 +112,7 @@
 
                   .overview {
                     margin-bottom: 1rem;
-                    display: -webkit-box;
-                    -webkit-line-clamp: 5;
-                    -webkit-box-orient: vertical;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                    height: 120px;
+                    min-height: 120px;
                   }
                 }
 
@@ -154,4 +149,96 @@
       }
     }
   }
+}
+
+@media screen and (max-width: 990px) {
+  .card-action {
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: end !important;
+    justify-content: space-between;
+
+    .action-common {
+      display: flex;
+      flex-direction: column;
+      align-items: start !important;
+      gap: 2.6rem;
+
+      .icon {
+        display: flex;
+        align-items: center;
+        gap: .8rem;
+
+        span {
+          font-size: 3.2rem;
+          color: $accent-color;
+        }
+      }
+
+
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .card-favorite {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    .card-action {
+      margin-top: 1rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: start !important;
+      gap: 2rem;
+      justify-content: space-between;
+
+      .action-common {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: center !important;
+        gap: 2.6rem;
+
+        .icon {
+          display: flex;
+          align-items: center;
+          gap: .8rem;
+
+          span {
+            font-size: 3.2rem;
+            color: $accent-color;
+          }
+        }
+
+
+      }
+    }
+  }
+
+  .img-container {
+    min-width: unset !important;
+    max-width: unset !important;
+    min-height: unset !important;
+    max-height: unset !important;
+    overflow: hidden;
+    border-radius: 10px;
+
+    img {
+      cursor: pointer;
+      object-fit: cover;
+      object-position: center;
+      min-width: unset !important;
+      max-width: unset !important;
+      min-height: unset !important;
+      max-height: unset !important;
+    }
+  }
+
+
 }

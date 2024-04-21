@@ -3,17 +3,19 @@
 <div class="account container-02 area-padding-y">
   <div class="account-area area-full">
     <div class="account-info">
-      <div class="account-info-area area-width area-center">
+      <div class="account-info-area area-width area-center area-padding-x">
         <h2 class="ttl-02 txt-primary">{{userInfo.username}}</h2>
         <p class="txt-primary txt-02">Total favorites :</p>
         <div class="account-favorite">
           <div class="txt-primary account-favorite-area">
-            <p class="total-favorite ttl-01">{{usersData.favourites.movies.length}}</p>
+            <p class="total-favorite ttl-01">{{!usersData.favourites.movies.length ? '-' :
+              usersData.favourites.movies.length}}</p>
             <p class="txt-favorite txt-02">Favorite<br>Movies</p>
           </div>
           <div class="divider"></div>
           <div class="txt-primary account-favorite-area">
-            <p class="total-favorite ttl-01">{{usersData.favourites.tv.length}}</p>
+            <p class="total-favorite ttl-01">{{!usersData.favourites.tv.length ? '-' : usersData.favourites.tv.length}}
+            </p>
             <p class="txt-favorite txt-02">Favorite<br>Tv Shows</p>
           </div>
         </div>
@@ -23,7 +25,7 @@
         </p>
       </div>
     </div>
-    <div class="my-favorite area-width area-center">
+    <div class="my-favorite area-width area-center area-padding-x">
       <h2 class="ttl-02 txt-primary">My Favourites</h2>
       <p *ngIf="(usersData.favourites.movies.length === 0) && (usersData.favourites.tv.length === 0)"
         class="txt-01 txt-primary">You haven't added any favorite shows.</p>
