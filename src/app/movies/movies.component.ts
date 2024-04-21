@@ -29,15 +29,15 @@ export class MoviesComponent {
   ) {
     this.userInfo = this.globalService.getMe()
     this.usersData = this.globalService.getUsersData()
+  }
+
+  ngOnInit() {
+    this.getTopRatedMovies()
     setTimeout(() => {
       this.elementsArray =
         this.element.nativeElement.querySelectorAll('.animated-fade-in');
       this.fadeIn();
     }, 500);
-  }
-
-  ngOnInit() {
-    this.getTopRatedMovies()
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -85,11 +85,6 @@ export class MoviesComponent {
       console.error('Error toggling favorite:', error);
       // this.snackbar.show('Error toggling favorite');
     } finally {
-      setTimeout(() => {
-        this.elementsArray =
-          this.element.nativeElement.querySelectorAll('.animated-fade-in');
-        this.fadeIn();
-      }, 500);
       this.snackbar.showLoading(false)
     }
   }

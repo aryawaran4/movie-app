@@ -3,11 +3,26 @@
 <div class="movies container-02 area-padding">
   <div class="movies-area area-full">
     <div class="top-rated area-width area-center">
-      <h2 class="ttl-02 txt-primary">Top Rated Movies</h2>
+      <h2 class="ttl-02 txt-primary">Top Rated Tv Shows</h2>
       <div class="top-rated-area">
-        <div class="top-rated-section animated-fade-in first-show">
-          <div class="list-top-rated">
-            <div *ngFor="let movie of TopRatedMovies; let i = index" class="card-top-rated" [id]="'movie-' + (i+1)">
+        <div class="top-rated-section">
+          <ng-container *ngIf="TopRatedMovies === undefined">
+            <!-- Show loading message or spinner while data is being fetched -->
+            <ng-container *ngIf="loading">
+              <ng-container *ngTemplateOutlet="loading"></ng-container>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="TopRatedMovies !== undefined && TopRatedMovies.length === 0">
+            <!-- Show empty state message if TopRatedMovies data is available but empty -->
+            <ng-container *ngIf="empty">
+              <ng-container *ngTemplateOutlet="empty"></ng-container>
+            </ng-container>
+          </ng-container>
+
+          <div class="list-top-rated" *ngIf="TopRatedMovies && TopRatedMovies.length > 0">
+            <div *ngFor="let movie of TopRatedMovies; let i = index" class="card-top-rated animated-fade-in first-show"
+              [id]="'movie-' + (i+1)">
               <div class="card-content">
                 <div class="img-container">
                   <img [src]="movieService.getImageUrl(movie.backdrop_path , 'w780')" alt="" width="100%">
@@ -32,8 +47,7 @@
                         {{movie.vote_count}}
                       </p>
                       <div class="icon favorite">
-                        <span
-                          [ngClass]="isFavorite(movie.id, 'movie') ? 'favorite-icon active' : 'favorite-icon'"></span>
+                        <span [ngClass]="isFavorite(movie.id, 'movie') ? 'favorite-icon active' : 'favorite-icon'"></span>
                         <span [ngClass]="isFavorite(movie.id, 'movie') ? 'favorite-txt remove' : 'favorite-txt add'"
                           (click)="toggleFavorite(movie.id, 'movie')">
                           {{ isFavorite(movie.id, 'movie') ? 'Remove from favorites' : 'Add to favorites'
@@ -57,3 +71,16 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #empty>
+  <div class="error-empty-container">
+    <app-error-empty [messageType]="'empty'"></app-error-empty>
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <div class="error-empty-container">
+    <app-error-empty [messageType]="'loading'"></app-error-empty>
+  </div>
+</ng-template>

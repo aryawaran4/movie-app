@@ -52,6 +52,11 @@ export class DashboardComponent {
     this.getPopularMovies()
     this.getPopularTvShows()
     this.getGenres()
+    setTimeout(() => {
+      this.elementsArray =
+        this.element.nativeElement.querySelectorAll('.animated-fade-in');
+      this.fadeIn();
+    }, 500);
   }
 
   // ***SLICK***
@@ -148,20 +153,13 @@ export class DashboardComponent {
   async getPopularMovies() {
     this.snackbar.showLoading(true)
     try {
-      const popular = await this.movieService.popularMovies();
-      // setTimeout(() => {
-        this.popularMovies = popular.results
-      // }, 3000);
+      const popular = await this.movieService.popularMovies();      
+        this.popularMovies = popular.results      
     } catch (error) {
       console.error('Error fetching movies:', error);
       // this.snackbar.show('Error fetching movies');
     } finally {
-      console.log('API call completed.');
-      setTimeout(() => {
-        this.elementsArray =
-          this.element.nativeElement.querySelectorAll('.animated-fade-in');
-        this.fadeIn();
-      }, 500);
+      console.log('API call completed.');      
       this.snackbar.showLoading(false)
     }
   }
@@ -176,11 +174,6 @@ export class DashboardComponent {
       // this.snackbar.show('Error fetching tv shows');
     } finally {
       console.log('API call completed.');
-      setTimeout(() => {
-        this.elementsArray =
-          this.element.nativeElement.querySelectorAll('.animated-fade-in');
-        this.fadeIn();
-      }, 500);
       this.snackbar.showLoading(false)
     }
   }

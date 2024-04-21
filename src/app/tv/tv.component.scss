@@ -1,7 +1,6 @@
 @import '/src/styles.scss';
 
 .tv {
-
   .tv-area {
     .top-rated {
       padding: 3rem 0 2rem;
@@ -12,6 +11,10 @@
         gap: 5rem;
 
         .top-rated-section {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 53vh;
           .list-top-rated {
             margin-top: 2rem;
             display: flex;

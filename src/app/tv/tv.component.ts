@@ -29,15 +29,15 @@ export class TvComponent {
   ) {
     this.userInfo = this.globalService.getMe()
     this.usersData = this.globalService.getUsersData()
+  }
+
+  ngOnInit() {
+    this.getTopRatedTvs()
     setTimeout(() => {
       this.elementsArray =
         this.element.nativeElement.querySelectorAll('.animated-fade-in');
       this.fadeIn();
     }, 500);
-  }
-
-  ngOnInit() {
-    this.getTopRatedTvs()
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -60,9 +60,9 @@ export class TvComponent {
     this.snackbar.showLoading(true)
     try {
       const tvs = await this.movieService.topRatedTvs();
-      setTimeout(() => {      
+      // setTimeout(() => {
         this.TopRatedTvs = tvs.results;
-      }, 3000);
+      // }, 3000);
     } catch (error) {
       console.error('Error fetching tvs:', error);
       // this.snackbar.show('Error fetching tvs');
@@ -87,11 +87,6 @@ export class TvComponent {
       console.error('Error toggling favorite:', error);
       // this.snackbar.show('Error toggling favorite');
     } finally {
-      setTimeout(() => {
-        this.elementsArray =
-          this.element.nativeElement.querySelectorAll('.animated-fade-in');
-        this.fadeIn();
-      }, 500);
       this.snackbar.showLoading(false)
     }
   }

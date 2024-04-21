@@ -12,6 +12,10 @@
         gap: 5rem;
 
         .top-rated-section {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 53vh;
           .list-top-rated {
             margin-top: 2rem;
             display: flex;
