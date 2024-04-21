@@ -72,3 +72,27 @@
     }
   }
 }
+
+
+@media screen and (max-width: 768px) {
+  .register-page {
+
+    .register-page-area {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .illustration {
+        display: none;
+      }
+
+      .form-wrap {
+        width: 100%;
+        padding: 0 1.5rem;
+
+      }
+
+    }
+  }
+}

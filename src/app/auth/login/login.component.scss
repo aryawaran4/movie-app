@@ -20,16 +20,18 @@
       }
     }
 
-    .form-wrap {      
+    .form-wrap {
       width: 40%;
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
       .form {
         width: 100%;
         max-width: 36.5rem;
+
         .form-area {
           width: 100%;
           display: flex;
@@ -64,6 +66,29 @@
       span:hover {
         text-decoration: underline;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .login-page {
+
+    .login-page-area {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .illustration {
+        display: none;
+      }
+
+      .form-wrap {
+        width: 100%;
+        padding: 0 1.5rem;
+
+      }
+
     }
   }
 }
