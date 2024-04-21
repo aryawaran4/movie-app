@@ -127,7 +127,7 @@ export class DashboardComponent {
         const formValue = this.searchForm.value;
         if (formValue.search) {
           console.log(formValue.search);
-          const search = await this.movieService.searchMulti(formValue.search);
+          const search = await this.movieService.fetchMultiSearch(formValue.search);
 
           this.searchArray = search.results;
           console.log(this.searchArray);
@@ -155,7 +155,7 @@ export class DashboardComponent {
   async getTrending() {
     this.snackbar.showLoading(true)
     try {
-      const trends = await this.dashboardService.trendingShows();
+      const trends = await this.dashboardService.getTrendingShows();
       this.trends = trends.results;      
       setTimeout(() => {
         this.elementsArray =
@@ -175,7 +175,7 @@ export class DashboardComponent {
   async getPopularMovies() {
     this.snackbar.showLoading(true)
     try {
-      const popular = await this.dashboardService.popularMovies();
+      const popular = await this.dashboardService.getPopularMovies();
       this.popularMovies = popular.results
       setTimeout(() => {
         this.elementsArray =
@@ -194,7 +194,7 @@ export class DashboardComponent {
   async getPopularTvShows() {
     this.snackbar.showLoading(true)
     try {
-      const popular = await this.dashboardService.popularTvShows();
+      const popular = await this.dashboardService.getPopularTvShows();
       this.popularTvShows = popular.results
       setTimeout(() => {
         this.elementsArray =
@@ -250,8 +250,8 @@ export class DashboardComponent {
     try {
       // Fetch genres for both movies and TV shows concurrently
       const [movieGenres, tvGenres] = await Promise.all([
-        this.movieService.GenresList('movie'),
-        this.movieService.GenresList('tv')
+        this.movieService.getGenresList('movie'),
+        this.movieService.getGenresList('tv')
       ]);
       this.genresMovie = movieGenres;
       this.genresTv = tvGenres;

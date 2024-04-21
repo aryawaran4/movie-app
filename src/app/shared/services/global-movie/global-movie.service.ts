@@ -51,7 +51,7 @@ export class GlobalMovieService {
     }
   }
 
-  async searchMulti(searchValue: string): Promise<GetResponse> {
+  async fetchMultiSearch(searchValue: string): Promise<GetResponse> {
     try {
       const url = `${this.apiUrl}/search/multi?query=${searchValue}&language=en-US`;
 
@@ -215,7 +215,7 @@ export class GlobalMovieService {
 
   }
 
-  async GenresList(mediaType: string): Promise<GenresType> {
+  async getGenresList(mediaType: string): Promise<GenresType> {
     const url = `${this.apiUrl}/genre/${mediaType}/list?language=en`;
     try {
       const response = await this.http.get<GenresType>(url).toPromise();

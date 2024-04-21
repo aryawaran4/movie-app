@@ -73,7 +73,7 @@ export class SearchResultComponent {
         const formValue = this.searchForm.value;
         if (formValue.search) {
           console.log(formValue.search);
-          const search = await this.movieService.searchMulti(formValue.search);
+          const search = await this.movieService.fetchMultiSearch(formValue.search);
           this.searchArray = search.results;
           setTimeout(() => {
             this.elementsArray =

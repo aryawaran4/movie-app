@@ -56,7 +56,7 @@ export class MoviesComponent {
   async getTopRatedMovies() {
     this.snackbar.showLoading(true)
     try {
-      const movies = await this.moviesService.topRatedMovies();
+      const movies = await this.moviesService.getTopRatedMovies();
       this.TopRatedMovies = movies.results;
       setTimeout(() => {
         this.elementsArray =
