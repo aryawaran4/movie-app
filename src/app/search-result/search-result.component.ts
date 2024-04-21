@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from '../shared/services/global.service';
-import { MovieService } from '../shared/services/movie/movie.service';
+import { GlobalMovieService } from '../shared/services/global-movie/movie.service';
 import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MediaType, UserFavouriteType } from '../shared/types/movie.type';
@@ -27,7 +27,7 @@ export class SearchResultComponent {
 
   constructor(
     private globalService: GlobalService,
-    public movieService: MovieService,
+    public movieService: GlobalMovieService,
     private snackbar: SnackbarService,
     private renderer: Renderer2,
     private element: ElementRef,

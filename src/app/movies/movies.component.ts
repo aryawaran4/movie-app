@@ -1,9 +1,10 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { FavouriteType, MovieType, UserFavouriteType } from '../shared/types/movie.type';
 import { GlobalService } from '../shared/services/global.service';
-import { MovieService } from '../shared/services/movie/movie.service';
+import { GlobalMovieService } from '../shared/services/global-movie/movie.service';
 import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
 import { UserType } from '../shared/types/auth.type';
+import { MoviesService } from './movies.service';
 
 @Component({
   selector: 'app-movies',
@@ -22,7 +23,8 @@ export class MoviesComponent {
 
   constructor(
     private globalService: GlobalService,
-    public movieService: MovieService,
+    public movieService: GlobalMovieService,
+    public moviesService: MoviesService,
     private snackbar: SnackbarService,
     private renderer: Renderer2,
     private element: ElementRef,
@@ -59,7 +61,7 @@ export class MoviesComponent {
   async getTopRatedMovies() {
     this.snackbar.showLoading(true)
     try {
-      const movies = await this.movieService.topRatedMovies();
+      const movies = await this.moviesService.topRatedMovies();
       this.TopRatedMovies = movies.results;      
     } catch (error) {
       console.error('Error fetching movies:', error);

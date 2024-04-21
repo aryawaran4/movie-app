@@ -2,9 +2,8 @@ import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { GlobalService } from '../shared/services/global.service';
 import { UserFavouriteType } from '../shared/types/movie.type';
 import { UserType } from '../shared/types/auth.type';
-import { MovieService } from '../shared/services/movie/movie.service';
+import { GlobalMovieService } from '../shared/services/global-movie/movie.service';
 import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-account',
@@ -20,7 +19,7 @@ export class AccountComponent {
 
   constructor(
     private globalService: GlobalService,
-    public movieService: MovieService,
+    public movieService: GlobalMovieService,
     private snackbar: SnackbarService,
     private renderer: Renderer2,
     private element: ElementRef,

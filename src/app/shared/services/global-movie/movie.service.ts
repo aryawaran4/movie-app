@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GetResponse, UserFavouriteType, MovieDetailsType, TvDetailsType, GenresType, VideoType, VideoResult } from '../../types/movie.type';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MovieService {
+export class GlobalMovieService {
   private apiUrl = 'https://api.themoviedb.org/3';
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
@@ -51,7 +51,6 @@ export class MovieService {
     }
   }
 
-
   async searchMulti(searchValue: string): Promise<GetResponse> {
     try {
       const url = `${this.apiUrl}/search/multi?query=${searchValue}&language=en-US`;
@@ -63,81 +62,6 @@ export class MovieService {
       return response;
     } catch (error) {
       console.error('Error fetching search:', error);
-      throw error;
-    }
-  }
-
-  async trendingShows(): Promise<GetResponse> {
-    try {
-      const url = `${this.apiUrl}/trending/all/week?language=en-US`;
-
-      const response = await this.http.get<GetResponse>(url).toPromise();
-      if (!response) {
-        throw new Error('Response is undefined');
-      }
-      return response;
-    } catch (error) {
-      console.error('Error fetching trends:', error);
-      throw error;
-    }
-  }
-
-  async popularMovies(): Promise<GetResponse> {
-    try {
-      const url = `${this.apiUrl}/movie/popular?language=en-US`;
-
-      const response = await this.http.get<GetResponse>(url).toPromise();
-      if (!response) {
-        throw new Error('Response is undefined');
-      }
-      return response;
-    } catch (error) {
-      console.error('Error fetching movies:', error);
-      throw error;
-    }
-  }
-
-  async popularTvShows(): Promise<GetResponse> {
-    try {
-      const url = `${this.apiUrl}/tv/popular?language=en-US`;
-
-      const response = await this.http.get<GetResponse>(url).toPromise();
-      if (!response) {
-        throw new Error('Response is undefined');
-      }
-      return response;
-    } catch (error) {
-      console.error('Error fetching tv shows:', error);
-      throw error;
-    }
-  }
-
-  async topRatedMovies(): Promise<GetResponse> {
-    try {
-      const url = `${this.apiUrl}/movie/top_rated?language=en-US`;
-
-      const response = await this.http.get<GetResponse>(url).toPromise();
-      if (!response) {
-        throw new Error('Response is undefined');
-      }
-      return response;
-    } catch (error) {
-      console.error('Error fetching movies:', error);
-      throw error;
-    }
-  }
-
-  async topRatedTvs(): Promise<GetResponse> {
-    try {
-      const url = `${this.apiUrl}/tv/top_rated?language=en-US`;
-
-      const response = await this.http.get<GetResponse>(url).toPromise();
-      if (!response) {
-        throw new Error('Response is undefined');
-      }
-      return response;
-    } catch (error) {
-      console.error('Error fetching tv shows:', error);
       throw error;
     }
   }

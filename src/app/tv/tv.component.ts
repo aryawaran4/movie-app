@@ -1,9 +1,11 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
-import { MovieService } from '../shared/services/movie/movie.service';
 import { GlobalService } from '../shared/services/global.service';
 import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
 import { UserType } from '../shared/types/auth.type';
 import { TvType, FavouriteType, UserFavouriteType } from '../shared/types/movie.type';
+import { MoviesService } from '../movies/movies.service';
+import { TvService } from './tv.service';
+import { GlobalMovieService } from '../shared/services/global-movie/movie.service';
 
 @Component({
   selector: 'app-tv',
@@ -22,7 +24,8 @@ export class TvComponent {
 
   constructor(
     private globalService: GlobalService,
-    public movieService: MovieService,
+    public movieService: GlobalMovieService,
+    public tvService: TvService,
     private snackbar: SnackbarService,
     private renderer: Renderer2,
     private element: ElementRef,
@@ -59,9 +62,9 @@ export class TvComponent {
   async getTopRatedTvs() {
     this.snackbar.showLoading(true)
     try {
-      const tvs = await this.movieService.topRatedTvs();
+      const tvs = await this.tvService.topRatedTvs();
       // setTimeout(() => {
-        this.TopRatedTvs = tvs.results;
+      this.TopRatedTvs = tvs.results;
       // }, 3000);
     } catch (error) {
       console.error('Error fetching tvs:', error);

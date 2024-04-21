@@ -1,12 +1,13 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { GlobalService } from '../shared/services/global.service';
-import { MovieService } from '../shared/services/movie/movie.service';
+import { GlobalMovieService } from '../shared/services/global-movie/movie.service';
 import { FavouriteType, GenresType, MovieType, TvType, UserFavouriteType, MediaType } from '../shared/types/movie.type';
 import { Router } from '@angular/router';
 import { UserType } from '../shared/types/auth.type';
 import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { VideoDialogService } from '../shared/template/video-dialog/video-dialog.service';
+import { DashboardService } from './dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,8 +20,6 @@ export class DashboardComponent {
   userInfo!: UserType
 
   trends!: MediaType[];
-  testUndefined: any = undefined
-  testArrVoid: any = []
   searchArray!: MediaType[];
   popularMovies!: MovieType[]
   popularTvShows!: TvType[]
@@ -36,7 +35,8 @@ export class DashboardComponent {
 
   constructor(
     private globalService: GlobalService,
-    public movieService: MovieService,
+    public movieService: GlobalMovieService,
+    private dashboardService: DashboardService,
     private snackbar: SnackbarService,
     private renderer: Renderer2,
     private element: ElementRef,
@@ -138,8 +138,8 @@ export class DashboardComponent {
   async getTrending() {
     this.snackbar.showLoading(true)
     try {
-      const trends = await this.movieService.trendingShows();
-      this.trends = trends.results;      
+      const trends = await this.dashboardService.trendingShows();
+      this.trends = trends.results;
     } catch (error) {
       console.error('Error fetching trends:', error);
       // this.snackbar.show('Error fetching trends');
@@ -153,13 +153,13 @@ export class DashboardComponent {
   async getPopularMovies() {
     this.snackbar.showLoading(true)
     try {
-      const popular = await this.movieService.popularMovies();      
-        this.popularMovies = popular.results      
+      const popular = await this.dashboardService.popularMovies();
+      this.popularMovies = popular.results
     } catch (error) {
       console.error('Error fetching movies:', error);
       // this.snackbar.show('Error fetching movies');
     } finally {
-      console.log('API call completed.');      
+      console.log('API call completed.');
       this.snackbar.showLoading(false)
     }
   }
@@ -167,7 +167,7 @@ export class DashboardComponent {
   async getPopularTvShows() {
     this.snackbar.showLoading(true)
     try {
-      const popular = await this.movieService.popularTvShows();
+      const popular = await this.dashboardService.popularTvShows();
       this.popularTvShows = popular.results
     } catch (error) {
       console.error('Error fetching tv shows:', error);
