@@ -11,3 +11,19 @@
     display: block;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .illustration {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .animation {
+      width: 70%;
+      height: auto;
+      display: block;
+    }
+  }
+}
