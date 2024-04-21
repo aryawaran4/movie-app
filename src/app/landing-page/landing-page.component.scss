@@ -2,7 +2,7 @@
 
 .landing-page {
 
-  .landing-page-area {    
+  .landing-page-area {
 
     .text-content {
       font-size: 2.4rem;
@@ -24,7 +24,35 @@
         align-items: center;
         justify-content: center;
       }
-      
+
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .landing-page {
+
+    .landing-page-area {
+
+      h2 {
+        font-size: 3.2rem;
+      }
+
+      .text-content {
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+      }
+
+      .btn-area {
+        align-items: center;
+        gap: 2rem;
+
+        button {
+          font-size: 1.6rem;
+          text-align: center;
+        }
+
+      }
     }
   }
 }
