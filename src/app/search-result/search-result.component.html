@@ -4,36 +4,38 @@
   <div class="search-area area-full">
     <div class="search-info">
       <form [formGroup]="searchForm" (ngSubmit)="search()" class="search-bar-area area-width area-center">
-        <input class="search-bar" type="text" placeholder="Search for a movie or tv show" formControlName="search">
+        <input class="search-bar area-width" type="text" placeholder="Search for a movie or tv show" formControlName="search">
         <button type="submit" [disabled]="searchForm.invalid" class="search-btn primary-btn outlined">Search</button>
       </form>      
 
-      <div class="search-results animated-fade-in first-show area-width area-center">
-        <div class="card" *ngFor="let search of searchArray">
-          <div class="card-area">
-            <div class="img-wrapper card" [routerLink]="['/', 'movie', search.id]">
-              <div class="overview-layer">
-                <p class="txt-02 txt-primary ellipsis-2">{{search.overview}}</p>              
+      <div class="search-results-wrap">
+        <div class="search-results animated-fade-in first-show area-width area-center">
+          <div class="card" *ngFor="let search of searchArray">
+            <div class="card-area">
+              <div class="img-wrapper card" [routerLink]="['/', 'movie', search.id]">
+                <div class="overview-layer">
+                  <p class="txt-02 txt-primary ellipsis-2">{{search.overview}}</p>              
+                </div>
+                <img [src]="movieService.getImageUrl(search.poster_path, 'w342')" alt="" width="100%">
               </div>
-              <img [src]="movieService.getImageUrl(search.poster_path, 'w342')" alt="" width="100%">
-            </div>
-            <div class="card-info">
-              <div class="card-info-area">
-                <p class="txt-02 txt-primary icon rating">
-                  <span class="material-symbols-outlined">
-                    star_rate
-                  </span>
-                  {{search.vote_average | number : '1.1-1'}} / 10
-                </p>
-                <div class="icon favorite card">
-                  <span
-                    [ngClass]="isFavorite(search.id, search.media_type === 'movie' ? 'movie' : 'tv') ? 'favorite-icon active' : 'favorite-icon'"
-                    (click)="toggleFavorite(search.id, search.media_type === 'movie' ? 'movie' : 'tv')"></span>
+              <div class="card-info">
+                <div class="card-info-area">
+                  <p class="txt-02 txt-primary icon rating">
+                    <span class="material-symbols-outlined">
+                      star_rate
+                    </span>
+                    {{search.vote_average | number : '1.1-1'}} / 10
+                  </p>
+                  <div class="icon favorite card">
+                    <span
+                      [ngClass]="isFavorite(search.id, search.media_type === 'movie' ? 'movie' : 'tv') ? 'favorite-icon active' : 'favorite-icon'"
+                      (click)="toggleFavorite(search.id, search.media_type === 'movie' ? 'movie' : 'tv')"></span>
+                  </div>
                 </div>
               </div>
             </div>
+            <p class="txt-02 txt-primary ttl-card">{{search.media_type === 'movie' ? search.title : search.name}}</p>
           </div>
-          <p class="txt-02 txt-primary ttl-card">{{search.media_type === 'movie' ? search.title : search.name}}</p>
         </div>
       </div>
     </div>
