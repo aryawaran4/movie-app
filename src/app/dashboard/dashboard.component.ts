@@ -16,7 +16,9 @@ import { DashboardService } from './dashboard.service';
 })
 export class DashboardComponent {
   showNavbar = true;
+  isSmallScreen: boolean = false;
   elementsArray!: NodeListOf<Element>;
+
   userInfo!: UserType
 
   trends!: MediaType[];
@@ -48,10 +50,21 @@ export class DashboardComponent {
   }
 
   ngOnInit() {
+    this.onResize('')
     this.getTrending()
     this.getPopularMovies()
     this.getPopularTvShows()
     this.getGenres()
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.isSmallScreen = window.innerWidth < 768;
+  }
+
+  ngAfterViewInit() {
+    this.updateSlickShow();
+    window.addEventListener('resize', this.updateSlickShow.bind(this));
   }
 
   // ***SLICK***
@@ -63,8 +76,18 @@ export class DashboardComponent {
 
   sectionSlides = [];
   sectionSlideConfig = {
-    "slidesToShow": 5, "slidesToScroll": 2, 'arrows': true, 'infinite': true
+    "slidesToShow": 5, "slidesToScroll": 2, 'arrows': true, 'infinite': true, adaptiveHeight: true, centerMode: true,
+    initialSlide: 1,
+    variableWidth: true,
   };
+
+  updateSlickShow() {
+    if (window.innerWidth < 768) {
+      this.sectionSlideConfig.slidesToShow = 1
+    } else {
+      this.sectionSlideConfig.slidesToShow = 5
+    }
+  }
   // ***SLICK***
 
   @HostListener('window:scroll', ['$event'])
@@ -133,7 +156,7 @@ export class DashboardComponent {
     this.snackbar.showLoading(true)
     try {
       const trends = await this.dashboardService.trendingShows();
-      this.trends = trends.results;
+      this.trends = trends.results;      
       setTimeout(() => {
         this.elementsArray =
           this.element.nativeElement.querySelectorAll('.animated-fade-in');

@@ -3,25 +3,29 @@
 .dashboard {
   .dashboard-area {
     .main-slide-area {
-      .carousel-wrap{
-        height: 56rem;
+      .carousel-wrap {
+        height: 100%;
+        max-height: 56rem;
+
         .carousel {
           .slide {
             position: relative;
-  
+
             .img-wrapper {
               overflow: hidden;
-              height: 56rem;
+              height: 100%;
+              max-height: 56rem;
               display: flex;
               align-items: center;
               justify-content: center;
-  
+
               img {
                 object-fit: cover;
-                transition: all 20s
+                transform: scale(1.2);
+                transition: all 15s
               }
             }
-  
+
             .slide-info {
               background: linear-gradient(to top right, $main-background, transparent);
               position: absolute;
@@ -29,20 +33,20 @@
               left: 0;
               top: 0;
               bottom: 0;
-  
+
               .slide-info-area {
                 width: 100%;
                 padding: 4.5rem 6rem;
                 position: absolute;
                 left: 0;
                 bottom: 0;
-  
+
                 .genre-list {
                   display: flex;
                   align-items: center;
                   gap: 2rem;
                   margin-bottom: 1.6rem;
-  
+
                   .genre {
                     padding: .4rem 1.6rem;
                     background: $main-background-fade;
@@ -50,38 +54,44 @@
                     color: $accent-color;
                     border-radius: 10px;
                   }
-  
+
+                  .genre:nth-child(n + 5) {
+                    display: none;
+                  }
+
                 }
-  
+
                 h3 {
                   margin-bottom: .8rem;
                 }
-  
+
                 .slide-action-area {
                   width: 100%;
                   display: flex;
-                  align-items: center;
+                  align-items: end;
                   margin-top: 2.4rem;
                   justify-content: space-between;
-  
+                  gap: 1rem;
+
                   .action-common {
                     display: flex;
+                    flex-wrap: wrap;
                     align-items: center;
                     gap: 2.6rem;
-  
+
                     .icon {
                       display: flex;
                       align-items: center;
                       gap: .8rem;
-  
+
                       span {
                         font-size: 3.2rem;
                         color: $accent-color;
                       }
                     }
-  
+
                   }
-  
+
                   .action-btn {
                     display: flex;
                     align-items: center;
@@ -91,11 +101,11 @@
               }
             }
           }
-  
+
           .main.slide:hover {
             .img-wrapper {
               img {
-                transform: scale(1.1) translateY(15%);
+                transform: scale(1);
                 ;
               }
             }
@@ -111,18 +121,19 @@
         margin-bottom: 4rem;
       }
 
-      .card-slider-wrap{
+      .card-slider-wrap {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         min-height: 33.4rem;
-        .card-slider-area{
+
+        .card-slider-area {
           .carousel {
             .slide {
               width: 20rem !important;
               margin-right: 3rem;
-    
+
               .slide-area {
                 cursor: pointer;
                 position: relative;
@@ -130,7 +141,7 @@
                 border-radius: 10px;
                 margin-bottom: 1rem;
                 transition: all .5s;
-    
+
                 .img-wrapper {
                   width: 20rem;
                   height: 30rem;
@@ -138,14 +149,14 @@
                   display: flex;
                   align-items: center;
                   justify-content: center;
-    
+
                   img {
                     object-fit: cover;
                     width: 20rem;
                     height: 30rem;
                   }
                 }
-    
+
                 .slide-info {
                   background: linear-gradient(to top, $main-background, transparent);
                   position: absolute;
@@ -153,7 +164,7 @@
                   left: 0;
                   top: 70%;
                   bottom: 0;
-    
+
                   .slide-info-area {
                     .rating {
                       position: absolute;
@@ -162,7 +173,7 @@
                       display: flex;
                       align-items: center;
                       gap: .5rem;
-    
+
                       span {
                         font-size: 3.2rem;
                         color: $accent-color;
@@ -171,7 +182,7 @@
                   }
                 }
               }
-    
+
               .slide-area:hover {
                 box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.1), 0 4px 6px -4px rgba(255, 255, 255, 0.1);
               }
@@ -181,4 +192,127 @@
       }
     }
   }
+}
+
+@media screen and (max-width: 1152px) {
+  .slide-info-area {
+    padding: 4.5rem 1.5rem !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard {
+    .dashboard-area {
+      .main-slide-area {
+        .carousel-wrap {
+          height: 30rem;
+
+          .carousel {
+            .slide {
+              .img-wrapper {
+                height: 30rem;
+
+                img {
+                  height: 30rem;
+                  object-fit: cover;
+                  transform: scale(1);
+                }
+              }
+
+              .slide-info {
+
+                .slide-info-area {
+                  padding: 1rem 1.5rem !important;
+
+                  .genre-list {
+                    gap: .5rem;
+                    margin-bottom: .5rem;
+
+                    .genre {
+                      font-size: 1rem;
+                    }
+
+                    .genre:nth-child(n + 3) {
+                      display: none;
+                    }
+                  }
+
+                  h3 {
+                    margin-bottom: .8rem;
+                    font-size: 2.4rem;
+                  }
+
+                  .overview {
+                    display: none;
+                  }
+
+                  .slide-action-area {
+                    width: 100%;
+                    display: flex;
+                    align-items: end;
+                    margin-top: 0;
+                    justify-content: space-between;
+
+                    .action-common {
+                      display: flex;
+                      flex-wrap: wrap;
+                      align-items: center;
+                      gap: 1rem;
+
+                      .txt-01 {
+                        font-size: 1.6rem;
+                      }
+
+                      .icon {
+                        gap: .4rem;
+
+                        span {
+                          font-size: 1.6rem;
+                        }
+                      }
+
+                      .icon.favorite {
+                        .favorite-icon {
+                          width: 18px;
+                          height: 18px;
+
+                        }
+                      }
+                    }
+
+                    .action-btn {
+                      display: flex;
+                      align-items: center;
+                      gap: 1.6rem;
+
+                      .trailer {
+                        display: none;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.slick-slide {
+  height: 0px !important;
+}
+
+.slick-slide.slick-active {
+  height: 100% !important;
+}
+
+.main.slide.slick-slide {
+  height: unset !important;
+}
+
+.main.slide.slick-slide.slick-active {
+  height: unset !important;
 }
