@@ -87,7 +87,6 @@ export class DashboardComponent {
   onResize(event: any) {
     this.isSmallScreen = window.innerWidth < 768;
   }
-
   ngAfterViewInit() {
     this.updateSlickShow();
     window.addEventListener('resize', this.updateSlickShow.bind(this));

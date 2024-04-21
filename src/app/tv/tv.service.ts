@@ -11,9 +11,9 @@ export class TvService {
 
   constructor(private http: HttpClient) { }
 
-  async topRatedTvs(): Promise<GetResponse> {
+  async getTopRatedTvs(pageNumber: number): Promise<GetResponse> {
     try {
-      const url = `${this.apiUrl}/tv/top_rated?language=en-US`;
+      const url = `${this.apiUrl}/tv/top_rated?language=en-US&page=${pageNumber}`;
 
       const response = await this.http.get<GetResponse>(url).toPromise();
       if (!response) {
@@ -21,7 +21,7 @@ export class TvService {
       }
       return response;
     } catch (error) {
-      console.error('Error fetching tv shows:', error);
+      console.error('Error fetching tvs:', error);
       throw error;
     }
   }

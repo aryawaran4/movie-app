@@ -17,10 +17,14 @@ export class TvComponent {
   elementsArray!: NodeListOf<Element>;
   userInfo!: UserType;
 
-  TopRatedTvs!: TvType[]
+  TopRatedTvs: TvType[] = []
+  newTopRatedTvs!: TvType[]
 
   favourite!: FavouriteType;
   usersData!: UserFavouriteType
+
+  currentPage = 1
+  loading = false
 
   constructor(
     private globalService: GlobalService,
@@ -35,12 +39,37 @@ export class TvComponent {
   }
 
   ngOnInit() {
-    this.getTopRatedTvs()
+    this.getTopRatedTvs(this.currentPage)
   }
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     this.fadeIn();
+
+    const windowHeight = window.innerHeight + 20;
+    const scrollY = window.scrollY;
+    const bodyHeight = document.body.offsetHeight;
+
+    // Check if the user has scrolled to the bottom of the page
+    if (windowHeight + scrollY >= bodyHeight) {
+      this.fetchNextPage();
+    }
+  }
+
+  fetchNextPage() {
+    if (!this.loading) {
+      // Set loading indicator to true to prevent multiple requests
+      this.loading = true;
+
+      // Increment the page number to fetch the next page
+      this.currentPage++;
+
+      // Fetch movies for the next page
+      this.getTopRatedTvs(this.currentPage).then(() => {
+        // Reset loading indicator after the request is completed
+        this.loading = false;
+      });
+    }
   }
 
   fadeIn() {
@@ -54,11 +83,18 @@ export class TvComponent {
     }
   }
 
-  async getTopRatedTvs() {
+  async getTopRatedTvs(pageNumber: number) {
     this.snackbar.showLoading(true)
     try {
-      const tvs = await this.tvService.topRatedTvs();
-      this.TopRatedTvs = tvs.results;
+      const tvs = await this.tvService.getTopRatedTvs(pageNumber);
+      this.newTopRatedTvs = tvs.results;
+      console.log(this.newTopRatedTvs);
+
+      if (this.newTopRatedTvs.length === 0) {
+        // No more Tvs available, stop fetching
+        return;
+      }
+      this.TopRatedTvs.push(...this.newTopRatedTvs);
       setTimeout(() => {
         this.elementsArray =
           this.element.nativeElement.querySelectorAll('.animated-fade-in');

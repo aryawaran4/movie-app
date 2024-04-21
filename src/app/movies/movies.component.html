@@ -6,21 +6,21 @@
       <h2 class="ttl-02 txt-primary">Top Rated Movies</h2>
       <div class="top-rated-area">
         <div class="top-rated-section">
-          <ng-container *ngIf="TopRatedMovies === undefined">
+          <ng-container *ngIf="newTopRatedMovies === undefined">
             <!-- Show loading message or spinner while data is being fetched -->
             <ng-container *ngIf="loading">
               <ng-container *ngTemplateOutlet="loading"></ng-container>
             </ng-container>
           </ng-container>
 
-          <ng-container *ngIf="TopRatedMovies !== undefined && TopRatedMovies.length === 0">
-            <!-- Show empty state message if TopRatedMovies data is available but empty -->
+          <ng-container *ngIf="newTopRatedMovies !== undefined && newTopRatedMovies.length === 0">
+            <!-- Show empty state message if newTopRatedMovies data is available but empty -->
             <ng-container *ngIf="empty">
               <ng-container *ngTemplateOutlet="empty"></ng-container>
             </ng-container>
           </ng-container>
 
-          <div class="list-top-rated" *ngIf="TopRatedMovies && TopRatedMovies.length > 0">
+          <div class="list-top-rated" *ngIf="newTopRatedMovies && newTopRatedMovies.length > 0">
             <div *ngFor="let movie of TopRatedMovies; let i = index" class="card-top-rated animated-fade-in first-show"
               [id]="'movie-' + (i+1)">
               <div class="card-content">

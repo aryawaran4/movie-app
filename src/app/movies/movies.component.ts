@@ -15,11 +15,16 @@ export class MoviesComponent {
   showNavbar = true;
   elementsArray!: NodeListOf<Element>;
   userInfo!: UserType;
+  reachedBottom: boolean = false
 
-  TopRatedMovies!: MovieType[]
+  TopRatedMovies: MovieType[] = []
+  newTopRatedMovies!: MovieType[]
 
   favourite!: FavouriteType;
   usersData!: UserFavouriteType
+
+  currentPage = 1
+  loading = false
 
   constructor(
     private globalService: GlobalService,
@@ -34,12 +39,37 @@ export class MoviesComponent {
   }
 
   ngOnInit() {
-    this.getTopRatedMovies()
+    this.getTopRatedMovies(this.currentPage)
   }
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     this.fadeIn();
+
+    const windowHeight = window.innerHeight + 20;
+    const scrollY = window.scrollY;
+    const bodyHeight = document.body.offsetHeight;
+
+    // Check if the user has scrolled to the bottom of the page
+    if (windowHeight + scrollY >= bodyHeight) {
+      this.fetchNextPage();
+    }
+  }
+
+  fetchNextPage() {
+    if (!this.loading) {
+      // Set loading indicator to true to prevent multiple requests
+      this.loading = true;
+
+      // Increment the page number to fetch the next page
+      this.currentPage++;
+
+      // Fetch movies for the next page
+      this.getTopRatedMovies(this.currentPage).then(() => {
+        // Reset loading indicator after the request is completed
+        this.loading = false;
+      });
+    }
   }
 
   fadeIn() {
@@ -53,11 +83,18 @@ export class MoviesComponent {
     }
   }
 
-  async getTopRatedMovies() {
+  async getTopRatedMovies(pageNumber: number) {
     this.snackbar.showLoading(true)
     try {
-      const movies = await this.moviesService.getTopRatedMovies();
-      this.TopRatedMovies = movies.results;
+      const movies = await this.moviesService.getTopRatedMovies(pageNumber);
+      this.newTopRatedMovies = movies.results;
+      console.log(this.newTopRatedMovies);
+
+      if (this.newTopRatedMovies.length === 0) {
+        // No more movies available, stop fetching
+        return;
+      }
+      this.TopRatedMovies.push(...this.newTopRatedMovies);
       setTimeout(() => {
         this.elementsArray =
           this.element.nativeElement.querySelectorAll('.animated-fade-in');
