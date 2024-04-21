@@ -107,15 +107,16 @@ $secondary-background-fade: #1E1E1Eb3;
   display: none;
 }
 
-@media screen and (max-width: 768px) {}
-
-.pc-block {
-  display: none;
+@media screen and (max-width: 768px) {
+  .pc-block {
+    display: none;
+  }
+  
+  .sp-block {
+    display: block;
+  }
 }
 
-.sp-block {
-  display: block;
-}
 
 /**********************************************/
 /*                animate                     */

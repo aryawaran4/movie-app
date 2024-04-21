@@ -5,7 +5,7 @@
     </div>
     <ul class="nav-links">
       <li><a [routerLink]="['/', 'movie']">Movies</a></li>
-      <li><a [routerLink]="['/', 'tv']">Tv Shows</a></li>
+      <li><a [routerLink]="['/tv']">Tv Shows</a></li>
       <!-- <li><a routerLink="/">People</a></li> -->
       <li><a [routerLink]="['/', routerAccount]">Account</a></li>
       <li *ngIf="isLoggedIn"><a (click)="logout()" class="logout">Log out<span class="material-symbols-outlined">

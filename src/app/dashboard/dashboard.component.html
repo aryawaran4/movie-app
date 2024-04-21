@@ -76,10 +76,8 @@
                         play_arrow
                       </span>
                       Watch Trailer</button>
-                    <button class="primary-btn outlined pc-block"
-                      [routerLink]="['/', trendShow.media_type, trendShow.id]">See More</button>
-                    <!-- <button class="primary-btn outlined sp-block"
-                      [routerLink]="['/', trendShow.media_type, trendShow.id]">More</button> -->
+                    <button class="primary-btn outlined"
+                      [routerLink]="['/', trendShow.media_type, trendShow.id]">{{isSmallScreen ? "More" : "See More"}}</button>
                   </div>
                 </div>
               </div>
@@ -112,7 +110,7 @@
             <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sectionSlideConfig">
               <div ngxSlickItem *ngFor="let show of popularMovies" class="slide">
                 <div class="slide-area">
-                  <div class="img-wrapper card" [routerLink]="['/', 'movie', show.id]">
+                  <div class="img-wrapper card" [routerLink]="['/movie', show.id]">
                     <div class="overview-layer">
                       <p class="txt-02 txt-primary ellipsis-2">{{show.overview}}</p>
                     </div>
@@ -164,7 +162,7 @@
             <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sectionSlideConfig">
               <div ngxSlickItem *ngFor="let show of popularTvShows" class="slide">
                 <div class="slide-area">
-                  <div class="img-wrapper card" [routerLink]="['/', 'tv', show.id]">
+                  <div class="img-wrapper card" [routerLink]="['/tv', show.id]">
                     <div class="overview-layer">
                       <p class="txt-02 txt-primary ellipsis-2">{{show.overview}}</p>
                     </div>

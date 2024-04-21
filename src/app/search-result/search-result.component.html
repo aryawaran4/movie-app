@@ -13,7 +13,7 @@
         <div class="search-results animated-fade-in first-show area-width area-center">
           <div class="card" *ngFor="let search of searchArray">
             <div class="card-area">
-              <div class="img-wrapper card" [routerLink]="['/', 'movie', search.id]">
+              <div class="img-wrapper card" [routerLink]="['/movie', search.id]">
                 <div class="overview-layer">
                   <p class="txt-02 txt-primary ellipsis-2">{{search.overview}}</p>
                 </div>

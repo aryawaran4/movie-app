@@ -57,12 +57,10 @@ const routes: Routes = [
   },
   {
     path: 'movie',
-    component: MoviesComponent,
     loadChildren: () => import('./movies/movies.module').then(m => m.MoviesModule)
   },
   {
     path: 'tv',
-    component: TvComponent,
     loadChildren: () => import('./tv/tv.module').then(m => m.TvModule)
   },
   {
