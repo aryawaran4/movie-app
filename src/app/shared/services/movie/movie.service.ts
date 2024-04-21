@@ -112,6 +112,36 @@ export class MovieService {
     }
   }
 
+  async topRatedMovies(): Promise<GetResponse> {
+    try {
+      const url = `${this.apiUrl}/movie/top_rated?language=en-US`;
+
+      const response = await this.http.get<GetResponse>(url).toPromise();
+      if (!response) {
+        throw new Error('Response is undefined');
+      }
+      return response;
+    } catch (error) {
+      console.error('Error fetching movies:', error);
+      throw error;
+    }
+  }
+
+  async topRatedTvs(): Promise<GetResponse> {
+    try {
+      const url = `${this.apiUrl}/tv/top_rated?language=en-US`;
+
+      const response = await this.http.get<GetResponse>(url).toPromise();
+      if (!response) {
+        throw new Error('Response is undefined');
+      }
+      return response;
+    } catch (error) {
+      console.error('Error fetching tv shows:', error);
+      throw error;
+    }
+  }
+
   async getMovieDetails(showId: number): Promise<MovieDetailsType> {
     const url = `${this.apiUrl}/movie/${showId}`;
     try {

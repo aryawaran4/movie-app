@@ -4,9 +4,9 @@
       <h1>#Movie-app</h1>
     </div>
     <ul class="nav-links">
-      <li><a routerLink="/">Movie</a></li>
-      <li><a routerLink="/">Tv Shows</a></li>
-      <li><a routerLink="/">People</a></li>
+      <li><a [routerLink]="['/', 'movie']">Movies</a></li>
+      <li><a [routerLink]="['/', 'tv']">Tv Shows</a></li>
+      <!-- <li><a routerLink="/">People</a></li> -->
       <li><a [routerLink]="['/', routerAccount]">Account</a></li>
       <li *ngIf="isLoggedIn"><a (click)="logout()"><span class="material-symbols-outlined">
             logout

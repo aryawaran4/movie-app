@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
-import { AccountComponent } from './account.component';
+import { TvComponent } from './tv.component';
+import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 
+
+
 @NgModule({
-  declarations: [AccountComponent],
+  declarations: [TvComponent],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule
   ]
 })
-export class AccountModule { }
+export class TvModule { }

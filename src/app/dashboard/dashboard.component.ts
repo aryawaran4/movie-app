@@ -141,6 +141,7 @@ export class DashboardComponent {
       this.snackbar.showLoading(false)
     } finally {
       console.log('API call completed.');
+      this.snackbar.showLoading(false)
     }
   }
 

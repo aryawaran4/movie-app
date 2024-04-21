@@ -11,10 +11,10 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountComponent } from './account/account.component';
-import { MovieComponent } from './details/movie/movie.component';
-import { TvComponent } from './details/tv/tv.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { Error404Component } from './error404/error404.component';
+import { MoviesComponent } from './movies/movies.component';
+import { TvComponent } from './tv/tv.component';
 
 const routes: Routes = [
   {
@@ -56,14 +56,14 @@ const routes: Routes = [
     loadChildren: () => import('./account/account.module').then(m => m.AccountModule)
   },
   {
-    path: 'movie/:id',
-    component: MovieComponent,
-    loadChildren: () => import('./details/details.module').then(m => m.DetailsModule)
+    path: 'movie',
+    component: MoviesComponent,
+    loadChildren: () => import('./movies/movies.module').then(m => m.MoviesModule)
   },
   {
-    path: 'tv/:id',
+    path: 'tv',
     component: TvComponent,
-    loadChildren: () => import('./details/details.module').then(m => m.DetailsModule)
+    loadChildren: () => import('./tv/tv.module').then(m => m.TvModule)
   },
   {
     path: '**',
