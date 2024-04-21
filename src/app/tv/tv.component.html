@@ -21,7 +21,7 @@
           </ng-container>
 
           <div class="list-top-rated" *ngIf="newTopRatedTvs && newTopRatedTvs.length > 0">
-            <div *ngFor="let tv of newTopRatedTvs; let i = index" class="card-top-rated animated-fade-in first-show"
+            <div *ngFor="let tv of TopRatedTvs; let i = index" class="card-top-rated animated-fade-in first-show"
               [id]="'tv-' + (i+1)">
               <div class="card-content">
                 <div class="img-container">

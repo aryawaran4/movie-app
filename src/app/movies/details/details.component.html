@@ -1,7 +1,10 @@
 <app-navbar *ngIf="showNavbar"></app-navbar>
 
 <div class="details container-02 area-padding-y">
-  <div class="details-area area-full">
+  <div *ngIf="notfound" class="area-width area-center area-padding-x area-padding-y">
+    <p class="txt-01 txt-primary">Opps something's wrong</p>
+  </div>
+  <div class="details-area area-full" *ngIf="!notfound">
     <div class="details-info">
       <div class="bg-img-wrap"
         [style.background]="isSmallScreen ? 'linear-gradient(to top, #121212 15%, transparent), url(' + movieService.getImageUrl(movie.backdrop_path, 'w1280') + 'no-repeat' + ')' : 'linear-gradient(to left, #121212 15%, transparent), url(' + movieService.getImageUrl(movie.backdrop_path, 'w1280') + 'no-repeat' + ')'">
@@ -54,7 +57,7 @@
             <mark class="txt-02 txt-primary" *ngIf="movie.tagline">{{movie.tagline}}</mark>
           </div>
           <div class="overview">
-            <p class="txt-02 font-bold txt-primary">Overview</p>
+            <p class="txt-02 font-bold txt-primary" *ngIf="movie.overview">Overview</p>
             <p class="txt-02 txt-primary" *ngIf="movie.overview">{{movie.overview}}</p>
           </div>
           <div class="other-details txt-primary">
@@ -82,7 +85,8 @@
       <div class="crew-area area-width area-center area-padding-x">
         <div class="crew-member">
           <h3 class="ttl-02 txt-primary">Casts</h3>
-          <div class="crew-member-wrap overflow-container">
+          <p *ngIf="!castLists || castLists.length === 0" class="txt-01 txt-primary">There's no casts for this movie</p>
+          <div class="crew-member-wrap overflow-container" *ngIf="castLists.length > 0">
             <div class="crew-member-list" *ngFor="let cast of castLists">
               <div class="img-wrap">
                 <img [src]="movieService.getImageUrl(cast.profile_path, 'w185')" alt="" width="100%">

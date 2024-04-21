@@ -13,6 +13,7 @@ import { UserFavouriteType, TvDetailsType, CastMemberType } from 'src/app/shared
   styleUrls: ['./details.component.scss']
 })
 export class TvDetailsComponent {
+  notfound = false
   showNavbar = true;
   elementsArray!: NodeListOf<Element>;
 
@@ -111,6 +112,7 @@ export class TvDetailsComponent {
       }, 500);
     } catch (error) {
       console.error('Error fetching tvs:', error);
+      this.notfound = true
       // this.snackbar.show('Error fetching tvs');
     } finally {
       console.log('API call completed.');
@@ -146,7 +148,7 @@ export class TvDetailsComponent {
       this.videoDialogService.openVideoDialog(key);
     } catch (error) {
       console.error('Error opening video dialog:', error);
-      // Handle error appropriately, e.g., show error message
+      this.snackbar.show('Error opening video dialog')
     } finally {
       this.snackbar.showLoading(false)
     }

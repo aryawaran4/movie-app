@@ -88,7 +88,6 @@ export class TvComponent {
     try {
       const tvs = await this.tvService.getTopRatedTvs(pageNumber);
       this.newTopRatedTvs = tvs.results;
-      console.log(this.newTopRatedTvs);
 
       if (this.newTopRatedTvs.length === 0) {
         // No more Tvs available, stop fetching

@@ -13,6 +13,7 @@ import { CastMemberType, CrewMemberType, MovieDetailsType, UserFavouriteType } f
   styleUrls: ['./details.component.scss']
 })
 export class MovieDetailsComponent {
+  notfound = false
   showNavbar = true;
   elementsArray!: NodeListOf<Element>;
 
@@ -111,6 +112,7 @@ export class MovieDetailsComponent {
       }, 500);
     } catch (error) {
       console.error('Error fetching movies:', error);
+      this.notfound = true
       // this.snackbar.show('Error fetching movies');
     } finally {
       console.log('API call completed.');
@@ -146,7 +148,7 @@ export class MovieDetailsComponent {
       this.videoDialogService.openVideoDialog(key);
     } catch (error) {
       console.error('Error opening video dialog:', error);
-      // Handle error appropriately, e.g., show error message
+      this.snackbar.show('Error opening video dialog')
     } finally {
       this.snackbar.showLoading(false)
     }
