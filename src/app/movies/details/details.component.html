@@ -4,10 +4,16 @@
   <div *ngIf="notfound" class="area-width area-center area-padding-x area-padding-y">
     <p class="txt-01 txt-primary">Opps something's wrong</p>
   </div>
-  <div class="details-area area-full" *ngIf="!notfound">
+  <ng-container *ngIf="movie === undefined">
+    <!-- Show loading message or spinner while data is being fetched -->
+    <ng-container *ngIf="loading">
+      <ng-container *ngTemplateOutlet="loading"></ng-container>
+    </ng-container>
+  </ng-container>
+  <div class="details-area area-full" *ngIf="!notfound && movie !== undefined">
     <div class="details-info">
       <div class="bg-img-wrap"
-        [style.background]="isSmallScreen ? 'linear-gradient(to top, #121212 15%, transparent), url(' + movieService.getImageUrl(movie.backdrop_path, 'w1280') + 'no-repeat' + ')' : 'linear-gradient(to left, #121212 15%, transparent), url(' + movieService.getImageUrl(movie.backdrop_path, 'w1280') + 'no-repeat' + ')'">
+        [style.background]="isSmallScreen ? 'linear-gradient(to top, #121212 15%, transparent), url(' + movieService.getImageUrl(movie.backdrop_path, 'w1280') + ')' + 'no-repeat' : 'linear-gradient(to left, #121212 15%, transparent), url(' + movieService.getImageUrl(movie.backdrop_path, 'w1280') + ')' + 'no-repeat'">
       </div>
       <div class="details-info-area area-width area-center area-padding-x">
         <div class="img-wrap">
@@ -100,3 +106,9 @@
     </div>
   </div>
 </div>
+
+<ng-template #loading>
+  <div class="error-empty-container">
+    <app-error-empty [messageType]="'loading'"></app-error-empty>
+  </div>
+</ng-template>

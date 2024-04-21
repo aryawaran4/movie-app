@@ -30,11 +30,11 @@
 
         <ngx-slick-carousel *ngIf="trends && trends.length > 0" class="carousel" #slickModal="slick-carousel"
           [config]="mainSlideConfig">
-          <div ngxSlickItem *ngFor="let trendShow of trends" class="main slide" [routerLink]="isSmallScreen ? ['/', trendShow.media_type, trendShow.id] : null">
+          <div ngxSlickItem *ngFor="let trendShow of trends" class="main slide">
             <div class="img-wrapper">
               <img [src]="movieService.getImageUrl(trendShow.backdrop_path, 'w1280')" alt="" width="100%">
             </div>
-            <div class="slide-info">
+            <div class="slide-info" [routerLink]="isSmallScreen ? ['/', trendShow.media_type, trendShow.id] : null">
               <div class="slide-info-area">
                 <div class="genre-list">
                   <div class="genre font-medium txt-02" *ngFor="let genreId of trendShow.genre_ids">

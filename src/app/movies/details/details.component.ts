@@ -53,6 +53,7 @@ export class MovieDetailsComponent {
   onScroll() {
     this.fadeIn();
   }
+  @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.isSmallScreen = window.innerWidth < 768;
   }
@@ -100,10 +101,10 @@ export class MovieDetailsComponent {
 
   async getDetailsMovie() {
     this.snackbar.showLoading(true)
+    console.log(this.movie);
     try {
       const details = await this.movieService.getMovieDetails(this.idParam);
       this.movie = details
-      console.log(this.movie);
 
       setTimeout(() => {
         this.elementsArray =

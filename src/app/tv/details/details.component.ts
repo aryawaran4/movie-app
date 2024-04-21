@@ -53,6 +53,7 @@ export class TvDetailsComponent {
   onScroll() {
     this.fadeIn();
   }
+  @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.isSmallScreen = window.innerWidth < 768;
   }

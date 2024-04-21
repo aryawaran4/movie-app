@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -9,15 +9,36 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class NavbarComponent {
   isLoggedIn = false
-  routerAccount = 'landing-page' 
+  routerAccount = 'landing-page'
+  isNavbarOpen: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(
+    private router: Router, 
+    private authService: AuthService,
+    private elementRef: ElementRef
+  ) { }
 
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
       this.isLoggedIn = true
       this.routerAccount = 'account'
     }
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: Event) {
+    // Check if the clicked element is outside the navbar component
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      this.closeNavbar();
+    }
+  }
+
+  toggleNavbar() {
+    this.isNavbarOpen = !this.isNavbarOpen;
+  }
+
+  closeNavbar() {
+    this.isNavbarOpen = false;
   }
 
   logout() {
