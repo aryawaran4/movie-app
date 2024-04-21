@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { GlobalService } from '../shared/services/global.service';
-import { GlobalMovieService } from '../shared/services/global-movie/movie.service';
+import { GlobalMovieService } from '../shared/services/global-movie/global-movie.service';
 import { FavouriteType, GenresType, MovieType, TvType, UserFavouriteType, MediaType } from '../shared/types/movie.type';
 import { Router } from '@angular/router';
 import { UserType } from '../shared/types/auth.type';

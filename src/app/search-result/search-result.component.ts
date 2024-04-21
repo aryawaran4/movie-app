@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from '../shared/services/global.service';
-import { GlobalMovieService } from '../shared/services/global-movie/movie.service';
+import { GlobalMovieService } from '../shared/services/global-movie/global-movie.service';
 import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MediaType, UserFavouriteType } from '../shared/types/movie.type';

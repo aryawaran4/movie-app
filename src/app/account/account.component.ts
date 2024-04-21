@@ -2,7 +2,7 @@ import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { GlobalService } from '../shared/services/global.service';
 import { UserFavouriteType } from '../shared/types/movie.type';
 import { UserType } from '../shared/types/auth.type';
-import { GlobalMovieService } from '../shared/services/global-movie/movie.service';
+import { GlobalMovieService } from '../shared/services/global-movie/global-movie.service';
 import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
 
 @Component({

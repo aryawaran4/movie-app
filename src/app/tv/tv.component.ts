@@ -5,7 +5,7 @@ import { UserType } from '../shared/types/auth.type';
 import { TvType, FavouriteType, UserFavouriteType } from '../shared/types/movie.type';
 import { MoviesService } from '../movies/movies.service';
 import { TvService } from './tv.service';
-import { GlobalMovieService } from '../shared/services/global-movie/movie.service';
+import { GlobalMovieService } from '../shared/services/global-movie/global-movie.service';
 
 @Component({
   selector: 'app-tv',

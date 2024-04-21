@@ -1,1 +1,44 @@
-<p>details works!</p>
+<app-navbar *ngIf="showNavbar"></app-navbar>
+
+<div class="details container-02 area-padding-y">
+  <div class="details-area area-full">
+    <div class="details-info">
+      <div class="details-info-area area-width area-center area-padding-x">
+        <div class="img-wrap">
+          <img [src]="movieService.getImageUrl(detailsMovie.poster_path, 'w342')" alt="" width="100%">
+        </div>
+        <div class="img-wrap">
+          <img [src]="movieService.getImageUrl(detailsMovie.backdrop_path, 'w1280')" alt="" width="100%">
+        </div>
+        <div class="info-wrap">
+          <h2 class="txt-02 txt-primary">{{detailsMovie.title}}</h2>
+          <p>{{detailsMovie.release_date}}</p>
+          <div class="genre font-medium txt-02" *ngFor="let genre of detailsMovie.genres">
+            {{genre.name}}
+          </div>
+          <p>{{detailsMovie.runtime}}</p>
+          <p>{{detailsMovie.vote_average}}</p>
+          <p>{{detailsMovie.vote_count}}</p>
+          <div class="action-btn">
+            <button class="primary-btn icon trailer" (click)="openVideoDialog(detailsMovie.id, 'movie')"><span
+                class="material-symbols-outlined">
+                play_arrow
+              </span>
+              Play Trailer</button>
+          </div>
+          <p>{{detailsMovie.tagline}}</p>
+          <p>{{detailsMovie.overview}}</p>
+          <div>
+            <p>{{detailsMovie.status}}</p>
+            <p>{{detailsMovie.budget}}</p>
+            <p>{{detailsMovie.revenue}}</p>
+            <p *ngFor="let lang of detailsMovie.spoken_languages">{{lang.english_name}}</p>            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="details-area area-width area-center area-padding-x">
+
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GetResponse, UserFavouriteType, MovieDetailsType, TvDetailsType, GenresType, VideoType, VideoResult } from '../../types/movie.type';
+import { GetResponse, UserFavouriteType, MovieDetailsType, TvDetailsType, GenresType, VideoType, VideoResult, CrewMemberType } from '../../types/movie.type';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
@@ -39,7 +39,7 @@ export class GlobalMovieService {
 
       if (officialTrailer) {
         videoId = officialTrailer.key;
-        
+
         // Return the video ID
         return videoId;
       } else {
@@ -77,6 +77,21 @@ export class GlobalMovieService {
       }
     } catch (error) {
       console.error('Error fetching movie details:', error);
+      throw error;
+    }
+  }
+
+  async getCrewList(showId: number, mediaType: string): Promise<CrewMemberType> {
+    const url = `${this.apiUrl}/${mediaType}/${showId}/credits?language=en-US`;
+    try {
+      const response = await this.http.get<CrewMemberType>(url).toPromise();
+      if (response) {
+        return response;
+      } else {
+        throw new Error('Crew details not found');
+      }
+    } catch (error) {
+      console.error('Error fetching Crew:', error);
       throw error;
     }
   }
@@ -213,5 +228,7 @@ export class GlobalMovieService {
       throw error;
     }
   }
+
+
 
 }
