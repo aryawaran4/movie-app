@@ -78,11 +78,13 @@ $secondary-background-fade: #1E1E1Eb3;
 }
 
 .area-padding-y {
-  padding: 12.5rem 0;
+  padding-top: 12.5rem;
+  padding-bottom: 12.5rem;
 }
 
 .area-padding-x {
-  padding: 0 1.5rem;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
 }
 
 .dialog-open {

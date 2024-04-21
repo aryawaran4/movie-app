@@ -16,7 +16,10 @@
           align-items: center;
           justify-content: center;
           min-height: 53vh;
+
           .list-top-rated {
+            width: 100%;
+            max-width: 1152px;
             margin-top: 2rem;
             display: flex;
             flex-direction: column;
@@ -71,7 +74,6 @@
 
                 .card-info {
                   width: 100%;
-                  height: 100%;
                   display: flex;
                   flex-direction: column;
 
@@ -82,12 +84,6 @@
 
                     .overview {
                       margin-bottom: 1rem;
-                      display: -webkit-box;
-                      -webkit-line-clamp: 5;
-                      -webkit-box-orient: vertical;
-                      text-overflow: ellipsis;
-                      overflow: hidden;
-                      height: 120px;
                     }
                   }
 
@@ -162,6 +158,147 @@
               }
             }
           }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .card-action {
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: end !important;
+    justify-content: space-between;
+
+    .action-common {
+      display: flex;
+      flex-direction: column;
+      align-items: start !important;
+      gap: 2.6rem;
+
+      .icon {
+        display: flex;
+        align-items: center;
+        gap: .8rem;
+
+        span {
+          font-size: 3.2rem;
+          color: $accent-color;
+        }
+      }
+
+
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .top-rated-section {
+    .list-top-rated {
+      .card-content {
+        display: flex;
+        align-items: start;
+        flex-direction: column;
+        gap: 2.4rem;
+        z-index: 10;
+
+        .img-container {
+          min-width: unset !important;
+          max-width: unset !important;
+          min-height: unset !important;
+          max-height: unset !important;
+          overflow: hidden;
+          border-radius: 10px;
+
+          img {
+            cursor: pointer;
+            object-fit: cover;
+            object-position: center;
+            min-width: unset !important;
+            max-width: unset !important;
+            min-height: unset !important;
+            max-height: unset !important;
+          }
+        }
+
+        .card-info {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+
+          .card-info-area {
+            .ttl {
+              margin-bottom: 1rem;
+            }
+
+            .overview {
+              margin-bottom: 1rem;
+            }
+          }
+
+          .card-action {
+            margin-top: 1rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: start !important;
+            gap: 2rem;
+            justify-content: space-between;
+
+            .action-common {
+              width: 100%;
+              display: flex;
+              flex-wrap: wrap;
+              flex-direction: row;
+              align-items: center !important;
+              gap: 2.6rem;
+
+              .icon {
+                display: flex;
+                align-items: center;
+                gap: .8rem;
+
+                span {
+                  font-size: 3.2rem;
+                  color: $accent-color;
+                }
+              }
+
+
+            }
+          }
+        }
+      }
+    }
+
+    .card-top-rated#movie-1,
+    .card-top-rated#movie-2,
+    .card-top-rated#movie-3 {
+      .bg-medal {
+        display: block;
+        background: linear-gradient(to bottom, $accent-color 10%, transparent 50%) !important;
+
+        .medal-content {
+          bottom: 5rem;
+        }
+      }
+    }
+
+    .card-top-rated#movie-4,
+    .card-top-rated#movie-5,
+    .card-top-rated#movie-6,
+    .card-top-rated#movie-7,
+    .card-top-rated#movie-8,
+    .card-top-rated#movie-9,
+    .card-top-rated#movie-10 {
+      .bg-medal {
+        display: block;
+        background: linear-gradient(to bottom, #4CAF50 10%, transparent 50%) !important;
+
+        .medal-content {
+          bottom: 5rem;
         }
       }
     }

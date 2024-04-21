@@ -1,7 +1,7 @@
 <app-navbar *ngIf="showNavbar"></app-navbar>
 
-<div class="tv container-02 area-padding-y">
-  <div class="tv-area area-full">
+<div class="tvs container-02 area-padding-y area-padding-x">
+  <div class="tvs-area area-full">
     <div class="top-rated area-width area-center">
       <h2 class="ttl-02 txt-primary">Top Rated Tv Shows</h2>
       <div class="top-rated-area">
@@ -19,9 +19,10 @@
               <ng-container *ngTemplateOutlet="empty"></ng-container>
             </ng-container>
           </ng-container>
-          
+
           <div class="list-top-rated" *ngIf="TopRatedTvs && TopRatedTvs.length > 0">
-            <div *ngFor="let tv of TopRatedTvs; let i = index" class="card-top-rated animated-fade-in first-show" [id]="'movie-' + (i+1)">
+            <div *ngFor="let tv of TopRatedTvs; let i = index" class="card-top-rated animated-fade-in first-show"
+              [id]="'tv-' + (i+1)">
               <div class="card-content">
                 <div class="img-container">
                   <img [src]="movieService.getImageUrl(tv.backdrop_path , 'w780')" alt="" width="100%">
@@ -74,7 +75,7 @@
 
 <ng-template #empty>
   <div class="error-empty-container">
-    <app-error-empty [messageType]="'error'"></app-error-empty>
+    <app-error-empty [messageType]="'empty'"></app-error-empty>
   </div>
 </ng-template>
 
