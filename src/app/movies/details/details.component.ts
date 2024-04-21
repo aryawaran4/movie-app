@@ -5,7 +5,7 @@ import { GlobalService } from 'src/app/shared/services/global.service';
 import { SnackbarService } from 'src/app/shared/template/snackbar/snackbar.service';
 import { VideoDialogService } from 'src/app/shared/template/video-dialog/video-dialog.service';
 import { UserType } from 'src/app/shared/types/auth.type';
-import { MovieDetailsType, UserFavouriteType } from 'src/app/shared/types/movie.type';
+import { CastMemberType, CrewMemberType, MovieDetailsType, UserFavouriteType } from 'src/app/shared/types/movie.type';
 
 @Component({
   selector: 'app-details',
@@ -19,9 +19,11 @@ export class MovieDetailsComponent {
   userInfo!: UserType;
   usersData!: UserFavouriteType;
 
-  detailsMovie!: MovieDetailsType
+  movie!: MovieDetailsType
+  castLists!: CastMemberType[]
 
   idParam!: number
+  isSmallScreen: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,15 +39,21 @@ export class MovieDetailsComponent {
   }
 
   ngOnInit() {
+    this.onResize('')
     this.route.params.subscribe(params => {
       this.idParam = params['id'];
     });
     this.getDetailsMovie()
+    this.getCastList()
   }
+
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     this.fadeIn();
+  }
+  onResize(event: any) {
+    this.isSmallScreen = window.innerWidth < 768;
   }
 
   fadeIn() {
@@ -93,9 +101,30 @@ export class MovieDetailsComponent {
     this.snackbar.showLoading(true)
     try {
       const details = await this.movieService.getMovieDetails(this.idParam);
-      this.detailsMovie = details
-      console.log(this.detailsMovie);
-      
+      this.movie = details
+      console.log(this.movie);
+
+      setTimeout(() => {
+        this.elementsArray =
+          this.element.nativeElement.querySelectorAll('.animated-fade-in');
+        this.fadeIn();
+      }, 500);
+    } catch (error) {
+      console.error('Error fetching movies:', error);
+      // this.snackbar.show('Error fetching movies');
+    } finally {
+      console.log('API call completed.');
+      this.snackbar.showLoading(false)
+    }
+  }
+
+  async getCastList() {
+    this.snackbar.showLoading(true)
+    try {
+      const casts = await this.movieService.getCastList(this.idParam, 'movie');
+      this.castLists = casts
+      console.log(this.castLists);
+
       setTimeout(() => {
         this.elementsArray =
           this.element.nativeElement.querySelectorAll('.animated-fade-in');

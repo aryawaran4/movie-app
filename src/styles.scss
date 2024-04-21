@@ -111,7 +111,7 @@ $secondary-background-fade: #1E1E1Eb3;
   .pc-block {
     display: none;
   }
-  
+
   .sp-block {
     display: block;
   }
@@ -421,6 +421,10 @@ input:focus {
   backface-visibility: hidden;
 }
 
+.slick-list.draggable{
+  padding: 0 !important;
+}
+
 
 /**********************************************/
 /*                SNACKBAR                    */
@@ -570,4 +574,43 @@ input:focus {
     background: rgba(18, 18, 18, 0.7);
     top: 0;
   }
+}
+
+/**********************************************/
+/*                Scroll                      */
+/**********************************************/
+/* Apply overflow scrolling to a container */
+.overflow-container {
+  /* Allow vertical scrolling */
+  overflow-y: auto !important;
+
+  /* Allow horizontal scrolling */
+  overflow-x: auto !important;
+
+  /* Optional: Set a fixed height or width to limit the size of the container */
+  /* height: 300px; */
+  /* width: 300px; */
+}
+
+/* Customize scrollbar appearance (optional) */
+.overflow-container::-webkit-scrollbar {
+  width: 12px !important;
+}
+
+/* Track */
+.overflow-container::-webkit-scrollbar-track {
+  background: #f1f1f1 !important;
+  /* Optional: Change scrollbar track color */
+}
+
+/* Handle */
+.overflow-container::-webkit-scrollbar-thumb {
+  background: $secondary-background !important;
+  /* Optional: Change scrollbar handle color */
+}
+
+/* Handle on hover */
+.overflow-container::-webkit-scrollbar-thumb:hover {
+  background: #555 !important;
+  /* Optional: Change scrollbar handle color on hover */
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GetResponse, UserFavouriteType, MovieDetailsType, TvDetailsType, GenresType, VideoType, VideoResult, CrewMemberType } from '../../types/movie.type';
+import { GetResponse, UserFavouriteType, MovieDetailsType, TvDetailsType, GenresType, VideoType, CastMemberType, MovieCreditsType } from '../../types/movie.type';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
@@ -81,17 +81,17 @@ export class GlobalMovieService {
     }
   }
 
-  async getCrewList(showId: number, mediaType: string): Promise<CrewMemberType> {
+  async getCastList(showId: number, mediaType: string): Promise<CastMemberType[]> {
     const url = `${this.apiUrl}/${mediaType}/${showId}/credits?language=en-US`;
     try {
-      const response = await this.http.get<CrewMemberType>(url).toPromise();
+      const response = await this.http.get<MovieCreditsType>(url).toPromise();
       if (response) {
-        return response;
+        return response.cast;
       } else {
-        throw new Error('Crew details not found');
+        throw new Error('Casts details not found');
       }
     } catch (error) {
-      console.error('Error fetching Crew:', error);
+      console.error('Error fetching Casts:', error);
       throw error;
     }
   }

@@ -4,6 +4,7 @@ import { MoviesComponent } from './movies.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { MovieDetailsComponent } from './details/details.component';
+import { MinutesToHoursMinutesPipe } from '../shared/pipe/minutes-to-hours-minutes.pipe';
 
 const routes: Routes = [
   {
@@ -17,7 +18,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [MoviesComponent, MovieDetailsComponent],
+  declarations: [MoviesComponent, MovieDetailsComponent, MinutesToHoursMinutesPipe],
   imports: [
     CommonModule,
     SharedModule,

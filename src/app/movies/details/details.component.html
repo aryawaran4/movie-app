@@ -3,42 +3,96 @@
 <div class="details container-02 area-padding-y">
   <div class="details-area area-full">
     <div class="details-info">
+      <div class="bg-img-wrap"
+        [style.background]="isSmallScreen ? 'linear-gradient(to top, #121212 15%, transparent), url(' + movieService.getImageUrl(movie.backdrop_path, 'w1280') + 'no-repeat' + ')' : 'linear-gradient(to left, #121212 15%, transparent), url(' + movieService.getImageUrl(movie.backdrop_path, 'w1280') + 'no-repeat' + ')'">
+      </div>
       <div class="details-info-area area-width area-center area-padding-x">
         <div class="img-wrap">
-          <img [src]="movieService.getImageUrl(detailsMovie.poster_path, 'w342')" alt="" width="100%">
-        </div>
-        <div class="img-wrap">
-          <img [src]="movieService.getImageUrl(detailsMovie.backdrop_path, 'w1280')" alt="" width="100%">
+          <img [src]="movieService.getImageUrl(movie.poster_path, 'w342')" alt="" width="100%">
         </div>
         <div class="info-wrap">
-          <h2 class="txt-02 txt-primary">{{detailsMovie.title}}</h2>
-          <p>{{detailsMovie.release_date}}</p>
-          <div class="genre font-medium txt-02" *ngFor="let genre of detailsMovie.genres">
-            {{genre.name}}
+          <div class="ttl-wrap">
+            <h2 class="ttl-01 txt-primary" *ngIf="movie.title">{{movie.title}}</h2>
+            <div class="desc">
+              <p class="txt-02 desc-item" *ngIf="movie.release_date">{{movie.release_date}}</p>
+              <div class="genre font-medium desc-item txt-02">
+                <p class="txt-02" *ngFor="let genre of movie.genres">{{genre.name}}</p>
+              </div>
+              <p class="txt-02 desc-item" *ngIf="movie.runtime">{{movie.runtime | minutesToHoursMinutes}}</p>
+            </div>
           </div>
-          <p>{{detailsMovie.runtime}}</p>
-          <p>{{detailsMovie.vote_average}}</p>
-          <p>{{detailsMovie.vote_count}}</p>
+          <div class="action-common">
+            <p class="txt-01 txt-primary icon rating">
+              <span class="material-symbols-outlined">
+                star_rate
+              </span>
+              {{movie.vote_average}}
+            </p>
+            <p class="txt-01 txt-primary icon person">
+              <span class="material-symbols-outlined">
+                person
+              </span>
+              {{movie.vote_count}}
+            </p>
+            <div class="icon favorite">
+              <span [ngClass]="isFavorite(movie.id, 'movie') ? 'favorite-icon active' : 'favorite-icon'"></span>
+              <span [ngClass]="isFavorite(movie.id, 'movie') ? 'favorite-txt remove' : 'favorite-txt add'"
+                (click)="toggleFavorite(movie.id, 'movie')">
+                {{ isFavorite(movie.id, 'movie') ? 'Remove from favorites' : 'Add to favorites'
+                }}
+              </span>
+            </div>
+          </div>
           <div class="action-btn">
-            <button class="primary-btn icon trailer" (click)="openVideoDialog(detailsMovie.id, 'movie')"><span
+            <button class="primary-btn icon trailer" (click)="openVideoDialog(movie.id, 'movie')"><span
                 class="material-symbols-outlined">
                 play_arrow
               </span>
               Play Trailer</button>
           </div>
-          <p>{{detailsMovie.tagline}}</p>
-          <p>{{detailsMovie.overview}}</p>
-          <div>
-            <p>{{detailsMovie.status}}</p>
-            <p>{{detailsMovie.budget}}</p>
-            <p>{{detailsMovie.revenue}}</p>
-            <p *ngFor="let lang of detailsMovie.spoken_languages">{{lang.english_name}}</p>            
+          <div class="tagline">
+            <mark class="txt-02 txt-primary" *ngIf="movie.tagline">{{movie.tagline}}</mark>
+          </div>
+          <div class="overview">
+            <p class="txt-02 font-bold txt-primary">Overview</p>
+            <p class="txt-02 txt-primary" *ngIf="movie.overview">{{movie.overview}}</p>
+          </div>
+          <div class="other-details txt-primary">
+            <div class="wrap">
+              <p class="txt-02 font-bold label">Status</p>
+              <p class="txt-02 status" *ngIf="movie.status">{{movie.status}}</p>
+            </div>
+            <div class="wrap">
+              <p class="txt-02 font-bold label">Budget</p>
+              <p class="txt-02 budget" *ngIf="movie.budget">{{movie.budget}}</p>
+            </div>
+            <div class="wrap">
+              <p class="txt-02 font-bold label">Revenue</p>
+              <p class="txt-02 revenue" *ngIf="movie.revenue">{{movie.revenue}}</p>
+            </div>
+            <div class="wrap">
+              <p class="txt-02 font-bold label">Original Language</p>
+              <p class="txt-02 lang" *ngIf="movie.original_language">{{movie.original_language}}</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="details-area area-width area-center area-padding-x">
-
+    <div class="area-full crew-container">
+      <div class="crew-area area-width area-center area-padding-x">
+        <div class="crew-member">
+          <h3 class="ttl-02 txt-primary">Casts</h3>
+          <div class="crew-member-wrap overflow-container">
+            <div class="crew-member-list" *ngFor="let cast of castLists">
+              <div class="img-wrap">
+                <img [src]="movieService.getImageUrl(cast.profile_path, 'w185')" alt="" width="100%">
+              </div>
+              <p class="txt-02 txt-primary font-medium">{{cast.name}}</p>
+              <p class="character txt-primary">{{cast.character}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
