@@ -54,6 +54,7 @@ export class SearchResultComponent {
         search: [this.query]
       });
     });
+    console.log('new page');
     this.search(this.currentPage)
   }
 
@@ -76,7 +77,7 @@ export class SearchResultComponent {
 
       this.currentPage++;
 
-      this.search(this.currentPage).then(() => {
+      this.scrollSearch(this.currentPage).then(() => {
         this.loading = false;
       });
     }
@@ -93,20 +94,48 @@ export class SearchResultComponent {
     }
   }
 
-  async search(pageNumber: number) {
-    this.snackbar.showLoading(true);
-
+  async scrollSearch(currentPage: number) {
+    this.snackbar.showLoading(true)
     try {
       if (this.searchForm.valid) {
         const formValue = this.searchForm.value;
         if (formValue.search) {
-          const search = await this.movieService.fetchMultiSearch(formValue.search, pageNumber);
-          this.newSearchArray = search.results;
+          const search = await this.movieService.fetchMultiSearch(formValue.search, this.currentPage);
 
+          this.newSearchArray = search.results;
           if (this.newSearchArray.length === 0) {
             this.snackbar.show('No more search available');
             return;
           }
+          this.searchArray.push(...this.newSearchArray);
+
+          setTimeout(() => {
+            this.elementsArray =
+              this.element.nativeElement.querySelectorAll('.animated-fade-in');
+            this.fadeIn();
+          }, 500);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching search:', error);
+      this.snackbar.show('Error fetching search')
+    } finally {
+      this.snackbar.showLoading(false)
+    }
+  }
+
+  async search(currentPage: number) {
+    this.snackbar.showLoading(true)
+    this.currentPage = 1
+    this.searchArray = []
+    try {
+      if (this.searchForm.valid) {
+        const formValue = this.searchForm.value;
+        if (formValue.search) {
+          const search = await this.movieService.fetchMultiSearch(formValue.search, this.currentPage);
+
+          this.newSearchArray = search.results;
+
           this.searchArray.push(...this.newSearchArray);
           setTimeout(() => {
             this.elementsArray =
@@ -114,21 +143,21 @@ export class SearchResultComponent {
             this.fadeIn();
           }, 500);
 
-          if (this.searchArray.length === 0) {
+          if (this.newSearchArray.length === 0) {
             this.snackbar.show('No results found');
           } else {
-            this.router.navigate(['/search'], { queryParams: { query: formValue.search } });
+            this.router.navigateByUrl(`/search?query=${formValue.search}`);
           }
+
         }
       }
     } catch (error) {
-      console.error('Error fetching trends:', error);
-      this.snackbar.show('An error occurred during search');
+      console.error('Error fetching search:', error);
+      this.snackbar.show('Error fetching search')
     } finally {
-      this.snackbar.showLoading(false);
+      this.snackbar.showLoading(false)
     }
   }
-
 
   async toggleFavorite(showId: number, mediaType: string): Promise<void> {
     if (this.globalService.getToken()) {
