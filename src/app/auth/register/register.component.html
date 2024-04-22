@@ -7,12 +7,12 @@
     </div>
     <div class="form-wrap">
       <div class="form">
-        <h2 class="ttl-02 txt-accent txt-center"><span class="txt-01 txt-primary">The fun’s awaits</span><br>Register</h2>
+        <h2 class="ttl-02 txt-accent txt-center"><span class="txt-01 txt-primary">The fun’s awaits</span><br>Register
+        </h2>
         <form [formGroup]="registerForm" (ngSubmit)="register()" class="form-area">
           <div class="input-area">
             <div class="input-wrap">
               <input type="username" placeholder="Username" formControlName="username">
-              <!-- Display error message for username -->
               <div
                 *ngIf="registerForm.get('username')?.invalid && (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)"
                 class="error-message">
@@ -21,7 +21,6 @@
             </div>
             <div class="input-wrap">
               <input type="email" placeholder="Email" formControlName="email">
-              <!-- Display error message for email -->
               <div
                 *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)"
                 class="error-message">
@@ -31,7 +30,6 @@
             </div>
             <div class="input-wrap">
               <input type="password" placeholder="Password" formControlName="password">
-              <!-- Display error message for password -->
               <div
                 *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)"
                 class="error-message">

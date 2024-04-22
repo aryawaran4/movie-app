@@ -1,13 +1,17 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+// service
 import { GlobalService } from '../shared/services/global.service';
 import { GlobalMovieService } from '../shared/services/global-movie/global-movie.service';
-import { FavouriteType, GenresType, MovieType, TvType, UserFavouriteType, MediaType } from '../shared/types/movie.type';
-import { Router } from '@angular/router';
-import { UserType } from '../shared/types/auth.type';
 import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { VideoDialogService } from '../shared/template/video-dialog/video-dialog.service';
 import { DashboardService } from './dashboard.service';
+
+// type
+import { FavouriteType, GenresType, MovieType, TvType, UserFavouriteType, MediaType } from '../shared/types/movie.type';
+import { UserType } from '../shared/types/auth.type';
 
 @Component({
   selector: 'app-dashboard',
@@ -126,16 +130,12 @@ export class DashboardComponent {
       if (this.searchForm.valid) {
         const formValue = this.searchForm.value;
         if (formValue.search) {
-          console.log(formValue.search);
           const search = await this.movieService.fetchMultiSearch(formValue.search, this.initialPage);
 
           this.searchArray = search.results;
-          console.log(this.searchArray);
 
           if (this.searchArray.length === 0) {
-            console.log('No results found.');
             this.snackbar.show('No results found');
-            // Show a message to the user indicating no results found            
           } else {
             this.router.navigateByUrl(`/search?query=${formValue.search}`);
           }
@@ -143,11 +143,9 @@ export class DashboardComponent {
         }
       }
     } catch (error) {
-      console.error('Error fetching trends:', error);
-      // Show an error message to the user
-      // this.snackbar.showLoading(false)
+      console.error('Error fetching search:', error);
+      this.snackbar.show('Error fetching search')
     } finally {
-      console.log('API call completed.');
       this.snackbar.showLoading(false)
     }
   }
@@ -164,10 +162,10 @@ export class DashboardComponent {
       }, 500);
     } catch (error) {
       console.error('Error fetching trends:', error);
-      // this.snackbar.show('Error fetching trends');
+      this.snackbar.show('Error fetching trends');
       this.snackbar.showLoading(false)
     } finally {
-      console.log('API call completed.');
+
       this.snackbar.showLoading(false)
     }
   }
@@ -184,9 +182,9 @@ export class DashboardComponent {
       }, 500);
     } catch (error) {
       console.error('Error fetching movies:', error);
-      // this.snackbar.show('Error fetching movies');
+      this.snackbar.show('Error fetching movies');
     } finally {
-      console.log('API call completed.');
+
       this.snackbar.showLoading(false)
     }
   }
@@ -203,9 +201,9 @@ export class DashboardComponent {
       }, 500);
     } catch (error) {
       console.error('Error fetching tv shows:', error);
-      // this.snackbar.show('Error fetching tv shows');
+      this.snackbar.show('Error fetching tv shows');
     } finally {
-      console.log('API call completed.');
+
       this.snackbar.showLoading(false)
     }
   }
@@ -223,7 +221,7 @@ export class DashboardComponent {
         }
       } catch (error) {
         console.error('Error toggling favorite:', error);
-        // this.snackbar.show('Error toggling favorite');      
+        this.snackbar.show('Error toggling favorite');
       }
       finally {
         this.snackbar.showLoading(false)
@@ -248,7 +246,6 @@ export class DashboardComponent {
   async getGenres() {
     this.snackbar.showLoading(true)
     try {
-      // Fetch genres for both movies and TV shows concurrently
       const [movieGenres, tvGenres] = await Promise.all([
         this.movieService.getGenresList('movie'),
         this.movieService.getGenresList('tv')
@@ -257,7 +254,7 @@ export class DashboardComponent {
       this.genresTv = tvGenres;
     } catch (error) {
       console.error('Error fetching genres:', error);
-      // this.snackbar.show('Error fetching genres');
+      this.snackbar.show('Error fetching genres');
     } finally {
       this.snackbar.showLoading(false)
     }

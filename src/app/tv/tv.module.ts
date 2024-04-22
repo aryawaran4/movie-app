@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TvComponent } from './tv.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { TvComponent } from './tv.component';
 import { TvDetailsComponent } from './details/details.component';
 
 const routes: Routes = [
@@ -21,7 +21,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule.forChild(routes) // Use forChild for lazy loading
+    RouterModule.forChild(routes)
   ]
 })
 export class TvModule { }

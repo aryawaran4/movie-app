@@ -22,7 +22,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule.forChild(routes) // Use forChild for lazy loading
+    RouterModule.forChild(routes)
   ]
 })
 export class MoviesModule { }

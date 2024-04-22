@@ -13,7 +13,7 @@ export class NavbarComponent {
   isNavbarOpen: boolean = false;
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private authService: AuthService,
     private elementRef: ElementRef
   ) { }
@@ -27,7 +27,6 @@ export class NavbarComponent {
 
   @HostListener('document:click', ['$event'])
   onClick(event: Event) {
-    // Check if the clicked element is outside the navbar component
     if (!this.elementRef.nativeElement.contains(event.target)) {
       this.closeNavbar();
     }

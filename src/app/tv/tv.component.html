@@ -7,14 +7,12 @@
       <div class="top-rated-area">
         <div class="top-rated-section">
           <ng-container *ngIf="newTopRatedTvs === undefined">
-            <!-- Show loading message or spinner while data is being fetched -->
             <ng-container *ngIf="loading">
               <ng-container *ngTemplateOutlet="loading"></ng-container>
             </ng-container>
           </ng-container>
 
           <ng-container *ngIf="newTopRatedTvs !== undefined && newTopRatedTvs.length === 0">
-            <!-- Show empty state message if newTopRatedTvs data is available but empty -->
             <ng-container *ngIf="empty">
               <ng-container *ngTemplateOutlet="empty"></ng-container>
             </ng-container>

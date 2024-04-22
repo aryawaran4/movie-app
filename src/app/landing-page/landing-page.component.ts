@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 // library
 import { AnimationOptions } from 'ngx-lottie';

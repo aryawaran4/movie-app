@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class MinutesToHoursMinutesPipe implements PipeTransform {
   transform(minutes: number | null): string {
     if (minutes === null || isNaN(minutes) || minutes < 0) {
-      return ''; // or any default value you prefer
+      return '';
     }
 
     const hours = Math.floor(minutes / 60);

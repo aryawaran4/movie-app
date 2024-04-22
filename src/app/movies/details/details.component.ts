@@ -1,9 +1,13 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
+// service
 import { GlobalMovieService } from 'src/app/shared/services/global-movie/global-movie.service';
 import { GlobalService } from 'src/app/shared/services/global.service';
 import { SnackbarService } from 'src/app/shared/template/snackbar/snackbar.service';
 import { VideoDialogService } from 'src/app/shared/template/video-dialog/video-dialog.service';
+
+// type
 import { UserType } from 'src/app/shared/types/auth.type';
 import { CastMemberType, CrewMemberType, MovieDetailsType, UserFavouriteType } from 'src/app/shared/types/movie.type';
 
@@ -81,7 +85,7 @@ export class MovieDetailsComponent {
       }
     } catch (error) {
       console.error('Error toggling favorite:', error);
-      // this.snackbar.show('Error toggling favorite');
+      this.snackbar.show('Error toggling favorite');
     } finally {
       this.snackbar.showLoading(false)
     }
@@ -101,7 +105,6 @@ export class MovieDetailsComponent {
 
   async getDetailsMovie() {
     this.snackbar.showLoading(true)
-    console.log(this.movie);
     try {
       const details = await this.movieService.getMovieDetails(this.idParam);
       this.movie = details
@@ -114,9 +117,8 @@ export class MovieDetailsComponent {
     } catch (error) {
       console.error('Error fetching movies:', error);
       this.notfound = true
-      // this.snackbar.show('Error fetching movies');
+      this.snackbar.show('Error fetching movies');
     } finally {
-      console.log('API call completed.');
       this.snackbar.showLoading(false)
     }
   }
@@ -126,7 +128,6 @@ export class MovieDetailsComponent {
     try {
       const casts = await this.movieService.getCastList(this.idParam, 'movie');
       this.castLists = casts
-      console.log(this.castLists);
 
       setTimeout(() => {
         this.elementsArray =
@@ -135,9 +136,8 @@ export class MovieDetailsComponent {
       }, 500);
     } catch (error) {
       console.error('Error fetching movies:', error);
-      // this.snackbar.show('Error fetching movies');
+      this.snackbar.show('Error fetching movies');
     } finally {
-      console.log('API call completed.');
       this.snackbar.showLoading(false)
     }
   }

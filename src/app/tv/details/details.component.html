@@ -5,7 +5,6 @@
     <p class="txt-01 txt-primary">Opps something's wrong</p>
   </div>
   <ng-container *ngIf="tv === undefined">
-    <!-- Show loading message or spinner while data is being fetched -->
     <ng-container *ngIf="loading">
       <ng-container *ngTemplateOutlet="loading"></ng-container>
     </ng-container>

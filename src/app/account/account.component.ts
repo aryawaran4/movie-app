@@ -1,9 +1,13 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
-import { GlobalService } from '../shared/services/global.service';
+
+// type
 import { UserFavouriteType } from '../shared/types/movie.type';
 import { UserType } from '../shared/types/auth.type';
+
+// service
 import { GlobalMovieService } from '../shared/services/global-movie/global-movie.service';
 import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
+import { GlobalService } from '../shared/services/global.service';
 
 @Component({
   selector: 'app-account',
@@ -64,7 +68,7 @@ export class AccountComponent {
       }
     } catch (error) {
       console.error('Error toggling favorite:', error);
-      // this.snackbar.show('Error toggling favorite');
+      this.snackbar.show('error');
     } finally {
       this.snackbar.showLoading(false)
     }

@@ -13,8 +13,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountComponent } from './account/account.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { Error404Component } from './error404/error404.component';
-import { MoviesComponent } from './movies/movies.component';
-import { TvComponent } from './tv/tv.component';
 
 const routes: Routes = [
   {

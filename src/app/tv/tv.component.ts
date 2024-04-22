@@ -1,11 +1,14 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
+
+// service
 import { GlobalService } from '../shared/services/global.service';
 import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
-import { UserType } from '../shared/types/auth.type';
-import { TvType, FavouriteType, UserFavouriteType } from '../shared/types/movie.type';
-import { MoviesService } from '../movies/movies.service';
 import { TvService } from './tv.service';
 import { GlobalMovieService } from '../shared/services/global-movie/global-movie.service';
+
+// type
+import { UserType } from '../shared/types/auth.type';
+import { TvType, FavouriteType, UserFavouriteType } from '../shared/types/movie.type';
 
 @Component({
   selector: 'app-tv',
@@ -50,7 +53,6 @@ export class TvComponent {
     const scrollY = window.scrollY;
     const bodyHeight = document.body.offsetHeight;
 
-    // Check if the user has scrolled to the bottom of the page
     if (windowHeight + scrollY >= bodyHeight) {
       this.fetchNextPage();
     }
@@ -58,15 +60,11 @@ export class TvComponent {
 
   fetchNextPage() {
     if (!this.loading) {
-      // Set loading indicator to true to prevent multiple requests
       this.loading = true;
 
-      // Increment the page number to fetch the next page
       this.currentPage++;
 
-      // Fetch movies for the next page
       this.getTopRatedTvs(this.currentPage).then(() => {
-        // Reset loading indicator after the request is completed
         this.loading = false;
       });
     }
@@ -90,7 +88,6 @@ export class TvComponent {
       this.newTopRatedTvs = tvs.results;
 
       if (this.newTopRatedTvs.length === 0) {
-        // No more Tvs available, stop fetching
         return;
       }
       this.TopRatedTvs.push(...this.newTopRatedTvs);
@@ -101,7 +98,7 @@ export class TvComponent {
       }, 500);
     } catch (error) {
       console.error('Error fetching tvs:', error);
-      // this.snackbar.show('Error fetching tvs');
+      this.snackbar.show('Error fetching tvs');
       this.snackbar.showLoading(false)
     } finally {
       console.log('API call completed.');
@@ -121,7 +118,7 @@ export class TvComponent {
       }
     } catch (error) {
       console.error('Error toggling favorite:', error);
-      // this.snackbar.show('Error toggling favorite');
+      this.snackbar.show('Error toggling favorite');
     } finally {
       this.snackbar.showLoading(false)
     }

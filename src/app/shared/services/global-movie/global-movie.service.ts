@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GetResponse, UserFavouriteType, MovieDetailsType, TvDetailsType, GenresType, VideoType, CastMemberType, MovieCreditsType } from '../../types/movie.type';
 import { DomSanitizer } from '@angular/platform-browser';
+import { GetResponse, UserFavouriteType, MovieDetailsType, TvDetailsType, GenresType, VideoType, CastMemberType, MovieCreditsType } from '../../types/movie.type';
 
 @Injectable({
   providedIn: 'root'

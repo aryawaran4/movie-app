@@ -182,7 +182,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .account{
+  .account {
     padding-top: 8.5rem !important;
   }
 
@@ -247,14 +247,15 @@
   .joined-txt {
     font-size: 5rem !important;
   }
-  
+
   .account-favorite {
     display: flex;
     align-items: flex-start !important;
     flex-direction: column !important;
     gap: 1rem !important;
   }
-  .divider{
+
+  .divider {
     display: none !important;
   }
 }

@@ -15,14 +15,12 @@
       </div>
       <div class="carousel-wrap">
         <ng-container *ngIf="trends === undefined">
-          <!-- Show loading message or spinner while data is being fetched -->
           <ng-container *ngIf="loading">
             <ng-container *ngTemplateOutlet="loading"></ng-container>
           </ng-container>
         </ng-container>
 
         <ng-container *ngIf="trends !== undefined && trends.length === 0">
-          <!-- Show empty state message if trends data is available but empty -->
           <ng-container *ngIf="empty">
             <ng-container *ngTemplateOutlet="empty"></ng-container>
           </ng-container>
@@ -42,7 +40,8 @@
                   </div>
                 </div>
                 <h3 class="ttl-02 txt-primary">{{trendShow.media_type === "movie" ? trendShow.title :
-                  trendShow.name}}</h3>
+                  trendShow.name}}
+                </h3>
                 <p class="txt-02 txt-primary ellipsis overview">{{trendShow.overview}}</p>
                 <div class="slide-action-area">
                   <div class="action-common">
@@ -75,9 +74,11 @@
                         class="material-symbols-outlined">
                         play_arrow
                       </span>
-                      Play Trailer</button>
+                      Play Trailer
+                    </button>
                     <button class="primary-btn outlined"
-                      [routerLink]="['/', trendShow.media_type, trendShow.id]">{{isSmallScreen ? "More" : "See More"}}</button>
+                      [routerLink]="['/', trendShow.media_type, trendShow.id]">{{isSmallScreen ? "More" : "See More"}}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -93,14 +94,12 @@
       <div class="card-slider-wrap">
         <div class="card-slider-area debug-slick">
           <ng-container *ngIf="popularMovies === undefined">
-            <!-- Show loading message or spinner while data is being fetched -->
             <ng-container *ngIf="loading">
               <ng-container *ngTemplateOutlet="loading"></ng-container>
             </ng-container>
           </ng-container>
 
           <ng-container *ngIf="popularMovies !== undefined && popularMovies.length === 0">
-            <!-- Show empty state message if popularMovies data is available but empty -->
             <ng-container *ngIf="empty">
               <ng-container *ngTemplateOutlet="empty"></ng-container>
             </ng-container>
@@ -145,14 +144,12 @@
       <div class="card-slider-wrap">
         <div class="card-slider-area debug-slick">
           <ng-container *ngIf="popularMovies === undefined">
-            <!-- Show loading message or spinner while data is being fetched -->
             <ng-container *ngIf="loading">
               <ng-container *ngTemplateOutlet="loading"></ng-container>
             </ng-container>
           </ng-container>
 
           <ng-container *ngIf="popularMovies !== undefined && popularMovies.length === 0">
-            <!-- Show empty state message if popularMovies data is available but empty -->
             <ng-container *ngIf="empty">
               <ng-container *ngTemplateOutlet="empty"></ng-container>
             </ng-container>

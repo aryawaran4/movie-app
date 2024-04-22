@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 // services
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { SnackbarService } from 'src/app/shared/template/snackbar/snackbar.service';
-import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'app-login',
@@ -54,6 +53,5 @@ export class LoginComponent {
 
   logout(): void {
     this.authService.logout();
-    // Additional logout-related tasks
   }
 }

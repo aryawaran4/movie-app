@@ -1,9 +1,13 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+
+// service
 import { GlobalService } from '../shared/services/global.service';
 import { GlobalMovieService } from '../shared/services/global-movie/global-movie.service';
 import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+
+// type
 import { MediaType, UserFavouriteType } from '../shared/types/movie.type';
 import { UserType } from '../shared/types/auth.type';
 
@@ -61,7 +65,6 @@ export class SearchResultComponent {
     const scrollY = window.scrollY;
     const bodyHeight = document.body.offsetHeight;
 
-    // Check if the user has scrolled to the bottom of the page
     if (windowHeight + scrollY >= bodyHeight) {
       this.fetchNextPage();
     }
@@ -69,15 +72,11 @@ export class SearchResultComponent {
 
   fetchNextPage() {
     if (!this.loading) {
-      // Set loading indicator to true to prevent multiple requests
       this.loading = true;
 
-      // Increment the page number to fetch the next page
       this.currentPage++;
 
-      // Fetch movies for the next page
       this.search(this.currentPage).then(() => {
-        // Reset loading indicator after the request is completed
         this.loading = false;
       });
     }
@@ -101,12 +100,10 @@ export class SearchResultComponent {
       if (this.searchForm.valid) {
         const formValue = this.searchForm.value;
         if (formValue.search) {
-          console.log(formValue.search);
           const search = await this.movieService.fetchMultiSearch(formValue.search, pageNumber);
           this.newSearchArray = search.results;
 
           if (this.newSearchArray.length === 0) {
-            // No more search available, stop fetching
             this.snackbar.show('No more search available');
             return;
           }
@@ -118,7 +115,6 @@ export class SearchResultComponent {
           }, 500);
 
           if (this.searchArray.length === 0) {
-            console.log('No results found.');
             this.snackbar.show('No results found');
           } else {
             this.router.navigate(['/search'], { queryParams: { query: formValue.search } });
@@ -147,7 +143,7 @@ export class SearchResultComponent {
         }
       } catch (error) {
         console.error('Error toggling favorite:', error);
-        // this.snackbar.show('Error toggling favorite');      
+        this.snackbar.show('Error toggling favorite');
       }
       finally {
         this.snackbar.showLoading(false)

@@ -2,7 +2,7 @@
 
 <div class="login-page container-01">
   <div class="login-page-area area-full">
-    <div class="illustration">      
+    <div class="illustration">
       <img src="/assets/img/img_girl_baloon.svg" alt="">
     </div>
     <div class="form-wrap">
@@ -13,7 +13,6 @@
           <div class="input-area">
             <div class="input-wrap">
               <input type="email" placeholder="Email" formControlName="email">
-              <!-- Display error message for email -->
               <div
                 *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)"
                 class="error-message">
@@ -23,7 +22,6 @@
             </div>
             <div class="input-wrap">
               <input type="password" placeholder="Password" formControlName="password">
-              <!-- Display error message for password -->
               <div
                 *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)"
                 class="error-message">
