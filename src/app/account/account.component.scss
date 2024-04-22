@@ -1,165 +1,154 @@
-@import '/src/styles.scss';
-
 .account {
   padding-top: 9.5rem;
+}
 
-  .account-area {
-    .account-info {
-      padding: 3rem 0;
-      background: $main-background;
-      position: relative;
-      overflow: hidden;
+.account .account-area .account-info {
+  padding: 3rem 0;
+  background: #121212;
+  position: relative;
+  overflow: hidden;
+}
 
-      .account-info-area {
-        .account-favorite {
-          display: flex;
-          align-items: center;
-          gap: 5rem;
+.account .account-area .account-info .account-info-area .account-favorite {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+}
 
-          .account-favorite-area {
-            display: flex;
-            align-items: center;
-            gap: 1.6rem;
+.account .account-area .account-info .account-info-area .account-favorite .account-favorite-area {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
 
-            .total-favorite {
-              margin: 0;
-            }
-          }
+.account .account-area .account-info .account-info-area .account-favorite .account-favorite-area .total-favorite {
+  margin: 0;
+}
 
-          .divider {
-            content: '';
-            width: 1px;
-            height: 6.8rem;
-            background: $text-color;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-        }
-      }
+.account .account-area .account-info .account-info-area .account-favorite .divider {
+  content: "";
+  width: 1px;
+  height: 6.8rem;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-      .joined {
-        width: 100%;
-        position: absolute;
-        top: 50%;
-        right: -50%;
-        transform: translate(-50%, -50%);
+.account .account-area .account-info .joined {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  right: -50%;
+  transform: translate(-50%, -50%);
+}
 
-        .joined-txt {
-          font-weight: bold;
-          font-size: 10rem;
-          line-height: 1.2;
-          color: $text-color;
-          opacity: .3;
-          text-align: right;
-        }
-      }
-    }
+.account .account-area .account-info .joined .joined-txt {
+  font-weight: bold;
+  font-size: 10rem;
+  line-height: 1.2;
+  color: #FFFFFF;
+  opacity: 0.3;
+  text-align: right;
+}
 
-    .my-favorite {
-      padding: 3rem 0 2rem;
+.account .account-area .my-favorite {
+  padding: 3rem 0 2rem;
+}
 
-      .my-favorite-area {
-        display: flex;
-        flex-direction: column;
-        gap: 5rem;
+.account .account-area .my-favorite .my-favorite-area {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
 
-        .favorite-section {
-          .list-favorite {
-            margin-top: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
+.account .account-area .my-favorite .my-favorite-area .favorite-section .list-favorite {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
 
-            .card-favorite {
-              background: $main-background;
-              border-radius: 10px;
-              padding: 2.4rem;
-              display: flex;
-              align-items: flex-start;
-              gap: 2.4rem;
-              box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+.account .account-area .my-favorite .my-favorite-area .favorite-section .list-favorite .card-favorite {
+  background: #121212;
+  border-radius: 10px;
+  padding: 2.4rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 2.4rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
 
-              .img-container {
-                min-width: 300px;
-                max-width: 300px;
-                min-height: 250px;
-                max-height: 250px;
-                overflow: hidden;
-                border-radius: 10px;
+.account .account-area .my-favorite .my-favorite-area .favorite-section .list-favorite .card-favorite .img-container {
+  min-width: 300px;
+  max-width: 300px;
+  min-height: 250px;
+  max-height: 250px;
+  overflow: hidden;
+  border-radius: 10px;
+}
 
-                img {
-                  cursor: pointer;
-                  object-fit: cover;
-                  object-position: center;
-                  min-width: 300px;
-                  max-width: 300px;
-                  min-height: 250px;
-                  max-height: 250px;
-                }
-              }
+.account .account-area .my-favorite .my-favorite-area .favorite-section .list-favorite .card-favorite .img-container img {
+  cursor: pointer;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+  min-width: 300px;
+  max-width: 300px;
+  min-height: 250px;
+  max-height: 250px;
+}
 
-              .card-info {
-                width: 100%;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
+.account .account-area .my-favorite .my-favorite-area .favorite-section .list-favorite .card-favorite .card-info {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
-                .card-info-area {
-                  .ttl {
-                    margin-bottom: 1rem;
-                  }
+.account .account-area .my-favorite .my-favorite-area .favorite-section .list-favorite .card-favorite .card-info .card-info-area .ttl {
+  margin-bottom: 1rem;
+}
 
-                  .overview {
-                    margin-bottom: 1rem;
-                    min-height: 120px;
-                  }
-                }
+.account .account-area .my-favorite .my-favorite-area .favorite-section .list-favorite .card-favorite .card-info .card-info-area .overview {
+  margin-bottom: 1rem;
+  min-height: 120px;
+}
 
-                .card-action {
-                  margin-top: 1rem;
-                  width: 100%;
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
+.account .account-area .my-favorite .my-favorite-area .favorite-section .list-favorite .card-favorite .card-info .card-action {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-                  .action-common {
-                    display: flex;
-                    align-items: center;
-                    gap: 2.6rem;
+.account .account-area .my-favorite .my-favorite-area .favorite-section .list-favorite .card-favorite .card-info .card-action .action-common {
+  display: flex;
+  align-items: center;
+  gap: 2.6rem;
+}
 
-                    .icon {
-                      display: flex;
-                      align-items: center;
-                      gap: .8rem;
+.account .account-area .my-favorite .my-favorite-area .favorite-section .list-favorite .card-favorite .card-info .card-action .action-common .icon {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
 
-                      span {
-                        font-size: 3.2rem;
-                        color: $accent-color;
-                      }
-                    }
-
-
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+.account .account-area .my-favorite .my-favorite-area .favorite-section .list-favorite .card-favorite .card-info .card-action .action-common .icon span {
+  font-size: 3.2rem;
+  color: #FFD700;
 }
 
 @media screen and (max-width: 990px) {
   .card-action {
     align-items: end !important;
+  }
 
-    .action-common {
-      flex-direction: column;
-      align-items: start !important;
-
-    }
+  .card-action .action-common {
+    flex-direction: column;
+    align-items: start !important;
   }
 }
 
@@ -171,19 +160,19 @@
   .card-favorite {
     flex-direction: column;
     align-items: flex-start;
+  }
 
-    .card-action {
-      flex-direction: column;
-      align-items: start !important;
-      gap: 2rem;
+  .card-favorite .card-action {
+    flex-direction: column;
+    align-items: start !important;
+    gap: 2rem;
+  }
 
-      .action-common {
-        width: 100%;
-        flex-wrap: wrap;
-        flex-direction: row;
-        align-items: center !important;
-      }
-    }
+  .card-favorite .card-action .action-common {
+    width: 100%;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center !important;
   }
 
   .img-container {
@@ -191,15 +180,14 @@
     max-width: unset !important;
     min-height: unset !important;
     max-height: unset !important;
-
-    img {
-      min-width: unset !important;
-      max-width: unset !important;
-      min-height: unset !important;
-      max-height: unset !important;
-    }
   }
 
+  .img-container img {
+    min-width: unset !important;
+    max-width: unset !important;
+    min-height: unset !important;
+    max-height: unset !important;
+  }
 
   .joined-txt {
     font-size: 5rem !important;
@@ -215,3 +203,5 @@
     display: none !important;
   }
 }
+
+/*# sourceMappingURL=account.component.css.map */

@@ -1,198 +1,177 @@
-@import '/src/styles.scss';
+.dashboard .dashboard-area .main-slide-area .carousel-wrap {
+  height: 100%;
+  max-height: 56rem;
+}
 
-.dashboard {
-  .dashboard-area {
-    .main-slide-area {
-      .carousel-wrap {
-        height: 100%;
-        max-height: 56rem;
+.dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide {
+  position: relative;
+}
 
-        .carousel {
-          .slide {
-            position: relative;
+.dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .img-wrapper {
+  overflow: hidden;
+  height: 100%;
+  max-height: 56rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-            .img-wrapper {
-              overflow: hidden;
-              height: 100%;
-              max-height: 56rem;
-              display: flex;
-              align-items: center;
-              justify-content: center;
+.dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .img-wrapper img {
+  -o-object-fit: cover;
+  object-fit: cover;
+  transform: scale(1.2);
+  transition: all 15s;
+}
 
-              img {
-                object-fit: cover;
-                transform: scale(1.2);
-                transition: all 15s
-              }
-            }
+.dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info {
+  background: linear-gradient(to top right, #121212, transparent);
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
 
-            .slide-info {
-              background: linear-gradient(to top right, $main-background, transparent);
-              position: absolute;
-              width: 100%;
-              left: 0;
-              top: 0;
-              bottom: 0;
+.dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area {
+  width: 100%;
+  padding: 4.5rem 6rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
 
-              .slide-info-area {
-                width: 100%;
-                padding: 4.5rem 6rem;
-                position: absolute;
-                left: 0;
-                bottom: 0;
+.dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .genre-list {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1.6rem;
+}
 
-                .genre-list {
-                  display: flex;
-                  align-items: center;
-                  gap: 2rem;
-                  margin-bottom: 1.6rem;
+.dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .genre-list .genre {
+  padding: 0.4rem 1.6rem;
+  background: rgba(18, 18, 18, 0.7019607843);
+  border: 1px solid #FFD700;
+  color: #FFD700;
+  border-radius: 10px;
+}
 
-                  .genre {
-                    padding: .4rem 1.6rem;
-                    background: $main-background-fade;
-                    border: 1px solid $accent-color;
-                    color: $accent-color;
-                    border-radius: 10px;
-                  }
+.dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .genre-list .genre:nth-child(n+5) {
+  display: none;
+}
 
-                  .genre:nth-child(n + 5) {
-                    display: none;
-                  }
+.dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area h3 {
+  margin-bottom: 0.8rem;
+}
 
-                }
+.dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .slide-action-area {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  margin-top: 2.4rem;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 10;
+}
 
-                h3 {
-                  margin-bottom: .8rem;
-                }
+.dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .slide-action-area .action-common {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2.6rem;
+}
 
-                .slide-action-area {
-                  width: 100%;
-                  display: flex;
-                  align-items: flex-end;
-                  margin-top: 2.4rem;
-                  justify-content: space-between;
-                  gap: 1rem;
-                  z-index: 10;
+.dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .slide-action-area .action-common .icon {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
 
-                  .action-common {
-                    display: flex;
-                    flex-wrap: wrap;
-                    align-items: center;
-                    gap: 2.6rem;
+.dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .slide-action-area .action-common .icon span {
+  font-size: 3.2rem;
+  color: #FFD700;
+}
 
-                    .icon {
-                      display: flex;
-                      align-items: center;
-                      gap: .8rem;
+.dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .slide-action-area .action-btn {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
 
-                      span {
-                        font-size: 3.2rem;
-                        color: $accent-color;
-                      }
-                    }
+.dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .main.slide:hover .img-wrapper img {
+  transform: scale(1);
+}
 
-                  }
+.dashboard .dashboard-area .section-slide-area {
+  margin-top: 6rem;
+}
 
-                  .action-btn {
-                    display: flex;
-                    align-items: center;
-                    gap: 1.6rem;
-                  }
-                }
-              }
-            }
-          }
+.dashboard .dashboard-area .section-slide-area h3 {
+  margin-bottom: 4rem;
+}
 
-          .main.slide:hover {
-            .img-wrapper {
-              img {
-                transform: scale(1);
-                ;
-              }
-            }
-          }
-        }
-      }
-    }
+.dashboard .dashboard-area .section-slide-area .card-slider-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 33.4rem;
+}
 
-    .section-slide-area {
-      margin-top: 6rem;
+.dashboard .dashboard-area .section-slide-area .card-slider-wrap .card-slider-area .carousel .slide {
+  width: 20rem !important;
+  margin-right: 3rem;
+}
 
-      h3 {
-        margin-bottom: 4rem;
-      }
+.dashboard .dashboard-area .section-slide-area .card-slider-wrap .card-slider-area .carousel .slide .slide-area {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  transition: all 0.5s;
+}
 
-      .card-slider-wrap {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 33.4rem;
+.dashboard .dashboard-area .section-slide-area .card-slider-wrap .card-slider-area .carousel .slide .slide-area .img-wrapper {
+  width: 20rem;
+  height: 30rem;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-        .card-slider-area {
-          .carousel {
-            .slide {
-              width: 20rem !important;
-              margin-right: 3rem;
+.dashboard .dashboard-area .section-slide-area .card-slider-wrap .card-slider-area .carousel .slide .slide-area .img-wrapper img {
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 20rem;
+  height: 30rem;
+}
 
-              .slide-area {
-                cursor: pointer;
-                position: relative;
-                overflow: hidden;
-                border-radius: 10px;
-                margin-bottom: 1rem;
-                transition: all .5s;
+.dashboard .dashboard-area .section-slide-area .card-slider-wrap .card-slider-area .carousel .slide .slide-area .slide-info {
+  background: linear-gradient(to top, #121212, transparent);
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 70%;
+  bottom: 0;
+}
 
-                .img-wrapper {
-                  width: 20rem;
-                  height: 30rem;
-                  height: auto;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
+.dashboard .dashboard-area .section-slide-area .card-slider-wrap .card-slider-area .carousel .slide .slide-area .slide-info .slide-info-area .rating {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 
-                  img {
-                    object-fit: cover;
-                    width: 20rem;
-                    height: 30rem;
-                  }
-                }
+.dashboard .dashboard-area .section-slide-area .card-slider-wrap .card-slider-area .carousel .slide .slide-area .slide-info .slide-info-area .rating span {
+  font-size: 3.2rem;
+  color: #FFD700;
+}
 
-                .slide-info {
-                  background: linear-gradient(to top, $main-background, transparent);
-                  position: absolute;
-                  width: 100%;
-                  left: 0;
-                  top: 70%;
-                  bottom: 0;
-
-                  .slide-info-area {
-                    .rating {
-                      position: absolute;
-                      bottom: 1rem;
-                      left: 1rem;
-                      display: flex;
-                      align-items: center;
-                      gap: .5rem;
-
-                      span {
-                        font-size: 3.2rem;
-                        color: $accent-color;
-                      }
-                    }
-                  }
-                }
-              }
-
-              .slide-area:hover {
-                box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.1), 0 4px 6px -4px rgba(255, 255, 255, 0.1);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+.dashboard .dashboard-area .section-slide-area .card-slider-wrap .card-slider-area .carousel .slide .slide-area:hover {
+  box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.1), 0 4px 6px -4px rgba(255, 255, 255, 0.1);
 }
 
 @media screen and (max-width: 1152px) {
@@ -202,112 +181,96 @@
 }
 
 @media screen and (max-width: 768px) {
-  .dashboard {
-    .dashboard-area {
-      .main-slide-area {
-        .carousel-wrap {
-          height: 30rem;
+  .dashboard .dashboard-area .main-slide-area .carousel-wrap {
+    height: 30rem;
+  }
 
-          .carousel {
-            .slide {
-              .img-wrapper {
-                height: 30rem;
+  .dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .img-wrapper {
+    height: 30rem;
+  }
 
-                img {
-                  height: 30rem;
-                  object-fit: cover;
-                  transform: scale(1);
-                }
-              }
+  .dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .img-wrapper img {
+    height: 30rem;
+    -o-object-fit: cover;
+    object-fit: cover;
+    transform: scale(1);
+  }
 
-              .slide-info {
+  .dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area {
+    padding: 1rem 1.5rem !important;
+  }
 
-                .slide-info-area {
-                  padding: 1rem 1.5rem !important;
+  .dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .genre-list {
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
 
-                  .genre-list {
-                    gap: .5rem;
-                    margin-bottom: .5rem;
+  .dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .genre-list .genre {
+    font-size: 0.9rem;
+  }
 
-                    .genre {
-                      font-size: .9rem;
-                    }
+  .dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .genre-list .genre:nth-child(n+3) {
+    display: none;
+  }
 
-                    .genre:nth-child(n + 3) {
-                      display: none;
-                    }
-                  }
+  .dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area h3 {
+    margin-bottom: 0.8rem;
+    font-size: 2.4rem;
+  }
 
-                  h3 {
-                    margin-bottom: .8rem;
-                    font-size: 2.4rem;
-                  }
+  .dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .overview {
+    display: none;
+  }
 
-                  .overview {
-                    display: none;
-                  }
+  .dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .slide-action-area {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    margin-top: 0;
+    justify-content: space-between;
+    z-index: 9999;
+  }
 
-                  .slide-action-area {
-                    width: 100%;
-                    display: flex;
-                    align-items: flex-end;
-                    margin-top: 0;
-                    justify-content: space-between;
-                    z-index: 9999;
+  .dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .slide-action-area .action-common {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
 
-                    .action-common {
-                      display: flex;
-                      flex-wrap: wrap;
-                      align-items: center;
-                      gap: 1rem;
+  .dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .slide-action-area .action-common .txt-01 {
+    font-size: 1.6rem;
+  }
 
-                      .txt-01 {
-                        font-size: 1.6rem;
-                      }
+  .dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .slide-action-area .action-common .icon {
+    gap: 0.4rem;
+  }
 
-                      .icon {
-                        gap: .4rem;
+  .dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .slide-action-area .action-common .icon span {
+    font-size: 1.6rem;
+  }
 
-                        span {
-                          font-size: 1.6rem;
-                        }
-                      }
+  .dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .slide-action-area .action-common .icon.favorite .favorite-icon {
+    width: 18px;
+    height: 18px;
+  }
 
-                      .icon.favorite {
-                        .favorite-icon {
-                          width: 18px;
-                          height: 18px;
+  .dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .slide-action-area .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+  }
 
-                        }
-                      }
-                    }
-
-                    .action-btn {
-                      display: flex;
-                      align-items: center;
-                      gap: 1.6rem;
-
-                      .trailer {
-                        display: none;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+  .dashboard .dashboard-area .main-slide-area .carousel-wrap .carousel .slide .slide-info .slide-info-area .slide-action-area .action-btn .trailer {
+    display: none;
   }
 
   .main.slide .primary-btn {
     font-size: 1.2rem !important;
-    padding: .8rem 1.2rem !important;
+    padding: 0.8rem 1.2rem !important;
     min-width: 85px !important;
   }
 }
-
 
 .slick-slide {
   height: 0px !important;
@@ -324,3 +287,5 @@
 .main.slide.slick-slide.slick-active {
   height: unset !important;
 }
+
+/*# sourceMappingURL=dashboard.component.css.map */

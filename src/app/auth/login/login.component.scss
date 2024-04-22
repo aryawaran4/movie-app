@@ -1,94 +1,85 @@
-@import '/src/styles.scss';
+.login-page .login-page-area {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-.login-page {
+.login-page .login-page-area .illustration {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .login-page-area {
+.login-page .login-page-area .illustration img {
+  width: 50%;
+  height: auto;
+}
+
+.login-page .login-page-area .form-wrap {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-page .login-page-area .form-wrap .form {
+  width: 100%;
+  max-width: 36.5rem;
+}
+
+.login-page .login-page-area .form-wrap .form .form-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-page .login-page-area .form-wrap .form .form-area .input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin: 2rem 0 3.5rem;
+}
+
+.login-page .login-page-area .register-link {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.login-page .login-page-area .register-link span {
+  margin-right: 1rem;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+.login-page .login-page-area .register-link span:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+  .login-page .login-page-area {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
 
-    .illustration {
-      width: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  .login-page .login-page-area .illustration {
+    display: none;
+  }
 
-      img {
-        width: 50%;
-        height: auto;
-      }
-    }
-
-    .form-wrap {
-      width: 40%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      .form {
-        width: 100%;
-        max-width: 36.5rem;
-
-        .form-area {
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-
-          .input-area {
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
-            margin: 2rem 0 3.5rem;
-          }
-        }
-      }
-    }
-
-
-    .register-link {
-      font-size: 1.2rem;
-      text-align: center;
-      margin-top: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: .5rem;
-
-      span {
-        margin-right: 1rem;
-        cursor: pointer;
-        font-size: inherit;
-      }
-
-      span:hover {
-        text-decoration: underline;
-      }
-    }
+  .login-page .login-page-area .form-wrap {
+    width: 100%;
+    padding: 0 1.5rem;
   }
 }
 
-@media screen and (max-width: 768px) {
-  .login-page {
-
-    .login-page-area {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .illustration {
-        display: none;
-      }
-
-      .form-wrap {
-        width: 100%;
-        padding: 0 1.5rem;
-
-      }
-
-    }
-  }
-}
+/*# sourceMappingURL=login.component.css.map */
