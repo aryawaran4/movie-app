@@ -1,0 +1,52 @@
+@import '/src/styles.scss';
+
+.navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 9999;
+  background-color: $main-background;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  .navbar-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $text-color;
+    padding: 2.4rem 1rem;
+
+    .logo {
+      h1 {
+        font-size: 3.2rem;
+        color: $text-color;
+        font-weight: bold;
+      }
+      cursor: pointer;
+    }
+
+    .nav-links {
+      list-style-type: none;
+      display: flex;
+
+      li {
+        margin-right: 3.6rem;
+
+        a {
+          font-size: 2rem;
+          font-weight: bold;
+          color: $text-color;
+          text-decoration: none;
+          cursor: pointer;
+        }
+
+        a:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

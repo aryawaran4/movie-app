@@ -1,0 +1,116 @@
+<app-navbar *ngIf="showNavbar"></app-navbar>
+
+<div class="account container-02 area-padding">
+  <div class="account-area area-full">
+    <div class="account-info">
+      <div class="account-info-area area-width area-center">
+        <h2 class="ttl-02 txt-primary">{{userInfo.username}}</h2>
+        <p class="txt-primary txt-02">Total favorites :</p>
+        <div class="account-favorite">
+          <div class="txt-primary account-favorite-area">
+            <p class="total-favorite ttl-01">{{usersData.favourites.movies.length}}</p>
+            <p class="txt-favorite txt-02">Favorite<br>Movies</p>
+          </div>
+          <div class="divider"></div>
+          <div class="txt-primary account-favorite-area">
+            <p class="total-favorite ttl-01">{{usersData.favourites.tv.length}}</p>
+            <p class="txt-favorite txt-02">Favorite<br>Tv Shows</p>
+          </div>
+        </div>
+      </div>
+      <div class="joined">
+        <p class="joined-txt">Joined Since<br>{{ userInfo.createdAt | date:'MMMM' }} {{ userInfo.createdAt | date:'y' }}
+        </p>
+      </div>
+    </div>
+    <div class="my-favorite area-width area-center">
+      <h2 class="ttl-02 txt-primary">My Favourites</h2>
+      <p *ngIf="(usersData.favourites.movies.length === 0) && (usersData.favourites.tv.length === 0)"
+        class="txt-01 txt-primary">You haven't added any favorite shows.</p>
+      <div class="my-favorite-area">
+        <div *ngIf="usersData.favourites.movies.length !== 0" class="favorite-section animated-fade-in first-show">
+          <p class="txt-01 txt-primary">Movies</p>
+          <div class="list-favorite">
+            <div *ngFor="let movie of usersData.favourites.movies" class="card-favorite">
+              <div class="img-container">
+                <img [src]="movieService.getImageUrl(movie.backdrop_path , 'w780')" alt="" width="100%">
+              </div>
+              <div class="card-info">
+                <div class="card-info-area">
+                  <p class="ttl-02 txt-primary ttl">{{movie.title}}</p>
+                  <p class="txt-02 txt-primary overview">{{movie.overview}}</p>
+                </div>
+                <div class="card-action">
+                  <div class="action-common">
+                    <p class="txt-01 txt-primary icon rating">
+                      <span class="material-symbols-outlined">
+                        star_rate
+                      </span>
+                      {{movie.vote_average}}
+                    </p>
+                    <p class="txt-01 txt-primary icon person">
+                      <span class="material-symbols-outlined">
+                        person
+                      </span>
+                      {{movie.vote_count}}
+                    </p>
+                    <div class="icon favorite">
+                      <span [ngClass]="isFavorite(movie.id, 'movie') ? 'favorite-icon active' : 'favorite-icon'"></span>
+                      <span [ngClass]="isFavorite(movie.id, 'movie') ? 'favorite-txt remove' : 'favorite-txt add'"
+                        (click)="toggleFavorite(movie.id, 'movie')">
+                        {{ isFavorite(movie.id, 'movie') ? 'Remove from favorites' : 'Add to favorites'
+                        }}
+                      </span>
+                    </div>
+                  </div>
+                  <button class="primary-btn outlined" [routerLink]="['/', 'movie', movie.id]">See More</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="usersData.favourites.tv.length !== 0" class="favorite-section animated-fade-in second-show">
+          <p class="txt-01 txt-primary">Tv Shows</p>
+          <div class="list-favorite">
+            <div *ngFor="let tv of usersData.favourites.tv" class="card-favorite">
+              <div class="img-container">
+                <img [src]="movieService.getImageUrl(tv.backdrop_path , 'w342')" alt="" width="100%">
+              </div>
+              <div class="card-info">
+                <div class="card-info-area">
+                  <p class="ttl-02 txt-primary ttl">{{tv.name}}</p>
+                  <p class="txt-02 txt-primary overview">{{tv.overview}}</p>
+                </div>
+                <div class="card-action">
+                  <div class="action-common">
+                    <p class="txt-01 txt-primary icon rating">
+                      <span class="material-symbols-outlined">
+                        star_rate
+                      </span>
+                      {{tv.vote_average}}
+                    </p>
+                    <p class="txt-01 txt-primary icon person">
+                      <span class="material-symbols-outlined">
+                        person
+                      </span>
+                      {{tv.vote_count}}
+                    </p>
+                    <div class="icon favorite">
+                      <span [ngClass]="isFavorite(tv.id, 'tv') ? 'favorite-icon active' : 'favorite-icon'"></span>
+                      <span [ngClass]="isFavorite(tv.id, 'tv') ? 'favorite-txt remove' : 'favorite-txt add'"
+                        (click)="toggleFavorite(tv.id, 'tv')">
+                        {{ isFavorite(tv.id, 'tv') ? 'Remove from favorites' : 'Add to favorites'
+                        }}
+                      </span>
+                    </div>
+                  </div>
+                  <button class="primary-btn outlined" [routerLink]="['/', 'tv', tv.id]">See More</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

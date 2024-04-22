@@ -1,0 +1,68 @@
+@import '/src/styles.scss';
+
+/**********************************************/
+/*                Error Empty                 */
+/**********************************************/
+.error-empty-template {
+  width: 100%;
+  height: 100%;
+  height: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .error-empty-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .img-wrapper {
+      width: 30%;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .error-empty-description {
+      margin-top: 2rem;
+    }
+  }
+}
+
+/**********************************************/
+/*                Loading                     */
+/**********************************************/
+/* CSS for the circular loading spinner */
+.circular-loading-spinner {
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  /* Spinner border color */
+  border-left-color: $accent-color;
+  /* Spinner color */
+  border-radius: 50%;
+  /* Make it circular */
+  width: 5rem;
+  /* Spinner width */
+  height: 5rem;
+  /* Spinner height */
+  animation: spin 1s linear infinite;
+  /* Animation to make it spin */
+}
+
+/* CSS animation for spinning */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  /* Start at 0 degrees rotation */
+  100% {
+    transform: rotate(360deg);
+  }
+
+  /* End at 360 degrees rotation (full circle) */
+}

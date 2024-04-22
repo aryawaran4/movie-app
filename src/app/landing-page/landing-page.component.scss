@@ -1,0 +1,30 @@
+@import '/src/styles.scss';
+
+.landing-page {
+
+  .landing-page-area {    
+
+    .text-content {
+      font-size: 2.4rem;
+      color: $text-color;
+      margin-bottom: 5rem;
+    }
+
+    .btn-area {
+      display: flex;
+      align-items: center;
+      gap: 5rem;
+
+      .divider {
+        content: '';
+        width: 1px;
+        height: 6.8rem;
+        background: $text-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+    }
+  }
+}

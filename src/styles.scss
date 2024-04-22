@@ -1,1 +1,546 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 10px;
+}
+
+.debug-slick {
+  min-width: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+// Dark Theme:
+// Main Background: #121212 (Dark charcoal black)
+// Secondary Background: #1E1E1E (Slightly lighter black)
+// Text Color: #FFFFFF (White)
+// Accent Color: #FFD700 (Gold or yellow for highlighting)
+
+// Light Theme:
+// Main Background: #F8F9FA (Light grayish-blue)
+// Secondary Background: #FFFFFF (White)
+// Text Color: #333333 (Dark gray for better readability)
+// Accent Color: #007BFF (Blue for highlighting)
+
+/**********************************************/
+/*                common                      */
+/**********************************************/
+
+$main-background: #121212;
+$secondary-background: #1E1E1E;
+$text-color: #FFFFFF;
+$accent-color: #FFD700;
+$accent-color-hover: #dfa92c;
+$accent-color-fade: #FFD7001a;
+$main-background-fade: #121212b3;
+$secondary-background-fade: #1E1E1Eb3;
+
+.none {
+  display: none !important;
+}
+
+/**********************************************/
+/*                template                    */
+/**********************************************/
+.container-01 {
+  width: 100%;
+  height: 100vh;
+  padding-top: 10rem;
+  background-color: $secondary-background;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-02 {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $secondary-background;
+}
+
+.area-width {
+  width: 80%;
+}
+
+.area-full {
+  width: 100%;
+  max-width: 100%;
+}
+
+.area-center {
+  margin: 0 auto;
+}
+
+.area-padding {
+  padding: 12.5rem 0;
+}
+
+.dialog-open {
+  overflow: hidden;
+}
+
+/* CSS for the container */
+.error-empty-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/**********************************************/
+/*                animate                     */
+/**********************************************/
+
+.inView {
+  opacity: 1 !important;
+  transform: translateY(0px) rotate(0deg) translateZ(0) !important;
+}
+
+.animated-fade-in {
+  -webkit-transform: translateY(50px) translateZ(0);
+  transform: translateY(50px) translateZ(0);
+  opacity: 0;
+}
+
+.first-show {
+  -webkit-transition-delay: all 1s;
+  -o-transition-delay: all 1s;
+  transition-delay: all 1s;
+  -webkit-transition: all 0.9s;
+  -o-transition: all 0.9s;
+  transition: all 0.9s;
+}
+
+.second-show {
+  -webkit-transition-delay: all 1.5s;
+  -o-transition-delay: all 1.5s;
+  transition-delay: all 1.5s;
+  -webkit-transition: all 1.4s;
+  -o-transition: all 1.4s;
+  transition: all 1.4s;
+}
+
+/**********************************************/
+/*                btn style                   */
+/**********************************************/
+button {
+  cursor: pointer;
+}
+
+.primary-btn {
+  font-size: 2.4rem;
+  font-weight: bold;
+  color: $text-color;
+  padding: 1.6rem 2.4rem;
+  background: $accent-color;
+  border: none;
+  border-radius: 10px;
+  transition: all 0.5s ease;
+  color: $main-background;
+}
+
+.primary-btn.outlined {
+  font-size: 1.6rem;
+  background: $main-background-fade;
+  border: 1px solid $accent-color;
+  color: $accent-color
+}
+
+.primary-btn.icon {
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.primary-btn.icon.circle {
+  font-size: 1.6rem;
+  padding: 1.6rem;
+  background: $main-background-fade;
+  border: 1px solid $accent-color;
+  border-radius: 9999px;
+  transition: all 0.5s ease;
+  color: $main-background;
+}
+
+.primary-btn.icon.circle .material-symbols-outlined {
+  color: $accent-color;
+}
+
+.primary-btn:hover {
+  box-shadow: 0 4px 6px -1px $accent-color-fade, 0 2px 4px -2px $accent-color-fade;
+  background-color: $accent-color-hover;
+}
+
+.primary-btn.icon.circle:hover {
+  background-color: $secondary-background;
+}
+
+.primary-btn.outlined:hover {
+  background-color: $accent-color;
+  color: $main-background;
+}
+
+.primary-cta {
+  font-size: 2.4rem;
+  font-weight: bold;
+  color: $text-color;
+  border: none;
+  background: transparent;
+  transition: all 0.5s ease;
+}
+
+.primary-cta:hover {
+  color: $accent-color;
+}
+
+
+/**********************************************/
+/*                Typography                  */
+/**********************************************/
+.txt-primary {
+  color: $text-color;
+}
+
+.txt-accent {
+  color: $accent-color;
+}
+
+.txt-center {
+  text-align: center !important;
+}
+
+.txt-left {
+  text-align: left !important;
+}
+
+.font-bold {
+  font-weight: bold !important;
+}
+
+.font-medium {
+  font-weight: 500 !important;
+}
+
+.font-normal {
+  font-weight: normal !important;
+}
+
+.ttl-01 {
+  font-size: 6.4rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.ttl-02 {
+  font-size: 3.2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.ttl-03 {
+  font-size: 2.6rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.txt-01 {
+  font-size: 2.4rem;
+  font-weight: normal;
+}
+
+.txt-02 {
+  font-size: 1.6rem;
+  font-weight: normal;
+}
+
+.material-symbols-outlined {
+  font-size: 2.4rem;
+  color: inherit;
+}
+
+.ellipsis {
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.ellipsis-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 9;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/**********************************************/
+/*                INPUT                       */
+/**********************************************/
+
+input {
+  font-size: 1.8rem;
+  border-radius: 10px;
+  transition: all .5s;
+  padding: 1.6rem;
+}
+
+input:focus {
+  border-color: $accent-color-fade;
+  box-shadow: 0 0 1rem $accent-color;
+  outline: 0 none;
+}
+
+.search-bar-area {
+  position: relative;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+
+  input:focus {
+    border-color: none;
+    box-shadow: none;
+  }
+}
+
+.search-bar {
+  display: block;
+  background: $main-background;
+  color: $text-color;
+  border: none;
+  width: 100%;
+  padding-right: 12%;
+}
+
+.search-btn {
+  width: 10%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.input-wrap {
+  position: relative;
+  width: 100%;
+
+  input {
+    width: 100%;
+  }
+
+  .error-message {
+    color: $text-color;
+    position: absolute;
+    bottom: -2rem;
+    right: .5rem;
+  }
+}
+
+/**********************************************/
+/*                SLICK                       */
+/**********************************************/
+
+.slick-next,
+.slick-prev {
+  z-index: 10;
+  width: 3.5rem !important;
+  height: 3.5rem !important;
+}
+
+.slick-prev {
+  left: 1rem !important;
+}
+
+.slick-next {
+  right: 1rem !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 3.5rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+//for slick problem flicked on the last slide
+.slick-slide,
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  -ms-perspective: 1000;
+  perspective: 1000;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+
+/**********************************************/
+/*                SNACKBAR                    */
+/**********************************************/
+.snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: $main-background;
+  color: $text-color;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  bottom: 30px;
+  font-size: 16px;
+}
+
+.snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s .5s;
+  animation: fadein 0.5s, fadeout 0.5s .5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+/**********************************************/
+/*                ICON                        */
+/**********************************************/
+.favorite {
+  cursor: pointer;
+
+  .material-symbols-outlined {
+    color: #FF5733;
+  }
+
+  .favorite-txt {
+    color: $text-color !important;
+    font-size: 1.6rem !important;
+  }
+
+  .favorite-txt:hover {
+    text-decoration: underline;
+  }
+
+  .favorite-icon {
+    content: '';
+    background: url('/assets/icons/favorite_outline.svg');
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+  }
+
+  .favorite-icon.active {
+    content: '';
+    background: url('/assets/icons/favorite.svg');
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.favorite.card {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+/**********************************************/
+/*                Card                        */
+/**********************************************/
+
+.img-wrapper.card {
+  position: relative;
+  width: 100%;
+
+  .overview-layer {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 999px;
+    padding: 1rem 1rem 0;
+    transition: all .75s;
+
+    p {
+      width: 100%;
+    }
+  }
+}
+
+.img-wrapper.card:hover {
+  .overview-layer {
+    background: rgba(18, 18, 18, 0.7);
+    top: 0;
+  }
+}
