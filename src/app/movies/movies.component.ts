@@ -53,19 +53,19 @@ export class MoviesComponent {
     const windowHeight = window.innerHeight + 20;
     const scrollY = window.scrollY;
     const bodyHeight = document.body.offsetHeight;
-    
+
     if (windowHeight + scrollY >= bodyHeight) {
       this.fetchNextPage();
     }
   }
 
   fetchNextPage() {
-    if (!this.loading) {      
+    if (!this.loading) {
       this.loading = true;
-      
+
       this.currentPage++;
-      
-      this.getTopRatedMovies(this.currentPage).then(() => {        
+
+      this.getTopRatedMovies(this.currentPage).then(() => {
         this.loading = false;
       });
     }
@@ -107,20 +107,25 @@ export class MoviesComponent {
   }
 
   async toggleFavorite(showId: number, mediaType: string): Promise<void> {
-    this.snackbar.showLoading(true)
-    try {
-      if (this.isFavorite(showId, mediaType)) {
-        const favourite = await this.movieService.removeFavourite(this.userInfo.uuid, showId, mediaType);
-        this.usersData = this.globalService.getUsersData();
-      } else {
-        const favourite = await this.movieService.addFavourite(this.userInfo.uuid, showId, mediaType);
-        this.usersData = this.globalService.getUsersData();
+    if (this.globalService.getToken()) {
+      this.snackbar.showLoading(true)
+      try {
+        if (this.isFavorite(showId, mediaType)) {
+          const favourite = await this.movieService.removeFavourite(this.userInfo.uuid, showId, mediaType);
+          this.usersData = this.globalService.getUsersData()
+        } else {
+          const favourite = await this.movieService.addFavourite(this.userInfo.uuid, showId, mediaType);
+          this.usersData = this.globalService.getUsersData()
+        }
+      } catch (error) {
+        console.error('Error toggling favorite:', error);
+        this.snackbar.show('Error toggling favorite');
       }
-    } catch (error) {
-      console.error('Error toggling favorite:', error);
-      this.snackbar.show('Error toggling favorite');
-    } finally {
-      this.snackbar.showLoading(false)
+      finally {
+        this.snackbar.showLoading(false)
+      }
+    } else {
+      this.snackbar.show('Need to login first');
     }
   }
 
