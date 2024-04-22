@@ -40,10 +40,9 @@
               </span>
               {{tv.vote_count}}
             </p>
-            <div class="icon favorite">
+            <div class="icon favorite" (click)="toggleFavorite(tv.id, 'tv')">
               <span [ngClass]="isFavorite(tv.id, 'tv') ? 'favorite-icon active' : 'favorite-icon'"></span>
-              <span [ngClass]="isFavorite(tv.id, 'tv') ? 'favorite-txt remove' : 'favorite-txt add'"
-                (click)="toggleFavorite(tv.id, 'tv')">
+              <span [ngClass]="isFavorite(tv.id, 'tv') ? 'favorite-txt remove' : 'favorite-txt add'">
                 {{ isFavorite(tv.id, 'tv') ? 'Remove from favorites' : 'Add to favorites'
                 }}
               </span>
@@ -69,7 +68,7 @@
               <p class="txt-02 status" *ngIf="tv.status">{{tv.status}}</p>
             </div>
             <div class="wrap">
-              <p class="txt-02 font-bold label">original_name</p>
+              <p class="txt-02 font-bold label">Original Name</p>
               <p class="txt-02 original_name" *ngIf="tv.original_name">{{tv.original_name}}</p>
             </div>
             <div class="wrap">

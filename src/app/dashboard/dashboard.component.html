@@ -57,12 +57,11 @@
                       </span>
                       {{trendShow.vote_count}}
                     </p>
-                    <div class="icon favorite">
+                    <div class="icon favorite" (click)="toggleFavorite(trendShow.id, trendShow.media_type)">
                       <span
                         [ngClass]="isFavorite(trendShow.id, trendShow.media_type) ? 'favorite-icon active' : 'favorite-icon'"></span>
                       <span
-                        [ngClass]="isFavorite(trendShow.id, trendShow.media_type) ? 'favorite-txt remove' : 'favorite-txt add'"
-                        (click)="toggleFavorite(trendShow.id, trendShow.media_type)">
+                        [ngClass]="isFavorite(trendShow.id, trendShow.media_type) ? 'favorite-txt remove' : 'favorite-txt add'">
                         {{ isFavorite(trendShow.id, trendShow.media_type) ? 'Remove from favorites' : 'Add to favorites'
                         }}
                       </span>
