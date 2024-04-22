@@ -4,7 +4,7 @@
   <div *ngIf="notfound" class="area-width area-center area-padding-x area-padding-y">
     <p class="txt-01 txt-primary">Opps something's wrong</p>
   </div>
-  <ng-container *ngIf="tv === undefined">
+  <ng-container *ngIf="!notfound && tv === undefined">
     <ng-container *ngIf="loading">
       <ng-container *ngTemplateOutlet="loading"></ng-container>
     </ng-container>
@@ -54,7 +54,7 @@
                 class="material-symbols-outlined">
                 play_arrow
               </span>
-              Play Trailer</button>
+              Play</button>
           </div>
           <div class="tagline">
             <mark class="txt-02 txt-primary" *ngIf="tv.tagline">{{tv.tagline}}</mark>

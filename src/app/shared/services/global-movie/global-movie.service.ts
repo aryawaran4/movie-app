@@ -215,10 +215,11 @@ export class GlobalMovieService {
 
   }
 
-  async getGenresList(mediaType: string): Promise<GenresType> {
+  async getGenresList(mediaType: string): Promise<any> {
     const url = `${this.apiUrl}/genre/${mediaType}/list?language=en`;
     try {
-      const response = await this.http.get<GenresType>(url).toPromise();
+      const response = await this.http.get<any>(url).toPromise();      
+      
       if (!response) {
         throw new Error('Response is undefined');
       }
@@ -228,7 +229,5 @@ export class GlobalMovieService {
       throw error;
     }
   }
-
-
 
 }
