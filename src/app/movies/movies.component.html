@@ -44,11 +44,10 @@
                         </span>
                         {{movie.vote_count}}
                       </p>
-                      <div class="icon favorite">
+                      <div class="icon favorite" (click)="toggleFavorite(movie.id, 'movie')">
                         <span
                           [ngClass]="isFavorite(movie.id, 'movie') ? 'favorite-icon active' : 'favorite-icon'"></span>
-                        <span [ngClass]="isFavorite(movie.id, 'movie') ? 'favorite-txt remove' : 'favorite-txt add'"
-                          (click)="toggleFavorite(movie.id, 'movie')">
+                        <span [ngClass]="isFavorite(movie.id, 'movie') ? 'favorite-txt remove' : 'favorite-txt add'">
                           {{ isFavorite(movie.id, 'movie') ? 'Remove from favorites' : 'Add to favorites'
                           }}
                         </span>
