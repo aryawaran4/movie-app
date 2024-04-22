@@ -1,6 +1,36 @@
 # MovieApp
 
+## Descriptions
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.
+
+This project is a simple Angular application that showcases various components, services, and routing configurations. It includes features such as:
+
+- Component-based architecture
+- Routing and navigation
+- HTTP requests and data fetching
+- Form handling
+- State management
+- Simulates Auths in local storage
+- Stored Favorites data in local storage
+- Lazy loads
+- Reusable components
+- etc.
+
+## Installation
+
+To get started with the project, follow these steps:
+
+1. Clone the repository: `git clone https://github.com/aryawaran4/movie-app.git`
+2. Install dependencies: `npm install`
+
+## Usage
+
+Instructions on how to use the project, including any commands to run it:
+
+- Development server: `ng serve`
+- Build: `ng build`
+- ...
 
 ## Development server
 
@@ -14,14 +44,4 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+This is a Angular project created to mainly to demonstrate favorite function in movie application.
