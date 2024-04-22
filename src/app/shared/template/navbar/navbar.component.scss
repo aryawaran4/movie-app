@@ -1,5 +1,3 @@
-@import '/src/styles.scss';
-
 .navbar {
   width: 100%;
   position: fixed;
@@ -7,46 +5,168 @@
   right: 0;
   left: 0;
   z-index: 9999;
-  background-color: $main-background;
+  background-color: #121212;
   display: flex;
   justify-content: center;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .navbar-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #FFFFFF;
+  padding: 2.4rem 1rem;
+}
+
+.navbar .navbar-area .logo {
+  cursor: pointer;
+}
+
+.navbar .navbar-area .logo h1 {
+  font-size: 3.2rem;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.navbar .navbar-area .icon-toggle {
+  display: none;
+}
+
+.navbar .navbar-area .nav-links {
+  list-style-type: none;
+  display: flex;
+}
+
+.navbar .navbar-area .nav-links li {
+  margin-right: 3.6rem;
+}
+
+.navbar .navbar-area .nav-links li a {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.navbar .navbar-area .nav-links li .logout {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar .navbar-area .nav-links li a:hover {
+  text-decoration: none;
+  color: #FFD700;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 9999;
+    background-color: #121212;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  }
 
   .navbar-area {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: $text-color;
-    padding: 2.4rem 1rem;
+    color: #FFFFFF;
+    padding: 2.4rem 1.5rem;
+  }
 
-    .logo {
-      h1 {
-        font-size: 3.2rem;
-        color: $text-color;
-        font-weight: bold;
-      }
-      cursor: pointer;
-    }
+  .navbar-area .logo {
+    cursor: pointer;
+  }
 
-    .nav-links {
-      list-style-type: none;
-      display: flex;
+  .navbar-area .logo h1 {
+    font-size: 2.4rem !important;
+    color: #FFFFFF;
+    font-weight: bold;
+  }
 
-      li {
-        margin-right: 3.6rem;
+  .navbar-area .icon-toggle {
+    display: block !important;
+    position: absolute;
+    z-index: 1001;
+    right: 1.5rem;
+    font-size: 3.2rem;
+  }
 
-        a {
-          font-size: 2rem;
-          font-weight: bold;
-          color: $text-color;
-          text-decoration: none;
-          cursor: pointer;
-        }
+  .navbar-area .nav-links {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    position: fixed;
+    background: #121212;
+    top: 0;
+    right: 0;
+    left: 999px;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.75s;
+    z-index: 1000;
+  }
 
-        a:hover {
-          text-decoration: underline;
-        }
-      }
-    }
+  .navbar-area .nav-links li {
+    width: 100%;
+    margin-right: 0 !important;
+  }
+
+  .navbar-area .nav-links li a {
+    font-size: 2.4rem !important;
+    transition: all 0.5s;
+    width: 100%;
+    display: block;
+    padding-left: 3.5rem;
+  }
+
+  .navbar-area .nav-links li .logout {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .navbar-area .nav-links li a:hover {
+    text-decoration: none;
+    color: #FFD700;
+  }
+
+  .navbar-area .icon-toggle.open~.nav-links {
+    left: 10rem !important;
   }
 }
+
+.nav-links.collapsed {
+  display: none !important;
+}
+
+.background-dim {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+
+.background-dim.show {
+  display: block;
+}
+
+/*# sourceMappingURL=navbar.component.css.map */

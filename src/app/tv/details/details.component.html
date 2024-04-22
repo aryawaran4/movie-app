@@ -1,0 +1,108 @@
+<app-navbar *ngIf="showNavbar"></app-navbar>
+
+<div class="details container-02 area-padding-y">
+  <div *ngIf="notfound" class="area-width area-center area-padding-x area-padding-y">
+    <p class="txt-01 txt-primary">Opps something's wrong</p>
+  </div>
+  <ng-container *ngIf="!notfound && tv === undefined">
+    <ng-container *ngIf="loading">
+      <ng-container *ngTemplateOutlet="loading"></ng-container>
+    </ng-container>
+  </ng-container>
+  <div class="details-area area-full" *ngIf="!notfound && tv !== undefined">
+    <div class="details-info">
+      <div class="bg-img-wrap"
+        [style.background]="isSmallScreen ? 'linear-gradient(to top, #121212 15%, transparent), url(' + movieService.getImageUrl(tv.backdrop_path, 'w1280') + ')' + 'no-repeat' : 'linear-gradient(to left, #121212 15%, transparent), url(' + movieService.getImageUrl(tv.backdrop_path, 'w1280') + ')' + 'no-repeat'">
+      </div>
+      <div class="details-info-area area-width area-center area-padding-x">
+        <div class="img-wrap">
+          <img [src]="movieService.getImageUrl(tv.poster_path, 'w342')" alt="" width="100%">
+        </div>
+        <div class="info-wrap">
+          <div class="ttl-wrap">
+            <h2 class="ttl-01 txt-primary" *ngIf="tv.name">{{tv.name}}</h2>
+            <div class="desc">
+              <div class="genre font-medium desc-item txt-02">
+                <p class="txt-02" *ngFor="let genre of tv.genres">{{genre.name}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="action-common">
+            <p class="txt-01 txt-primary icon rating">
+              <span class="material-symbols-outlined">
+                star_rate
+              </span>
+              {{tv.vote_average}}
+            </p>
+            <p class="txt-01 txt-primary icon person">
+              <span class="material-symbols-outlined">
+                person
+              </span>
+              {{tv.vote_count}}
+            </p>
+            <div class="icon favorite">
+              <span [ngClass]="isFavorite(tv.id, 'tv') ? 'favorite-icon active' : 'favorite-icon'"></span>
+              <span [ngClass]="isFavorite(tv.id, 'tv') ? 'favorite-txt remove' : 'favorite-txt add'"
+                (click)="toggleFavorite(tv.id, 'tv')">
+                {{ isFavorite(tv.id, 'tv') ? 'Remove from favorites' : 'Add to favorites'
+                }}
+              </span>
+            </div>
+          </div>
+          <div class="action-btn">
+            <button class="primary-btn icon trailer" (click)="openVideoDialog(tv.id, 'tv')"><span
+                class="material-symbols-outlined">
+                play_arrow
+              </span>
+              Play</button>
+          </div>
+          <div class="tagline">
+            <mark class="txt-02 txt-primary" *ngIf="tv.tagline">{{tv.tagline}}</mark>
+          </div>
+          <div class="overview">
+            <p class="txt-02 font-bold txt-primary" *ngIf="tv.overview">Overview</p>
+            <p class="txt-02 txt-primary" *ngIf="tv.overview">{{tv.overview}}</p>
+          </div>
+          <div class="other-details txt-primary">
+            <div class="wrap">
+              <p class="txt-02 font-bold label">Status</p>
+              <p class="txt-02 status" *ngIf="tv.status">{{tv.status}}</p>
+            </div>
+            <div class="wrap">
+              <p class="txt-02 font-bold label">original_name</p>
+              <p class="txt-02 original_name" *ngIf="tv.original_name">{{tv.original_name}}</p>
+            </div>
+            <div class="wrap">
+              <p class="txt-02 font-bold label">Original Language</p>
+              <p class="txt-02 lang" *ngIf="tv.original_language">{{tv.original_language}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="area-full crew-container">
+      <div class="crew-area area-width area-center area-padding-x">
+        <div class="crew-member">
+          <h3 class="ttl-02 txt-primary">Casts</h3>
+          <p *ngIf="!castLists || castLists.length === 0" class="txt-01 txt-primary">There's no casts for this series
+          </p>
+          <div class="crew-member-wrap overflow-container" *ngIf="castLists.length > 0">
+            <div class="crew-member-list" *ngFor="let cast of castLists">
+              <div class="img-wrap">
+                <img [src]="movieService.getImageUrl(cast.profile_path, 'w185')" alt="" width="100%">
+              </div>
+              <p class="txt-02 txt-primary font-medium">{{cast.name}}</p>
+              <p class="character txt-primary">{{cast.character}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="error-empty-container">
+    <app-error-empty [messageType]="'loading'"></app-error-empty>
+  </div>
+</ng-template>

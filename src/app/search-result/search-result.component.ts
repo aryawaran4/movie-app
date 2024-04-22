@@ -1,9 +1,13 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GlobalService } from '../shared/services/global.service';
-import { GlobalMovieService } from '../shared/services/global-movie/movie.service';
-import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+
+// service
+import { GlobalService } from '../shared/services/global.service';
+import { GlobalMovieService } from '../shared/services/global-movie/global-movie.service';
+import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
+
+// type
 import { MediaType, UserFavouriteType } from '../shared/types/movie.type';
 import { UserType } from '../shared/types/auth.type';
 
@@ -15,11 +19,15 @@ import { UserType } from '../shared/types/auth.type';
 export class SearchResultComponent {
   showNavbar = true;
   elementsArray!: NodeListOf<Element>;
-  searchArray!: MediaType[];
+  searchArray: MediaType[] = []
+  newSearchArray!: MediaType[];
   usersData!: UserFavouriteType
   userInfo!: UserType
 
   query: string | null = null;
+
+  currentPage = 1
+  loading = false
 
   searchForm = new FormGroup({
     search: new FormControl('', Validators.required),
@@ -46,17 +54,32 @@ export class SearchResultComponent {
         search: [this.query]
       });
     });
-    this.search()
-    setTimeout(() => {
-      this.elementsArray =
-        this.element.nativeElement.querySelectorAll('.animated-fade-in');
-      this.fadeIn();
-    }, 500);
+    this.search(this.currentPage)
   }
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     this.fadeIn();
+
+    const windowHeight = window.innerHeight + 20;
+    const scrollY = window.scrollY;
+    const bodyHeight = document.body.offsetHeight;
+
+    if (windowHeight + scrollY >= bodyHeight) {
+      this.fetchNextPage();
+    }
+  }
+
+  fetchNextPage() {
+    if (!this.loading) {
+      this.loading = true;
+
+      this.currentPage++;
+
+      this.search(this.currentPage).then(() => {
+        this.loading = false;
+      });
+    }
   }
 
   fadeIn() {
@@ -70,20 +93,28 @@ export class SearchResultComponent {
     }
   }
 
-  async search() {
+  async search(pageNumber: number) {
     this.snackbar.showLoading(true);
 
     try {
       if (this.searchForm.valid) {
         const formValue = this.searchForm.value;
         if (formValue.search) {
-          console.log(formValue.search);
-          const search = await this.movieService.searchMulti(formValue.search);
-          this.searchArray = search.results;
-          console.log(this.searchArray);
+          const search = await this.movieService.fetchMultiSearch(formValue.search, pageNumber);
+          this.newSearchArray = search.results;
+
+          if (this.newSearchArray.length === 0) {
+            this.snackbar.show('No more search available');
+            return;
+          }
+          this.searchArray.push(...this.newSearchArray);
+          setTimeout(() => {
+            this.elementsArray =
+              this.element.nativeElement.querySelectorAll('.animated-fade-in');
+            this.fadeIn();
+          }, 500);
 
           if (this.searchArray.length === 0) {
-            console.log('No results found.');
             this.snackbar.show('No results found');
           } else {
             this.router.navigate(['/search'], { queryParams: { query: formValue.search } });
@@ -100,7 +131,7 @@ export class SearchResultComponent {
 
 
   async toggleFavorite(showId: number, mediaType: string): Promise<void> {
-    if(this.globalService.getToken()){
+    if (this.globalService.getToken()) {
       this.snackbar.showLoading(true)
       try {
         if (this.isFavorite(showId, mediaType)) {
@@ -112,13 +143,13 @@ export class SearchResultComponent {
         }
       } catch (error) {
         console.error('Error toggling favorite:', error);
-        // this.snackbar.show('Error toggling favorite');      
+        this.snackbar.show('Error toggling favorite');
       }
-      finally{
+      finally {
         this.snackbar.showLoading(false)
       }
-    }else{
-      this.snackbar.show('Need to login first');      
+    } else {
+      this.snackbar.show('Need to login first');
     }
   }
 

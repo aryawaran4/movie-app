@@ -1,70 +1,101 @@
-@import '/src/styles.scss';
+.search .search-area .search-results-wrap {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1152px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-.search {
-  .search-area {
-    .search-results {      
-      display: flex;
-      flex-wrap: wrap;
-      gap: 3.9rem;
-      .card {   
-        // margin-bottom: .5rem;
-        .card-area {
-          cursor: pointer;
-          position: relative;
-          overflow: hidden;
-          border-radius: 10px;
-          margin-bottom: 1rem;
-          transition: all .5s;
+.search .search-area .search-results-wrap .search-results {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3.8rem;
+}
 
-          .img-wrapper {
-            width: 20rem;
-            height: 30rem;
-            height: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+.search .search-area .search-results-wrap .search-results .card .card-area {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  transition: all 0.5s;
+}
 
-            img {
-              object-fit: cover;
-              width: 20rem;
-              height: 30rem;
-            }
-          }
+.search .search-area .search-results-wrap .search-results .card .card-area .img-wrapper {
+  width: 20rem;
+  height: 30rem;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-          .card-info {
-            background: linear-gradient(to top, $main-background, transparent);
-            position: absolute;
-            width: 100%;
-            left: 0;
-            top: 70%;
-            bottom: 0;
+.search .search-area .search-results-wrap .search-results .card .card-area .img-wrapper img {
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 20rem;
+  height: 30rem;
+}
 
-            .card-info-area {
-              .rating {
-                position: absolute;
-                bottom: 1rem;
-                left: 1rem;
-                display: flex;
-                align-items: center;
-                gap: .5rem;
+.search .search-area .search-results-wrap .search-results .card .card-area .card-info {
+  background: linear-gradient(to top, #121212, transparent);
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 70%;
+  bottom: 0;
+}
 
-                span {
-                  font-size: 3.2rem;
-                  color: $accent-color;
-                }
-              }              
-            }
-          }
-        }
+.search .search-area .search-results-wrap .search-results .card .card-area .card-info .card-info-area .rating {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 
-        .card-area:hover {
-          box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.1), 0 4px 6px -4px rgba(255, 255, 255, 0.1);
-        }
+.search .search-area .search-results-wrap .search-results .card .card-area .card-info .card-info-area .rating span {
+  font-size: 3.2rem;
+  color: #FFD700;
+}
 
-        .ttl-card{
-          width: 20rem;
-        }
-      }
-    }
+.search .search-area .search-results-wrap .search-results .card .card-area:hover {
+  box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.1), 0 4px 6px -4px rgba(255, 255, 255, 0.1);
+}
+
+.search .search-area .search-results-wrap .search-results .card .ttl-card {
+  width: 20rem;
+}
+
+@media screen and (max-width: 768px) {
+  .search .search-area .search-results-wrap {
+    max-width: 700px;
+  }
+
+  .search .search-area .search-results-wrap .search-results {
+    gap: 1.7rem;
+  }
+
+  .search .search-area .search-results-wrap .search-results .card .card-area .img-wrapper {
+    width: 16.4rem;
+    height: 24.6rem;
+  }
+
+  .search .search-area .search-results-wrap .search-results .card .card-area .img-wrapper img {
+    width: 16.4rem;
+    height: 24.6rem;
+  }
+
+  .search .search-area .search-results-wrap .search-results .card .ttl-card {
+    width: 16.4rem;
+  }
+
+  .search .search-area .search-results-wrap .search-results .card .ellipsis-2 {
+    -webkit-line-clamp: 7 !important;
   }
 }
+
+/*# sourceMappingURL=search-result.component.css.map */

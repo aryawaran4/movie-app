@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GetResponse, UserFavouriteType, MovieDetailsType, TvDetailsType, GenresType, VideoType, VideoResult } from '../../types/movie.type';
 import { DomSanitizer } from '@angular/platform-browser';
+import { GetResponse, UserFavouriteType, MovieDetailsType, TvDetailsType, GenresType, VideoType, CastMemberType, MovieCreditsType } from '../../types/movie.type';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +39,7 @@ export class GlobalMovieService {
 
       if (officialTrailer) {
         videoId = officialTrailer.key;
-        
+
         // Return the video ID
         return videoId;
       } else {
@@ -51,9 +51,9 @@ export class GlobalMovieService {
     }
   }
 
-  async searchMulti(searchValue: string): Promise<GetResponse> {
+  async fetchMultiSearch(searchValue: string, pageNumber: number): Promise<GetResponse> {
     try {
-      const url = `${this.apiUrl}/search/multi?query=${searchValue}&language=en-US`;
+      const url = `${this.apiUrl}/search/multi?query=${searchValue}&language=en-US&page=${pageNumber}`;
 
       const response = await this.http.get<GetResponse>(url).toPromise();
       if (!response) {
@@ -77,6 +77,21 @@ export class GlobalMovieService {
       }
     } catch (error) {
       console.error('Error fetching movie details:', error);
+      throw error;
+    }
+  }
+
+  async getCastList(showId: number, mediaType: string): Promise<CastMemberType[]> {
+    const url = `${this.apiUrl}/${mediaType}/${showId}/credits?language=en-US`;
+    try {
+      const response = await this.http.get<MovieCreditsType>(url).toPromise();
+      if (response) {
+        return response.cast;
+      } else {
+        throw new Error('Casts details not found');
+      }
+    } catch (error) {
+      console.error('Error fetching Casts:', error);
       throw error;
     }
   }
@@ -200,10 +215,11 @@ export class GlobalMovieService {
 
   }
 
-  async GenresList(mediaType: string): Promise<GenresType> {
+  async getGenresList(mediaType: string): Promise<any> {
     const url = `${this.apiUrl}/genre/${mediaType}/list?language=en`;
     try {
-      const response = await this.http.get<GenresType>(url).toPromise();
+      const response = await this.http.get<any>(url).toPromise();      
+      
       if (!response) {
         throw new Error('Response is undefined');
       }

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GlobalMovieService } from './movie.service';
+import { GlobalMovieService } from './global-movie.service';
 
 describe('GlobalMovieService', () => {
   let service: GlobalMovieService;

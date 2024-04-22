@@ -1,9 +1,13 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
-import { GlobalService } from '../shared/services/global.service';
+
+// type
 import { UserFavouriteType } from '../shared/types/movie.type';
 import { UserType } from '../shared/types/auth.type';
-import { GlobalMovieService } from '../shared/services/global-movie/movie.service';
+
+// service
+import { GlobalMovieService } from '../shared/services/global-movie/global-movie.service';
 import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
+import { GlobalService } from '../shared/services/global.service';
 
 @Component({
   selector: 'app-account',
@@ -53,27 +57,27 @@ export class AccountComponent {
   }
 
   async toggleFavorite(showId: number, mediaType: string): Promise<void> {
-    this.snackbar.showLoading(true)
-    try {
-      if (this.isFavorite(showId, mediaType)) {
-        const favourite = await this.movieService.removeFavourite(this.userInfo.uuid, showId, mediaType);        
-        this.usersData = this.globalService.getUsersData();
-      } else {
-        const favourite = await this.movieService.addFavourite(this.userInfo.uuid, showId, mediaType);        
-        this.usersData = this.globalService.getUsersData();
+    if (this.globalService.getToken()) {
+      this.snackbar.showLoading(true)
+      try {
+        if (this.isFavorite(showId, mediaType)) {
+          const favourite = await this.movieService.removeFavourite(this.userInfo.uuid, showId, mediaType);
+          this.usersData = this.globalService.getUsersData()
+        } else {
+          const favourite = await this.movieService.addFavourite(this.userInfo.uuid, showId, mediaType);
+          this.usersData = this.globalService.getUsersData()
+        }
+      } catch (error) {
+        console.error('Error toggling favorite:', error);
+        this.snackbar.show('Error toggling favorite');
       }
-    } catch (error) {
-      console.error('Error toggling favorite:', error);
-      // this.snackbar.show('Error toggling favorite');
-    } finally {      
-      setTimeout(() => {
-        this.elementsArray =
-          this.element.nativeElement.querySelectorAll('.animated-fade-in');
-        this.fadeIn();
-      }, 500);
-      this.snackbar.showLoading(false)
+      finally {
+        this.snackbar.showLoading(false)
+      }
+    } else {
+      this.snackbar.show('Need to login first');
     }
-}
+  }
 
   isFavorite(showId: number, mediaType: string): boolean {
     const user = this.usersData

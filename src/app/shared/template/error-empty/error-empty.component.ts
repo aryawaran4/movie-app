@@ -19,7 +19,6 @@ export class ErrorEmptyComponent {
       case 'empty':
         description = "There is no content to display.";
         break;
-      // Add more cases as needed
       default:
         description = "Please provide a valid message type.";
     }

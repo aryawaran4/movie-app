@@ -7,7 +7,7 @@ import { UserFavouriteType } from '../types/movie.type';
 })
 export class GlobalService {
 
-  private isOpen: boolean = false; 
+  private isOpen: boolean = false;
 
   constructor() { }
 
@@ -19,7 +19,7 @@ export class GlobalService {
     const userString = localStorage.getItem('user') || '{}';
     return JSON.parse(userString) as UserType;
   }
-  
+
   getUsersData(): UserFavouriteType {
     const uuid = this.getMe().uuid
     const usersData = localStorage.getItem('usersData') || '{}';

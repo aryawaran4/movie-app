@@ -3,14 +3,17 @@
     <div class="logo" [routerLink]="['/']">
       <h1>#Movie-app</h1>
     </div>
+    <span class="material-symbols-outlined icon-toggle" (click)="toggleNavbar()" [class.open]="isNavbarOpen">
+      Menu
+    </span>
     <ul class="nav-links">
       <li><a [routerLink]="['/', 'movie']">Movies</a></li>
       <li><a [routerLink]="['/', 'tv']">Tv Shows</a></li>
-      <!-- <li><a routerLink="/">People</a></li> -->
       <li><a [routerLink]="['/', routerAccount]">Account</a></li>
-      <li *ngIf="isLoggedIn"><a (click)="logout()"><span class="material-symbols-outlined">
+      <li *ngIf="isLoggedIn"><a (click)="logout()" class="logout">Log out<span class="material-symbols-outlined">
             logout
           </span></a></li>
     </ul>
   </div>
+  <div class="background-dim" [ngClass]="{ 'show': isNavbarOpen }" (click)="closeNavbar()"></div>
 </nav>

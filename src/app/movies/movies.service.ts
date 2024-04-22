@@ -11,9 +11,9 @@ export class MoviesService {
 
   constructor(private http: HttpClient) { }
 
-  async topRatedMovies(): Promise<GetResponse> {
+  async getTopRatedMovies(pageNumber: number): Promise<GetResponse> {
     try {
-      const url = `${this.apiUrl}/movie/top_rated?language=en-US`;
+      const url = `${this.apiUrl}/movie/top_rated?language=en-US&page=${pageNumber}`;
 
       const response = await this.http.get<GetResponse>(url).toPromise();
       if (!response) {

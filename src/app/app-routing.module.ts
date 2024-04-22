@@ -13,8 +13,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountComponent } from './account/account.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { Error404Component } from './error404/error404.component';
-import { MoviesComponent } from './movies/movies.component';
-import { TvComponent } from './tv/tv.component';
 
 const routes: Routes = [
   {
@@ -57,12 +55,10 @@ const routes: Routes = [
   },
   {
     path: 'movie',
-    component: MoviesComponent,
     loadChildren: () => import('./movies/movies.module').then(m => m.MoviesModule)
   },
   {
     path: 'tv',
-    component: TvComponent,
     loadChildren: () => import('./tv/tv.module').then(m => m.TvModule)
   },
   {

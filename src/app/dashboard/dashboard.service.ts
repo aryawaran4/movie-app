@@ -11,7 +11,7 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-  async trendingShows(): Promise<GetResponse> {
+  async getTrendingShows(): Promise<GetResponse> {
     try {
       const url = `${this.apiUrl}/trending/all/week?language=en-US`;
 
@@ -26,7 +26,7 @@ export class DashboardService {
     }
   }
 
-  async popularMovies(): Promise<GetResponse> {
+  async getPopularMovies(): Promise<GetResponse> {
     try {
       const url = `${this.apiUrl}/movie/popular?language=en-US`;
 
@@ -41,7 +41,7 @@ export class DashboardService {
     }
   }
 
-  async popularTvShows(): Promise<GetResponse> {
+  async getPopularTvShows(): Promise<GetResponse> {
     try {
       const url = `${this.apiUrl}/tv/popular?language=en-US`;
 

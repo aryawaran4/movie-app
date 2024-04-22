@@ -1,55 +1,89 @@
-@import '/src/styles.scss';
+.register-page .register-page-area {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-.login-page {
+.register-page .register-page-area .illustration {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .login-page-area {
+.register-page .register-page-area .illustration img {
+  width: 50%;
+  height: auto;
+}
+
+.register-page .register-page-area .form-wrap {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-page .register-page-area .form-wrap .form {
+  width: 100%;
+  max-width: 36.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-page .register-page-area .form-wrap .form .form-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-page .register-page-area .form-wrap .form .form-area .input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin: 2rem 0 3.5rem;
+}
+
+.register-page .register-page-area .form-wrap .form .register-link {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.register-page .register-page-area .form-wrap .form .register-link span {
+  margin-right: 1rem;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+.register-page .register-page-area .form-wrap .form .register-link span:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+  .register-page .register-page-area {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
 
-    .illustration {
-      width: 50%;
-    }
+  .register-page .register-page-area .illustration {
+    display: none;
+  }
 
-    .form {
-      width: 50%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      .form-area {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-
-        .input-area {
-          display: flex;
-          flex-direction: column;
-          gap: 3rem;
-          margin: 2rem 0 3.5rem;
-        }
-      }
-
-      .login-link{
-        font-size: 1.4rem;
-        text-align: center;
-        margin-top: 2rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: .5rem;
-        span{
-          margin-right: 1rem;
-          cursor: pointer;
-          font-size: inherit;
-        }
-        span:hover{
-          text-decoration: underline;
-        }
-      }
-    }
+  .register-page .register-page-area .form-wrap {
+    width: 100%;
+    padding: 0 1.5rem;
   }
 }
+
+/*# sourceMappingURL=register.component.css.map */

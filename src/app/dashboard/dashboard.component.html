@@ -1,23 +1,26 @@
 <app-navbar *ngIf="showNavbar"></app-navbar>
 
-<div class="dashboard container-02 area-padding">
+<div class="dashboard container-02 area-padding-y">
   <div class="dashboard-area area-full">
     <div class="main-slide-area">
-      <form [formGroup]="searchForm" (ngSubmit)="search()" class="search-bar-area area-width area-center">
-        <input class="search-bar" type="text" placeholder="Search for a movie or tv show" formControlName="search">
-        <button type="submit" [disabled]="searchForm.invalid" class="search-btn primary-btn outlined">Search</button>
-      </form>
-      <h2 class="ttl-02 txt-primary area-width area-center">Trending This Week</h2>
+      <div class="area-padding-x">
+        <form [formGroup]="searchForm" (ngSubmit)="search()" class="search-bar-area area-width area-center">
+          <input class="search-bar area-width" type="text"
+            [placeholder]="isSmallScreen ? 'Search...' : 'Search for a movie or tv show'" formControlName="search">
+          <button type="submit" [disabled]="searchForm.invalid" class="search-btn primary-btn outlined">Search</button>
+        </form>
+      </div>
+      <div class="area-padding-x">
+        <h2 class="ttl-02 txt-primary area-width area-center">Trending This Week</h2>
+      </div>
       <div class="carousel-wrap">
         <ng-container *ngIf="trends === undefined">
-          <!-- Show loading message or spinner while data is being fetched -->
           <ng-container *ngIf="loading">
             <ng-container *ngTemplateOutlet="loading"></ng-container>
           </ng-container>
         </ng-container>
 
         <ng-container *ngIf="trends !== undefined && trends.length === 0">
-          <!-- Show empty state message if trends data is available but empty -->
           <ng-container *ngIf="empty">
             <ng-container *ngTemplateOutlet="empty"></ng-container>
           </ng-container>
@@ -29,7 +32,7 @@
             <div class="img-wrapper">
               <img [src]="movieService.getImageUrl(trendShow.backdrop_path, 'w1280')" alt="" width="100%">
             </div>
-            <div class="slide-info">
+            <div class="slide-info" [routerLink]="isSmallScreen ? ['/', trendShow.media_type, trendShow.id] : null">
               <div class="slide-info-area">
                 <div class="genre-list">
                   <div class="genre font-medium txt-02" *ngFor="let genreId of trendShow.genre_ids">
@@ -37,8 +40,9 @@
                   </div>
                 </div>
                 <h3 class="ttl-02 txt-primary">{{trendShow.media_type === "movie" ? trendShow.title :
-                  trendShow.name}}</h3>
-                <p class="txt-02 txt-primary ellipsis">{{trendShow.overview}}</p>
+                  trendShow.name}}
+                </h3>
+                <p class="txt-02 txt-primary ellipsis overview">{{trendShow.overview}}</p>
                 <div class="slide-action-area">
                   <div class="action-common">
                     <p class="txt-01 txt-primary icon rating">
@@ -65,13 +69,16 @@
                     </div>
                   </div>
                   <div class="action-btn">
-                    <button class="primary-btn icon" (click)="openVideoDialog(trendShow.id, trendShow.media_type)"><span
+                    <button class="primary-btn icon trailer"
+                      (click)="openVideoDialog(trendShow.id, trendShow.media_type)"><span
                         class="material-symbols-outlined">
                         play_arrow
                       </span>
-                      Watch Trailer</button>
-                    <button class="primary-btn outlined" [routerLink]="['/', trendShow.media_type, trendShow.id]">See
-                      More</button>
+                      Play Trailer
+                    </button>
+                    <button class="primary-btn outlined"
+                      [routerLink]="['/', trendShow.media_type, trendShow.id]">{{isSmallScreen ? "More" : "See More"}}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -81,18 +88,18 @@
       </div>
     </div>
     <div class="section-slide-area animated-fade-in first-show">
-      <h3 class="ttl-03 txt-primary area-width area-center">Popular on theater</h3>
+      <div class="area-padding-x">
+        <h3 class="ttl-03 txt-primary area-width area-center">Popular on theater</h3>
+      </div>
       <div class="card-slider-wrap">
         <div class="card-slider-area debug-slick">
           <ng-container *ngIf="popularMovies === undefined">
-            <!-- Show loading message or spinner while data is being fetched -->
             <ng-container *ngIf="loading">
               <ng-container *ngTemplateOutlet="loading"></ng-container>
             </ng-container>
           </ng-container>
 
           <ng-container *ngIf="popularMovies !== undefined && popularMovies.length === 0">
-            <!-- Show empty state message if popularMovies data is available but empty -->
             <ng-container *ngIf="empty">
               <ng-container *ngTemplateOutlet="empty"></ng-container>
             </ng-container>
@@ -102,7 +109,7 @@
             <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sectionSlideConfig">
               <div ngxSlickItem *ngFor="let show of popularMovies" class="slide">
                 <div class="slide-area">
-                  <div class="img-wrapper card" [routerLink]="['/', 'movie', show.id]">
+                  <div class="img-wrapper card" [routerLink]="['/movie', show.id]">
                     <div class="overview-layer">
                       <p class="txt-02 txt-primary ellipsis-2">{{show.overview}}</p>
                     </div>
@@ -131,18 +138,18 @@
       </div>
     </div>
     <div class="section-slide-area animated-fade-in second-show">
-      <h3 class="ttl-03 txt-primary area-width area-center">Popular TV Series</h3>
+      <div class="area-padding-x">
+        <h3 class="ttl-03 txt-primary area-width area-center">Popular TV Series</h3>
+      </div>
       <div class="card-slider-wrap">
         <div class="card-slider-area debug-slick">
           <ng-container *ngIf="popularMovies === undefined">
-            <!-- Show loading message or spinner while data is being fetched -->
             <ng-container *ngIf="loading">
               <ng-container *ngTemplateOutlet="loading"></ng-container>
             </ng-container>
           </ng-container>
 
           <ng-container *ngIf="popularMovies !== undefined && popularMovies.length === 0">
-            <!-- Show empty state message if popularMovies data is available but empty -->
             <ng-container *ngIf="empty">
               <ng-container *ngTemplateOutlet="empty"></ng-container>
             </ng-container>
@@ -152,7 +159,7 @@
             <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sectionSlideConfig">
               <div ngxSlickItem *ngFor="let show of popularTvShows" class="slide">
                 <div class="slide-area">
-                  <div class="img-wrapper card" [routerLink]="['/', 'tv', show.id]">
+                  <div class="img-wrapper card" [routerLink]="['/tv', show.id]">
                     <div class="overview-layer">
                       <p class="txt-02 txt-primary ellipsis-2">{{show.overview}}</p>
                     </div>

@@ -1,27 +1,26 @@
 <app-navbar *ngIf="showNavbar"></app-navbar>
 
-<div class="tv container-02 area-padding">
-  <div class="tv-area area-full">
+<div class="media-component container-02 area-padding-y area-padding-x">
+  <div class="media-component-area area-full">
     <div class="top-rated area-width area-center">
       <h2 class="ttl-02 txt-primary">Top Rated Tv Shows</h2>
       <div class="top-rated-area">
         <div class="top-rated-section">
-          <ng-container *ngIf="TopRatedTvs === undefined">
-            <!-- Show loading message or spinner while data is being fetched -->
+          <ng-container *ngIf="newTopRatedTvs === undefined">
             <ng-container *ngIf="loading">
               <ng-container *ngTemplateOutlet="loading"></ng-container>
             </ng-container>
           </ng-container>
 
-          <ng-container *ngIf="TopRatedTvs !== undefined && TopRatedTvs.length === 0">
-            <!-- Show empty state message if TopRatedTvs data is available but empty -->
+          <ng-container *ngIf="newTopRatedTvs !== undefined && newTopRatedTvs.length === 0">
             <ng-container *ngIf="empty">
               <ng-container *ngTemplateOutlet="empty"></ng-container>
             </ng-container>
           </ng-container>
-          
-          <div class="list-top-rated" *ngIf="TopRatedTvs && TopRatedTvs.length > 0">
-            <div *ngFor="let tv of TopRatedTvs; let i = index" class="card-top-rated animated-fade-in first-show" [id]="'movie-' + (i+1)">
+
+          <div class="list-top-rated" *ngIf="newTopRatedTvs && newTopRatedTvs.length > 0">
+            <div *ngFor="let tv of TopRatedTvs; let i = index" class="card-top-rated animated-fade-in first-show"
+              [id]="'tv-' + (i+1)">
               <div class="card-content">
                 <div class="img-container">
                   <img [src]="movieService.getImageUrl(tv.backdrop_path , 'w780')" alt="" width="100%">
@@ -54,7 +53,7 @@
                         </span>
                       </div>
                     </div>
-                    <button class="primary-btn outlined" [routerLink]="['/', 'tv', tv.id]">See More</button>
+                    <button class="primary-btn outlined" [routerLink]="['/tv', tv.id]">See More</button>
                   </div>
                 </div>
               </div>
@@ -74,7 +73,7 @@
 
 <ng-template #empty>
   <div class="error-empty-container">
-    <app-error-empty [messageType]="'error'"></app-error-empty>
+    <app-error-empty [messageType]="'empty'"></app-error-empty>
   </div>
 </ng-template>
 

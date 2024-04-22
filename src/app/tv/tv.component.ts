@@ -1,11 +1,14 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
+
+// service
 import { GlobalService } from '../shared/services/global.service';
 import { SnackbarService } from '../shared/template/snackbar/snackbar.service';
+import { TvService } from './tv.service';
+import { GlobalMovieService } from '../shared/services/global-movie/global-movie.service';
+
+// type
 import { UserType } from '../shared/types/auth.type';
 import { TvType, FavouriteType, UserFavouriteType } from '../shared/types/movie.type';
-import { MoviesService } from '../movies/movies.service';
-import { TvService } from './tv.service';
-import { GlobalMovieService } from '../shared/services/global-movie/movie.service';
 
 @Component({
   selector: 'app-tv',
@@ -17,10 +20,14 @@ export class TvComponent {
   elementsArray!: NodeListOf<Element>;
   userInfo!: UserType;
 
-  TopRatedTvs!: TvType[]
+  TopRatedTvs: TvType[] = []
+  newTopRatedTvs!: TvType[]
 
   favourite!: FavouriteType;
   usersData!: UserFavouriteType
+
+  currentPage = 1
+  loading = false
 
   constructor(
     private globalService: GlobalService,
@@ -35,17 +42,32 @@ export class TvComponent {
   }
 
   ngOnInit() {
-    this.getTopRatedTvs()
-    setTimeout(() => {
-      this.elementsArray =
-        this.element.nativeElement.querySelectorAll('.animated-fade-in');
-      this.fadeIn();
-    }, 500);
+    this.getTopRatedTvs(this.currentPage)
   }
 
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     this.fadeIn();
+
+    const windowHeight = window.innerHeight + 20;
+    const scrollY = window.scrollY;
+    const bodyHeight = document.body.offsetHeight;
+
+    if (windowHeight + scrollY >= bodyHeight) {
+      this.fetchNextPage();
+    }
+  }
+
+  fetchNextPage() {
+    if (!this.loading) {
+      this.loading = true;
+
+      this.currentPage++;
+
+      this.getTopRatedTvs(this.currentPage).then(() => {
+        this.loading = false;
+      });
+    }
   }
 
   fadeIn() {
@@ -59,16 +81,24 @@ export class TvComponent {
     }
   }
 
-  async getTopRatedTvs() {
+  async getTopRatedTvs(pageNumber: number) {
     this.snackbar.showLoading(true)
     try {
-      const tvs = await this.tvService.topRatedTvs();
-      // setTimeout(() => {
-      this.TopRatedTvs = tvs.results;
-      // }, 3000);
+      const tvs = await this.tvService.getTopRatedTvs(pageNumber);
+      this.newTopRatedTvs = tvs.results;
+
+      if (this.newTopRatedTvs.length === 0) {
+        return;
+      }
+      this.TopRatedTvs.push(...this.newTopRatedTvs);
+      setTimeout(() => {
+        this.elementsArray =
+          this.element.nativeElement.querySelectorAll('.animated-fade-in');
+        this.fadeIn();
+      }, 500);
     } catch (error) {
       console.error('Error fetching tvs:', error);
-      // this.snackbar.show('Error fetching tvs');
+      this.snackbar.show('Error fetching tvs');
       this.snackbar.showLoading(false)
     } finally {
       console.log('API call completed.');
@@ -77,20 +107,25 @@ export class TvComponent {
   }
 
   async toggleFavorite(showId: number, mediaType: string): Promise<void> {
-    this.snackbar.showLoading(true)
-    try {
-      if (this.isFavorite(showId, mediaType)) {
-        const favourite = await this.movieService.removeFavourite(this.userInfo.uuid, showId, mediaType);
-        this.usersData = this.globalService.getUsersData();
-      } else {
-        const favourite = await this.movieService.addFavourite(this.userInfo.uuid, showId, mediaType);
-        this.usersData = this.globalService.getUsersData();
+    if (this.globalService.getToken()) {
+      this.snackbar.showLoading(true)
+      try {
+        if (this.isFavorite(showId, mediaType)) {
+          const favourite = await this.movieService.removeFavourite(this.userInfo.uuid, showId, mediaType);
+          this.usersData = this.globalService.getUsersData()
+        } else {
+          const favourite = await this.movieService.addFavourite(this.userInfo.uuid, showId, mediaType);
+          this.usersData = this.globalService.getUsersData()
+        }
+      } catch (error) {
+        console.error('Error toggling favorite:', error);
+        this.snackbar.show('Error toggling favorite');
       }
-    } catch (error) {
-      console.error('Error toggling favorite:', error);
-      // this.snackbar.show('Error toggling favorite');
-    } finally {
-      this.snackbar.showLoading(false)
+      finally {
+        this.snackbar.showLoading(false)
+      }
+    } else {
+      this.snackbar.show('Need to login first');
     }
   }
 
