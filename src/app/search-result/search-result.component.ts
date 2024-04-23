@@ -54,7 +54,6 @@ export class SearchResultComponent {
         search: [this.query]
       });
     });
-    console.log('new page');
     this.search(this.currentPage)
   }
 

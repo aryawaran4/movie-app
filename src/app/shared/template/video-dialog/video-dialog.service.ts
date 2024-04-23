@@ -14,8 +14,7 @@ export class VideoDialogService {
     private injector: Injector
   ) { }
 
-  openVideoDialog(videoId: string): void {
-    console.log(this.isOpen);
+  openVideoDialog(videoId: string): void {    
     if (!this.isOpen) {
       const dialogComponentFactory = this.componentFactoryResolver.resolveComponentFactory(VideoDialogComponent);
       const componentRef = dialogComponentFactory.create(this.injector);

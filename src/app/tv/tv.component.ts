@@ -100,8 +100,7 @@ export class TvComponent {
       console.error('Error fetching tvs:', error);
       this.snackbar.show('Error fetching tvs');
       this.snackbar.showLoading(false)
-    } finally {
-      console.log('API call completed.');
+    } finally {      
       this.snackbar.showLoading(false)
     }
   }

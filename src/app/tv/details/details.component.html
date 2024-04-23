@@ -85,7 +85,7 @@
           <h3 class="ttl-02 txt-primary">Casts</h3>
           <p *ngIf="!castLists || castLists.length === 0" class="txt-01 txt-primary">There's no casts for this series
           </p>
-          <div class="crew-member-wrap overflow-container" *ngIf="castLists.length > 0">
+          <div class="crew-member-wrap overflow-container">
             <div class="crew-member-list" *ngFor="let cast of castLists">
               <div class="img-wrap">
                 <img [src]="movieService.getImageUrl(cast.profile_path, 'w185')" alt="" width="100%">

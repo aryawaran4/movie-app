@@ -53,6 +53,7 @@ export class DashboardComponent {
   ) {
     this.userInfo = this.globalService.getMe()
     this.usersData = this.globalService.getUsersData()
+    this.getGenres()
   }
 
   ngOnInit() {
@@ -60,7 +61,6 @@ export class DashboardComponent {
     this.getTrending()
     this.getPopularMovies()
     this.getPopularTvShows()
-    this.getGenres()
   }
 
   // ***SLICK***
@@ -261,9 +261,24 @@ export class DashboardComponent {
   }
 
   getGenreName(genreId: number, mediaType: string): string {
-    const genresList = mediaType === 'movie' ? this.genresMovie : this.genresTv;
-    const genre = genresList.genres.find(genre => genre.id === genreId);
-    return genre ? genre.name : 'Unknown Genre';
+    try {
+      const genresList = mediaType === 'movie' ? this.genresMovie : this.genresTv;
+      if (!genresList || !genresList.genres) {
+        throw new Error('Genres list is not available.');
+      }
+
+      const genre = genresList.genres.find(genre => genre.id === genreId);
+      if (!genre) {
+        throw new Error('Genre not found.');
+      }
+
+      return genre.name;
+    } catch (error) {
+      console.error('Error fetching genre name:', error);
+      return 'Unknown Genre';
+    }
   }
+
+
 
 }

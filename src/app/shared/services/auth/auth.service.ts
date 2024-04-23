@@ -19,7 +19,8 @@ export class AuthService {
 
   login(authData: Partial<UserType>): Observable<boolean> {
     const storedUsers = JSON.parse(localStorage.getItem('users') || '[]') as UserType[];
-    console.log('Stored Users:', storedUsers); // Log the stored users array to see its contents
+    // console.log('Stored Users:', storedUsers); 
+    // Log the stored users array to see its contents
 
     let foundUser: UserType | undefined; // Define a variable to store the found user
 
@@ -30,7 +31,8 @@ export class AuthService {
       }
     });
 
-    console.log('User found:', foundUser); // Log the found user object
+    // console.log('User found:', foundUser); 
+    // Log the found user object
 
     if (foundUser) {
       localStorage.setItem('token', 'dummyToken');
@@ -38,7 +40,7 @@ export class AuthService {
       this.createUsersData(foundUser); // Pass the found user data to createUsersData function
       return of(true);
     } else {
-      console.error('Login failed: Invalid credentials');
+      // console.error('Login failed: Invalid credentials');
       return of(false);
     }
   }
@@ -61,7 +63,8 @@ export class AuthService {
       const createdAt = new Date()
       storedUsers.push({ email: authData.email, username: authData.username, password: authData.password, uuid, createdAt });
       localStorage.setItem('users', JSON.stringify(storedUsers));
-      console.log('Stored Users after registration:', storedUsers); // Log the stored users array after registration
+      // console.log('Stored Users after registration:', storedUsers); 
+      // Log the stored users array after registration
       return of(true);
     } else {
       console.error('Registration failed: Invalid data');

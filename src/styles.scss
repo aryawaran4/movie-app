@@ -1321,6 +1321,50 @@ input:focus {
   color: rgba(255, 215, 0, 0.1019607843);
 }
 
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-1 .bg-medal,
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-2 .bg-medal,
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-3 .bg-medal {
+  display: block;
+  background: linear-gradient(to right, #FFD700 10%, transparent 50%);
+}
+
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-1 .bg-medal .medal-content,
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-2 .bg-medal .medal-content,
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-3 .bg-medal .medal-content {
+  display: block;
+  position: absolute;
+  font-size: 30rem;
+  font-weight: bold;
+  right: 5rem;
+  color: rgba(255, 215, 0, 0.1019607843);
+}
+
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-4 .bg-medal,
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-5 .bg-medal,
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-6 .bg-medal,
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-7 .bg-medal,
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-8 .bg-medal,
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-9 .bg-medal,
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-10 .bg-medal {
+  display: block;
+  background: linear-gradient(to right, #4CAF50 10%, transparent 50%);
+}
+
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-4 .bg-medal .medal-content,
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-5 .bg-medal .medal-content,
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-6 .bg-medal .medal-content,
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-7 .bg-medal .medal-content,
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-8 .bg-medal .medal-content,
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-9 .bg-medal .medal-content,
+.media-component .media-component-area .top-rated .top-rated-area .top-rated-section .list-top-rated .card-top-rated#tv-10 .bg-medal .medal-content {
+  display: block;
+  position: absolute;
+  font-size: 30rem;
+  font-weight: bold;
+  right: 5rem;
+  color: rgba(255, 215, 0, 0.1019607843);
+}
+
 @media screen and (max-width: 990px) {
   .card-action {
     margin-top: 1rem;
@@ -1463,6 +1507,40 @@ input:focus {
   .top-rated-section .card-top-rated#movie-8 .bg-medal .medal-content,
   .top-rated-section .card-top-rated#movie-9 .bg-medal .medal-content,
   .top-rated-section .card-top-rated#movie-10 .bg-medal .medal-content {
+    bottom: 5rem;
+  }
+
+  .top-rated-section .card-top-rated#tv-1 .bg-medal,
+  .top-rated-section .card-top-rated#tv-2 .bg-medal,
+  .top-rated-section .card-top-rated#tv-3 .bg-medal {
+    display: block !important;
+    background: linear-gradient(to bottom, #FFD700 10%, transparent 50%) !important;
+  }
+
+  .top-rated-section .card-top-rated#tv-1 .bg-medal .medal-content,
+  .top-rated-section .card-top-rated#tv-2 .bg-medal .medal-content,
+  .top-rated-section .card-top-rated#tv-3 .bg-medal .medal-content {
+    bottom: 5rem;
+  }
+
+  .top-rated-section .card-top-rated#tv-4 .bg-medal,
+  .top-rated-section .card-top-rated#tv-5 .bg-medal,
+  .top-rated-section .card-top-rated#tv-6 .bg-medal,
+  .top-rated-section .card-top-rated#tv-7 .bg-medal,
+  .top-rated-section .card-top-rated#tv-8 .bg-medal,
+  .top-rated-section .card-top-rated#tv-9 .bg-medal,
+  .top-rated-section .card-top-rated#tv-10 .bg-medal {
+    display: block !important;
+    background: linear-gradient(to bottom, #4CAF50 10%, transparent 50%) !important;
+  }
+
+  .top-rated-section .card-top-rated#tv-4 .bg-medal .medal-content,
+  .top-rated-section .card-top-rated#tv-5 .bg-medal .medal-content,
+  .top-rated-section .card-top-rated#tv-6 .bg-medal .medal-content,
+  .top-rated-section .card-top-rated#tv-7 .bg-medal .medal-content,
+  .top-rated-section .card-top-rated#tv-8 .bg-medal .medal-content,
+  .top-rated-section .card-top-rated#tv-9 .bg-medal .medal-content,
+  .top-rated-section .card-top-rated#tv-10 .bg-medal .medal-content {
     bottom: 5rem;
   }
 }
