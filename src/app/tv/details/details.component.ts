@@ -51,12 +51,7 @@ export class TvDetailsComponent {
     this.getDetailsTv()
     this.getCastList()
   }
-
-
-  @HostListener('window:scroll', ['$event'])
-  onScroll() {
-    this.fadeIn();
-  }
+  
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.isSmallScreen = window.innerWidth < 768;
@@ -113,7 +108,6 @@ export class TvDetailsComponent {
     try {
       const details = await this.movieService.getTvDetails(this.idParam);
       this.tv = details
-      console.log(this.tv);
 
       setTimeout(() => {
         this.elementsArray =
