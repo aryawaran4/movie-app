@@ -13,14 +13,15 @@ export class AuthService {
 
   constructor() { }
 
+  // Method to check if the user is logged in
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
 
+  // Method to handle user login
   login(authData: Partial<UserType>): Observable<boolean> {
+    // Parse the local storage data of users or provides a default value of []
     const storedUsers = JSON.parse(localStorage.getItem('users') || '[]') as UserType[];
-    // console.log('Stored Users:', storedUsers); 
-    // Log the stored users array to see its contents
 
     let foundUser: UserType | undefined; // Define a variable to store the found user
 
@@ -31,22 +32,17 @@ export class AuthService {
       }
     });
 
-    // console.log('User found:', foundUser); 
-    // Log the found user object
-
     if (foundUser) {
       localStorage.setItem('token', 'dummyToken');
       localStorage.setItem('user', JSON.stringify(foundUser));
       this.createUsersData(foundUser); // Pass the found user data to createUsersData function
       return of(true);
     } else {
-      // console.error('Login failed: Invalid credentials');
       return of(false);
     }
   }
 
-
-
+  // Method to handle user registration
   register(authData: Partial<UserType>): Observable<boolean> {
     const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
 
@@ -63,8 +59,6 @@ export class AuthService {
       const createdAt = new Date()
       storedUsers.push({ email: authData.email, username: authData.username, password: authData.password, uuid, createdAt });
       localStorage.setItem('users', JSON.stringify(storedUsers));
-      // console.log('Stored Users after registration:', storedUsers); 
-      // Log the stored users array after registration
       return of(true);
     } else {
       console.error('Registration failed: Invalid data');
@@ -72,17 +66,14 @@ export class AuthService {
     }
   }
 
+  // Method to create user data for favorites
   createUsersData(userData: Partial<UserType>): void {
-    // Retrieve existing usersData array from localStorage or initialize it if it doesn't exist
     let usersData: UserFavouriteType[] = JSON.parse(localStorage.getItem('usersData') || '[]');
 
-    // Check if the provided userData has a valid uuid
     if (userData.uuid) {
-      // Check if the provided uuid already exists in usersData
       const existingUser = usersData.find(user => user.uuid === userData.uuid);
 
       if (!existingUser) {
-        // Create a new entry for userData
         const newUserEntry = {
           username: userData.username || '',
           email: userData.email || '',
@@ -92,11 +83,7 @@ export class AuthService {
             tv: []
           } // Initialize favourite as an empty array
         };
-
-        // Push the new user entry to the usersData array
         usersData.push(newUserEntry);
-
-        // Save the updated usersData array back to localStorage
         localStorage.setItem('usersData', JSON.stringify(usersData));
       } else {
         console.log('User with the provided UUID already exists in usersData');
@@ -106,6 +93,7 @@ export class AuthService {
     }
   }
 
+  // Method to handle user logout
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

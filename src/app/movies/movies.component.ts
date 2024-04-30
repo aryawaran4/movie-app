@@ -46,6 +46,14 @@ export class MoviesComponent {
     this.getTopRatedMovies(this.currentPage)
   }
 
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.elementsArray =
+        this.element.nativeElement.querySelectorAll('.animated-fade-in');
+      this.fadeIn();
+    }, 500);
+  }
+
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     this.fadeIn();
@@ -66,6 +74,11 @@ export class MoviesComponent {
       this.currentPage++;
 
       this.getTopRatedMovies(this.currentPage).then(() => {
+        setTimeout(() => {
+          this.elementsArray =
+            this.element.nativeElement.querySelectorAll('.animated-fade-in');
+          this.fadeIn();
+        }, 500);
         this.loading = false;
       });
     }
@@ -92,11 +105,6 @@ export class MoviesComponent {
         return;
       }
       this.TopRatedMovies.push(...this.newTopRatedMovies);
-      setTimeout(() => {
-        this.elementsArray =
-          this.element.nativeElement.querySelectorAll('.animated-fade-in');
-        this.fadeIn();
-      }, 500);
     } catch (error) {
       console.error('Error fetching movies:', error);
       this.snackbar.show('Error fetching movies');

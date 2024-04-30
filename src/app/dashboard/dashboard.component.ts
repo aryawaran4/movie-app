@@ -37,6 +37,10 @@ export class DashboardComponent {
 
   initialPage = 1
 
+  trendsErr = false
+  movieErr = false
+  tvErr = false
+
   searchForm = new FormGroup({
     search: new FormControl('', Validators.required),
   })
@@ -55,7 +59,7 @@ export class DashboardComponent {
     this.usersData = this.globalService.getUsersData()
     this.getGenres()
   }
-
+  
   ngOnInit() {
     this.onResize('')
     this.getTrending()
@@ -66,22 +70,19 @@ export class DashboardComponent {
   // ***SLICK***
   mainSlides = [];
   mainSlideConfig = {
-    "slidesToShow": 1, "slidesToScroll": 1, 'arrows': false, 'autoplay': true,
-    'autoplaySpeed': 7000,
+    "slidesToShow": 1, "slidesToScroll": 1, 'arrows': false, 'autoplay': true, 'autoplaySpeed': 7000,
   };
 
   sectionSlides = [];
   sectionSlideConfig = {
-    "slidesToShow": 5, "slidesToScroll": 2, 'arrows': true, 'infinite': true, adaptiveHeight: true, centerMode: true,
-    initialSlide: 2,
-    variableWidth: true,
+    "slidesToShow": 7, "slidesToScroll": 2, 'arrows': true, 'infinite': true, adaptiveHeight: true, centerMode: true, variableWidth: true, initialSlide: 7,
   };
 
   updateSlickShow() {
     if (window.innerWidth < 768) {
       this.sectionSlideConfig.slidesToShow = 1
     } else {
-      this.sectionSlideConfig.slidesToShow = 5
+      this.sectionSlideConfig.slidesToShow = 7
     }
   }
   // ***SLICK***
@@ -90,13 +91,20 @@ export class DashboardComponent {
   onScroll() {
     this.fadeIn();
   }
+
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.isSmallScreen = window.innerWidth < 768;
   }
+
   ngAfterViewInit() {
     this.updateSlickShow();
     window.addEventListener('resize', this.updateSlickShow.bind(this));
+    setTimeout(() => {
+      this.elementsArray =
+        this.element.nativeElement.querySelectorAll('.animated-fade-in');
+      this.fadeIn();
+    }, 500);
   }
 
   fadeIn() {
@@ -152,58 +160,46 @@ export class DashboardComponent {
 
   async getTrending() {
     this.snackbar.showLoading(true)
+    this.trendsErr = false
     try {
       const trends = await this.dashboardService.getTrendingShows();
       this.trends = trends.results;
-      setTimeout(() => {
-        this.elementsArray =
-          this.element.nativeElement.querySelectorAll('.animated-fade-in');
-        this.fadeIn();
-      }, 500);
     } catch (error) {
       console.error('Error fetching trends:', error);
       this.snackbar.show('Error fetching trends');
       this.snackbar.showLoading(false)
+      this.trendsErr = true
     } finally {
-
       this.snackbar.showLoading(false)
     }
   }
 
   async getPopularMovies() {
     this.snackbar.showLoading(true)
+    this.movieErr = false
     try {
       const popular = await this.dashboardService.getPopularMovies();
       this.popularMovies = popular.results
-      setTimeout(() => {
-        this.elementsArray =
-          this.element.nativeElement.querySelectorAll('.animated-fade-in');
-        this.fadeIn();
-      }, 500);
     } catch (error) {
       console.error('Error fetching movies:', error);
       this.snackbar.show('Error fetching movies');
     } finally {
-
       this.snackbar.showLoading(false)
+      this.movieErr = true
     }
   }
 
   async getPopularTvShows() {
     this.snackbar.showLoading(true)
+    this.tvErr = false
     try {
       const popular = await this.dashboardService.getPopularTvShows();
       this.popularTvShows = popular.results
-      setTimeout(() => {
-        this.elementsArray =
-          this.element.nativeElement.querySelectorAll('.animated-fade-in');
-        this.fadeIn();
-      }, 500);
     } catch (error) {
       console.error('Error fetching tv shows:', error);
       this.snackbar.show('Error fetching tv shows');
+      this.tvErr = true
     } finally {
-
       this.snackbar.showLoading(false)
     }
   }
@@ -266,19 +262,17 @@ export class DashboardComponent {
       if (!genresList || !genresList.genres) {
         throw new Error('Genres list is not available.');
       }
-
+  
       const genre = genresList.genres.find(genre => genre.id === genreId);
       if (!genre) {
         throw new Error('Genre not found.');
       }
-
+  
       return genre.name;
     } catch (error) {
       console.error('Error fetching genre name:', error);
       return 'Unknown Genre';
     }
-  }
-
-
+  }  
 
 }

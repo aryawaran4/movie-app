@@ -30,14 +30,17 @@ export class AccountComponent {
   ) {
     this.userInfo = this.globalService.getMe()
     this.usersData = this.globalService.getUsersData()
+  }
+
+  ngOnInit() {
+  }
+
+  ngAfterViewInit(): void {
     setTimeout(() => {
       this.elementsArray =
         this.element.nativeElement.querySelectorAll('.animated-fade-in');
       this.fadeIn();
     }, 500);
-  }
-
-  ngOnInit() {
   }
 
   @HostListener('window:scroll', ['$event'])

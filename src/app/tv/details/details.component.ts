@@ -57,17 +57,6 @@ export class TvDetailsComponent {
     this.isSmallScreen = window.innerWidth < 768;
   }
 
-  fadeIn() {
-    for (let i = 0; i < this.elementsArray.length; i++) {
-      const elem = this.elementsArray[i];
-      const distInView =
-        elem.getBoundingClientRect().top - window.innerHeight + 20;
-      if (distInView < 0) {
-        this.renderer.addClass(elem, 'inView');
-      }
-    }
-  }
-
   async toggleFavorite(showId: number, mediaType: string): Promise<void> {
     if (this.globalService.getToken()) {
       this.snackbar.showLoading(true)
@@ -108,12 +97,6 @@ export class TvDetailsComponent {
     try {
       const details = await this.movieService.getTvDetails(this.idParam);
       this.tv = details
-
-      setTimeout(() => {
-        this.elementsArray =
-          this.element.nativeElement.querySelectorAll('.animated-fade-in');
-        this.fadeIn();
-      }, 500);
     } catch (error) {
       console.error('Error fetching tvs:', error);
       this.notfound = true
@@ -128,12 +111,6 @@ export class TvDetailsComponent {
     try {
       const casts = await this.movieService.getCastList(this.idParam, 'tv');
       this.castLists = casts
-
-      setTimeout(() => {
-        this.elementsArray =
-          this.element.nativeElement.querySelectorAll('.animated-fade-in');
-        this.fadeIn();
-      }, 500);
     } catch (error) {
       console.error('Error fetching cast:', error);
       this.snackbar.show('Error fetching cast');

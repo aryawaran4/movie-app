@@ -7,14 +7,12 @@ import { LandingPageComponent } from './landing-page.component';
 
 //module
 import { SharedModule } from '../shared/shared.module';
-import { LottieModule } from 'ngx-lottie';
 
 @NgModule({
   declarations: [LandingPageComponent],
   imports: [
     CommonModule,
     SharedModule,
-    LottieModule,
     RouterModule
   ]
 })
