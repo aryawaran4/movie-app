@@ -45,14 +45,6 @@ export class TvComponent {
     this.getTopRatedTvs(this.currentPage)
   }
 
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.elementsArray =
-        this.element.nativeElement.querySelectorAll('.animated-fade-in');
-      this.fadeIn();
-    }, 500);
-  }
-
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     this.fadeIn();
@@ -104,11 +96,18 @@ export class TvComponent {
         return;
       }
       this.TopRatedTvs.push(...this.newTopRatedTvs);
+      if(this.TopRatedTvs.length > 0){
+        setTimeout(() => {
+          this.elementsArray =
+            this.element.nativeElement.querySelectorAll('.animated-fade-in');
+          this.fadeIn();
+        }, 500);
+      }
     } catch (error) {
       console.error('Error fetching tvs:', error);
       this.snackbar.show('Error fetching tvs');
       this.snackbar.showLoading(false)
-    } finally {      
+    } finally {
       this.snackbar.showLoading(false)
     }
   }

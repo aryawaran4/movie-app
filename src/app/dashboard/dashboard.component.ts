@@ -57,10 +57,10 @@ export class DashboardComponent {
   ) {
     this.userInfo = this.globalService.getMe()
     this.usersData = this.globalService.getUsersData()
-    this.getGenres()
   }
-  
+
   ngOnInit() {
+    this.getGenres()
     this.onResize('')
     this.getTrending()
     this.getPopularMovies()
@@ -100,11 +100,6 @@ export class DashboardComponent {
   ngAfterViewInit() {
     this.updateSlickShow();
     window.addEventListener('resize', this.updateSlickShow.bind(this));
-    setTimeout(() => {
-      this.elementsArray =
-        this.element.nativeElement.querySelectorAll('.animated-fade-in');
-      this.fadeIn();
-    }, 500);
   }
 
   fadeIn() {
@@ -180,6 +175,13 @@ export class DashboardComponent {
     try {
       const popular = await this.dashboardService.getPopularMovies();
       this.popularMovies = popular.results
+      if (this.popularMovies.length > 0) {
+        setTimeout(() => {
+          this.elementsArray =
+            this.element.nativeElement.querySelectorAll('.animated-fade-in');
+          this.fadeIn();
+        }, 500);
+      }
     } catch (error) {
       console.error('Error fetching movies:', error);
       this.snackbar.show('Error fetching movies');
@@ -195,6 +197,13 @@ export class DashboardComponent {
     try {
       const popular = await this.dashboardService.getPopularTvShows();
       this.popularTvShows = popular.results
+      if (this.popularTvShows.length > 0) {
+        setTimeout(() => {
+          this.elementsArray =
+            this.element.nativeElement.querySelectorAll('.animated-fade-in');
+          this.fadeIn();
+        }, 500);
+      }
     } catch (error) {
       console.error('Error fetching tv shows:', error);
       this.snackbar.show('Error fetching tv shows');
@@ -240,39 +249,51 @@ export class DashboardComponent {
   }
 
   async getGenres() {
-    this.snackbar.showLoading(true)
+    // Show loading indicator while fetching genres
+    this.snackbar.showLoading(true);
     try {
+      // Fetch movie and TV genres concurrently using Promise.all
       const [movieGenres, tvGenres] = await Promise.all([
         this.movieService.getGenresList('movie'),
         this.movieService.getGenresList('tv')
       ]);
+      // Store fetched genres in component properties
       this.genresMovie = movieGenres;
       this.genresTv = tvGenres;
     } catch (error) {
+      // Handle errors during genre fetching
       console.error('Error fetching genres:', error);
       this.snackbar.show('Error fetching genres');
     } finally {
-      this.snackbar.showLoading(false)
+      // Hide loading indicator regardless of success or failure
+      this.snackbar.showLoading(false);
     }
   }
 
+  // Get the name of a genre based on genre ID and media type (movie or TV)
   getGenreName(genreId: number, mediaType: string): string {
     try {
+      // Determine which genre list to use based on media type
       const genresList = mediaType === 'movie' ? this.genresMovie : this.genresTv;
+      // Check if genre list or genres array is not available
       if (!genresList || !genresList.genres) {
         throw new Error('Genres list is not available.');
       }
-  
+      // Find the genre object with matching ID
       const genre = genresList.genres.find(genre => genre.id === genreId);
+
+      // Throw error if genre is not found
       if (!genre) {
         throw new Error('Genre not found.');
       }
-  
+      // Return the name of the genre
       return genre.name;
     } catch (error) {
+      // Handle errors gracefully and return a default genre name
       console.error('Error fetching genre name:', error);
       return 'Unknown Genre';
     }
-  }  
+  }
+
 
 }

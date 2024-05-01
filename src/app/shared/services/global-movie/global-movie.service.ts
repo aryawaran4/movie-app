@@ -215,19 +215,28 @@ export class GlobalMovieService {
 
   }
 
+  // Fetches a list of genres for a specified media type (movie or TV) from the API
   async getGenresList(mediaType: string): Promise<any> {
+    // Construct the URL for fetching genre list based on the media type and language
     const url = `${this.apiUrl}/genre/${mediaType}/list?language=en`;
     try {
-      const response = await this.http.get<any>(url).toPromise();      
-      
+      // Send an HTTP GET request to the API endpoint and await the response
+      const response = await this.http.get<any>(url).toPromise();
+
+      // Check if the response is undefined or null
       if (!response) {
+        // Throw an error if the response is undefined or null
         throw new Error('Response is undefined');
       }
+      // Return the response data (genre list)
       return response;
     } catch (error) {
+      // Handle errors that occur during the HTTP request or processing of the response
       console.error('Error fetching genres:', error);
+      // Re-throw the error to propagate it to the caller
       throw error;
     }
   }
+
 
 }

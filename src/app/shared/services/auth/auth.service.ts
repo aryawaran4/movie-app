@@ -5,13 +5,14 @@ import { v4 as uuidv4 } from 'uuid';
 // type
 import { UserType } from '../../types/auth.type';
 import { UserFavouriteType } from '../../types/movie.type';
+import { SnackbarService } from '../../template/snackbar/snackbar.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private snackbar: SnackbarService) { }
 
   // Method to check if the user is logged in
   isLoggedIn(): boolean {
@@ -50,6 +51,7 @@ export class AuthService {
     const emailExists = storedUsers.some((u: UserType) => u.email === authData.email);
     if (emailExists) {
       console.error('Registration failed: Email already exists');
+      this.snackbar.show('Registration failed: Email already exists');
       return of(false);
     }
 
@@ -62,6 +64,7 @@ export class AuthService {
       return of(true);
     } else {
       console.error('Registration failed: Invalid data');
+      this.snackbar.show('Registration failed: Invalid data');
       return of(false);
     }
   }

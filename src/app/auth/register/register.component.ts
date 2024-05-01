@@ -35,8 +35,6 @@ export class RegisterComponent {
           if (loggedIn) {
             this.router.navigateByUrl('/login');
             this.snackbar.show('Registration successful');
-          } else {
-            this.snackbar.show('Registration failed');
           }
         },
         error => {
