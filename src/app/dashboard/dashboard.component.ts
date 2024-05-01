@@ -87,29 +87,36 @@ export class DashboardComponent {
   }
   // ***SLICK***
 
-  // Listen for scroll events on the window
+  /**
+ * Listens for scroll events on the window and triggers the fadeIn method.
+ * @param event The scroll event.
+ */
   @HostListener('window:scroll', ['$event'])
-  onScroll() {
-    // Call the fadeIn method when the window is scrolled
+  onScroll(event: any) {
     this.fadeIn();
   }
 
-  // Listen for resize events on the window
+  /**
+   * Listens for resize events on the window and updates the isSmallScreen property.
+   * @param event The resize event.
+   */
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
-    // Check if the screen width is less than 768 pixels (small screen)
     this.isSmallScreen = window.innerWidth < 768;
   }
 
-  // After the view has been initialized
+  /**
+   * Executes after the view has been initialized.
+   * Updates the slick show and adds a resize event listener to the window.
+   */
   ngAfterViewInit() {
-    // Update the slick show (assuming it's related to a carousel or slideshow)
     this.updateSlickShow();
-    // Add a resize event listener to the window and bind it to the updateSlickShow method
     window.addEventListener('resize', this.updateSlickShow.bind(this));
   }
 
-  // Method to fade in elements when they come into view
+  /**
+ * Fades in elements when they come into view.
+ */
   fadeIn() {
     // Loop through each element in the elementsArray
     for (let i = 0; i < this.elementsArray.length; i++) {
@@ -125,7 +132,12 @@ export class DashboardComponent {
     }
   }
 
-  // Method to open a video dialog for a given link ID and media type
+  /**
+   * Opens a video dialog for a given link ID and media type.
+   * @param linkId The ID of the link.
+   * @param mediaType The type of media (e.g., 'movie' or 'tv').
+   * @returns A Promise that resolves once the video dialog is opened.
+   */
   async openVideoDialog(linkId: number, mediaType: string): Promise<void> {
     // Show loading indicator while opening the video dialog
     this.snackbar.showLoading(true);
@@ -145,7 +157,9 @@ export class DashboardComponent {
     }
   }
 
-  // Method to perform a search
+  /**
+ * Performs a search based on the provided search query and updates the component's state.
+ */
   async search() {
     // Show loading indicator while performing the search
     this.snackbar.showLoading(true);
@@ -180,7 +194,9 @@ export class DashboardComponent {
     }
   }
 
-  // Fetch trending shows
+  /**
+   * Fetches trending shows and updates the component's state.
+   */
   async getTrending() {
     // Show loading indicator
     this.snackbar.showLoading(true);
@@ -203,7 +219,9 @@ export class DashboardComponent {
     }
   }
 
-  // Fetch popular movies
+  /**
+ * Fetches popular movies and updates the component's state.
+ */
   async getPopularMovies() {
     // Show loading indicator
     this.snackbar.showLoading(true);
@@ -235,7 +253,9 @@ export class DashboardComponent {
     }
   }
 
-  // Fetch popular TV shows
+  /**
+   * Fetches popular TV shows and updates the component's state.
+   */
   async getPopularTvShows() {
     // Show loading indicator
     this.snackbar.showLoading(true);
@@ -267,7 +287,12 @@ export class DashboardComponent {
     }
   }
 
-  // Method to toggle favorite status for a show
+  /**
+ * Toggles the favorite status for a show.
+ * @param showId The ID of the show.
+ * @param mediaType The type of media (movie or TV).
+ * @returns A Promise that resolves once the favorite status is toggled.
+ */
   async toggleFavorite(showId: number, mediaType: string): Promise<void> {
     // Check if the user is logged in
     if (this.globalService.getToken()) {
@@ -277,15 +302,13 @@ export class DashboardComponent {
         // Check if the show is already a favorite
         if (this.isFavorite(showId, mediaType)) {
           // Remove the show from favorites
-          const favourite = await this.movieService.removeFavourite(this.userInfo.uuid, showId, mediaType);
-          // Update usersData after removing favorite
-          this.usersData = this.globalService.getUsersData();
+          await this.movieService.removeFavourite(this.userInfo.uuid, showId, mediaType);
         } else {
           // Add the show to favorites
-          const favourite = await this.movieService.addFavourite(this.userInfo.uuid, showId, mediaType);
-          // Update usersData after adding favorite
-          this.usersData = this.globalService.getUsersData();
+          await this.movieService.addFavourite(this.userInfo.uuid, showId, mediaType);
         }
+        // Update usersData after adding or removing favorite
+        this.usersData = this.globalService.getUsersData();
       } catch (error) {
         // Handle errors during toggling favorite
         console.error('Error toggling favorite:', error);
@@ -301,7 +324,12 @@ export class DashboardComponent {
     }
   }
 
-  // Method to check if a show is marked as favorite
+  /**
+   * Checks if a show is marked as favorite.
+   * @param showId The ID of the show.
+   * @param mediaType The type of media (movie or TV).
+   * @returns True if the show is marked as favorite, otherwise false.
+   */
   isFavorite(showId: number, mediaType: string): boolean {
     const user = this.usersData;
     if (user) {
@@ -318,6 +346,11 @@ export class DashboardComponent {
     return false;
   }
 
+  /**
+ * Retrieves movie and TV genres concurrently using Promise.all.
+ * Stores fetched genres in component properties.
+ * @returns A Promise that resolves once genres are fetched and stored.
+ */
   async getGenres() {
     // Show loading indicator while fetching genres
     this.snackbar.showLoading(true);
@@ -340,7 +373,12 @@ export class DashboardComponent {
     }
   }
 
-  // Get the name of a genre based on genre ID and media type (movie or TV)
+  /**
+   * Retrieves the name of a genre based on genre ID and media type (movie or TV).
+   * @param genreId The ID of the genre.
+   * @param mediaType The type of media (movie or TV).
+   * @returns The name of the genre if found, otherwise returns 'Unknown Genre'.
+   */
   getGenreName(genreId: number, mediaType: string): string {
     try {
       // Determine which genre list to use based on media type
@@ -364,6 +402,5 @@ export class DashboardComponent {
       return 'Unknown Genre';
     }
   }
-
 
 }
