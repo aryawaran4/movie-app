@@ -57,29 +57,29 @@
               </span>
               Play</button>
           </div>
-          <div class="tagline">
-            <mark class="txt-02 txt-primary" *ngIf="movie.tagline">{{movie.tagline}}</mark>
+          <div class="tagline" *ngIf="movie.tagline">
+            <mark class="txt-02 txt-primary">{{movie.tagline}}</mark>
           </div>
-          <div class="overview">
-            <p class="txt-02 font-bold txt-primary" *ngIf="movie.overview">Overview</p>
-            <p class="txt-02 txt-primary" *ngIf="movie.overview">{{movie.overview}}</p>
+          <div class="overview" *ngIf=" movie.overview">
+            <p class="txt-02 font-bold txt-primary">Overview</p>
+            <p class="txt-02 txt-primary">{{movie.overview}}</p>
           </div>
           <div class="other-details txt-primary">
-            <div class="wrap">
+            <div class="wrap" *ngIf="movie.status">
               <p class="txt-02 font-bold label">Status</p>
-              <p class="txt-02 status" *ngIf="movie.status">{{movie.status}}</p>
+              <p class="txt-02 status">{{movie.status}}</p>
             </div>
-            <div class="wrap">
+            <div class="wrap" *ngIf="movie.budget">
               <p class="txt-02 font-bold label">Budget</p>
-              <p class="txt-02 budget" *ngIf="movie.budget">{{movie.budget}}</p>
+              <p class="txt-02 budget">{{movie.budget | currency}}</p>
             </div>
-            <div class="wrap">
+            <div class="wrap" *ngIf="movie.revenue">
               <p class="txt-02 font-bold label">Revenue</p>
-              <p class="txt-02 revenue" *ngIf="movie.revenue">{{movie.revenue}}</p>
+              <p class="txt-02 revenue">{{movie.revenue | currency}}</p>
             </div>
-            <div class="wrap">
+            <div class="wrap" *ngIf="movie.original_language">
               <p class="txt-02 font-bold label">Original Language</p>
-              <p class="txt-02 lang" *ngIf="movie.original_language">{{movie.original_language}}</p>
+              <p class="txt-02 lang">{{movie.original_language}}</p>
             </div>
           </div>
         </div>

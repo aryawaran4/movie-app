@@ -55,25 +55,25 @@
               </span>
               Play</button>
           </div>
-          <div class="tagline">
-            <mark class="txt-02 txt-primary" *ngIf="tv.tagline">{{tv.tagline}}</mark>
+          <div class="tagline" *ngIf="tv.tagline">
+            <mark class="txt-02 txt-primary">{{tv.tagline}}</mark>
           </div>
-          <div class="overview">
-            <p class="txt-02 font-bold txt-primary" *ngIf="tv.overview">Overview</p>
-            <p class="txt-02 txt-primary" *ngIf="tv.overview">{{tv.overview}}</p>
+          <div class="overview" *ngIf="tv.overview">
+            <p class="txt-02 font-bold txt-primary">Overview</p>
+            <p class="txt-02 txt-primary">{{tv.overview}}</p>
           </div>
           <div class="other-details txt-primary">
-            <div class="wrap">
+            <div class="wrap" *ngIf="tv.status">
               <p class="txt-02 font-bold label">Status</p>
-              <p class="txt-02 status" *ngIf="tv.status">{{tv.status}}</p>
+              <p class="txt-02 status">{{tv.status}}</p>
             </div>
-            <div class="wrap">
+            <div class="wrap" *ngIf="tv.original_name">
               <p class="txt-02 font-bold label">Original Name</p>
-              <p class="txt-02 original_name" *ngIf="tv.original_name">{{tv.original_name}}</p>
+              <p class="txt-02 original_name">{{tv.original_name}}</p>
             </div>
-            <div class="wrap">
+            <div class="wrap" *ngIf="tv.original_language">
               <p class="txt-02 font-bold label">Original Language</p>
-              <p class="txt-02 lang" *ngIf="tv.original_language">{{tv.original_language}}</p>
+              <p class="txt-02 lang">{{tv.original_language}}</p>
             </div>
           </div>
         </div>
