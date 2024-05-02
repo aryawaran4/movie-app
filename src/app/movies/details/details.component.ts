@@ -9,25 +9,30 @@ import { VideoDialogService } from 'src/app/shared/template/video-dialog/video-d
 
 // type
 import { UserType } from 'src/app/shared/types/auth.type';
-import { CastMemberType, CrewMemberType, MovieDetailsType, UserFavouriteType } from 'src/app/shared/types/movie.type';
+import {
+  CastMemberType,
+  CrewMemberType,
+  MovieDetailsType,
+  UserFavouriteType,
+} from 'src/app/shared/types/movie.type';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+  styleUrls: ['./details.component.scss'],
 })
 export class MovieDetailsComponent {
-  notfound = false
+  notfound = false;
   showNavbar = true;
   elementsArray!: NodeListOf<Element>;
 
   userInfo!: UserType;
   usersData!: UserFavouriteType;
 
-  movie!: MovieDetailsType
-  castLists!: CastMemberType[]
+  movie!: MovieDetailsType;
+  castLists!: CastMemberType[];
 
-  idParam!: number
+  idParam!: number;
   isSmallScreen: boolean = false;
 
   constructor(
@@ -35,21 +40,19 @@ export class MovieDetailsComponent {
     private globalService: GlobalService,
     public movieService: GlobalMovieService,
     private snackbar: SnackbarService,
-    private renderer: Renderer2,
-    private element: ElementRef,
     private videoDialogService: VideoDialogService
   ) {
-    this.userInfo = this.globalService.getMe()
-    this.usersData = this.globalService.getUsersData()
+    this.userInfo = this.globalService.getMe();
+    this.usersData = this.globalService.getUsersData();
   }
 
   ngOnInit() {
-    this.onResize('')
-    this.route.params.subscribe(params => {
+    this.onResize('');
+    this.route.params.subscribe((params) => {
       this.idParam = params['id'];
     });
-    this.getDetailsMovie()
-    this.getCastList()
+    this.getDetailsMovie();
+    this.getCastList();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -57,78 +60,143 @@ export class MovieDetailsComponent {
     this.isSmallScreen = window.innerWidth < 768;
   }
 
+  /**
+   * Toggles the favorite status for a show.
+   * @param showId The ID of the show.
+   * @param mediaType The type of media (movie or TV).
+   * @returns A Promise that resolves once the favorite status is toggled.
+   */
   async toggleFavorite(showId: number, mediaType: string): Promise<void> {
+    // Check if the user is logged in
     if (this.globalService.getToken()) {
-      this.snackbar.showLoading(true)
+      // Show loading indicator while toggling favorite
+      this.snackbar.showLoading(true);
       try {
+        // Check if the show is already a favorite
         if (this.isFavorite(showId, mediaType)) {
-          const favourite = await this.movieService.removeFavourite(this.userInfo.uuid, showId, mediaType);
-          this.usersData = this.globalService.getUsersData()
+          // Remove the show from favorites
+          await this.movieService.removeFavourite(
+            this.userInfo.uuid,
+            showId,
+            mediaType
+          );
         } else {
-          const favourite = await this.movieService.addFavourite(this.userInfo.uuid, showId, mediaType);
-          this.usersData = this.globalService.getUsersData()
+          // Add the show to favorites
+          await this.movieService.addFavourite(
+            this.userInfo.uuid,
+            showId,
+            mediaType
+          );
         }
+        // Update usersData after adding or removing favorite
+        this.usersData = this.globalService.getUsersData();
       } catch (error) {
+        // Handle errors during toggling favorite
         console.error('Error toggling favorite:', error);
+        // Show error message to the user
         this.snackbar.show('Error toggling favorite');
-      }
-      finally {
-        this.snackbar.showLoading(false)
+      } finally {
+        // Hide loading indicator regardless of success or failure
+        this.snackbar.showLoading(false);
       }
     } else {
+      // If user is not logged in, show a message to login first
       this.snackbar.show('Need to login first');
     }
   }
 
+  /**
+   * Checks if a show is marked as favorite.
+   * @param showId The ID of the show.
+   * @param mediaType The type of media (movie or TV).
+   * @returns True if the show is marked as favorite, otherwise false.
+   */
   isFavorite(showId: number, mediaType: string): boolean {
-    const user = this.usersData
+    const user = this.usersData;
     if (user) {
+      // Check if the media type is 'movie'
       if (mediaType === 'movie') {
+        // Check if the show is in the list of favorite movies
         return user.favourites.movies.some((movie) => movie.id === showId);
       } else if (mediaType === 'tv') {
+        // Check if the show is in the list of favorite TV shows
         return user.favourites.tv.some((tvShow) => tvShow.id === showId);
       }
     }
+    // Return false if user data is not available or show is not a favorite
     return false;
   }
 
-  async getDetailsMovie() {
-    this.snackbar.showLoading(true)
+  /**
+   * Fetches the details of a movie.
+   * @returns A Promise that resolves with the movie details.
+   */
+  async getDetailsMovie(): Promise<void> {
+    // Show loading indicator while fetching movie details
+    this.snackbar.showLoading(true);
     try {
+      // Fetch the details of the movie with the specified ID
       const details = await this.movieService.getMovieDetails(this.idParam);
-      this.movie = details
+      // Store the fetched movie details
+      this.movie = details;
     } catch (error) {
-      console.error('Error fetching movies:', error);
-      this.notfound = true
-      this.snackbar.show('Error fetching movies');
+      // Handle errors during fetching movie details
+      console.error('Error fetching movie details:', error);
+      // Set 'notfound' flag to true to indicate movie not found
+      this.notfound = true;
+      // Show error message to the user
+      this.snackbar.show('Error fetching movie details');
     } finally {
-      this.snackbar.showLoading(false)
+      // Hide loading indicator regardless of success or failure
+      this.snackbar.showLoading(false);
     }
   }
 
-  async getCastList() {
-    this.snackbar.showLoading(true)
+  /**
+   * Fetches the cast list for a movie.
+   * @returns A Promise that resolves with the cast list.
+   */
+  async getCastList(): Promise<void> {
+    // Show loading indicator while fetching cast list
+    this.snackbar.showLoading(true);
     try {
+      // Fetch the cast list for the movie with the specified ID
       const casts = await this.movieService.getCastList(this.idParam, 'movie');
-      this.castLists = casts
+      // Store the fetched cast list
+      this.castLists = casts;
     } catch (error) {
-      console.error('Error fetching movies:', error);
-      this.snackbar.show('Error fetching movies');
+      // Handle errors during fetching cast list
+      console.error('Error fetching cast list:', error);
+      // Show error message to the user
+      this.snackbar.show('Error fetching cast list');
     } finally {
-      this.snackbar.showLoading(false)
+      // Hide loading indicator regardless of success or failure
+      this.snackbar.showLoading(false);
     }
   }
 
+  /**
+   * Opens a video dialog for a given link ID and media type.
+   * @param linkId The ID of the link.
+   * @param mediaType The type of media (movie or TV).
+   * @returns A Promise that resolves once the video dialog is opened.
+   */
   async openVideoDialog(linkId: number, mediaType: string): Promise<void> {
-    this.snackbar.showLoading(true)
+    // Show loading indicator while opening the video dialog
+    this.snackbar.showLoading(true);
     try {
+      // Get the video key using the link ID and media type
       const key = await this.movieService.getLinkVideoId(linkId, mediaType);
+      // Open the video dialog with the retrieved key
       this.videoDialogService.openVideoDialog(key);
     } catch (error) {
+      // Handle errors during opening the video dialog
       console.error('Error opening video dialog:', error);
-      this.snackbar.show('Error opening video dialog')
+      // Show error message to the user
+      this.snackbar.show('Error opening video dialog');
     } finally {
-      this.snackbar.showLoading(false)
+      // Hide loading indicator regardless of success or failure
+      this.snackbar.showLoading(false);
     }
   }
 }
