@@ -5,22 +5,32 @@ import { v4 as uuidv4 } from 'uuid';
 // type
 import { UserType } from '../../types/auth.type';
 import { UserFavouriteType } from '../../types/movie.type';
+import { SnackbarService } from '../../template/snackbar/snackbar.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  constructor(private snackbar: SnackbarService) {}
 
-  constructor() { }
-
+  /**
+   * Checks if the user is logged in by verifying the presence of a token in the local storage.
+   * @returns A boolean indicating whether the user is logged in.
+   */
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
 
+  /**
+   * Handles user login by comparing provided authentication data with stored user credentials.
+   * @param authData Partial user data containing email and password for authentication.
+   * @returns An Observable<boolean> indicating whether the login attempt was successful.
+   */
   login(authData: Partial<UserType>): Observable<boolean> {
-    const storedUsers = JSON.parse(localStorage.getItem('users') || '[]') as UserType[];
-    // console.log('Stored Users:', storedUsers); 
-    // Log the stored users array to see its contents
+    // Parse the local storage data of users or provides a default value of []
+    const storedUsers = JSON.parse(
+      localStorage.getItem('users') || '[]'
+    ) as UserType[];
 
     let foundUser: UserType | undefined; // Define a variable to store the found user
 
@@ -31,72 +41,81 @@ export class AuthService {
       }
     });
 
-    // console.log('User found:', foundUser); 
-    // Log the found user object
-
     if (foundUser) {
+      // If user is found, set a dummy token and store user data in local storage
       localStorage.setItem('token', 'dummyToken');
       localStorage.setItem('user', JSON.stringify(foundUser));
-      this.createUsersData(foundUser); // Pass the found user data to createUsersData function
-      return of(true);
+      // Pass the found user data to createUsersData function
+      this.createUsersData(foundUser);
+      return of(true); // Return an observable of true indicating successful login
     } else {
-      // console.error('Login failed: Invalid credentials');
-      return of(false);
+      return of(false); // Return an observable of false indicating unsuccessful login
     }
   }
 
-
-
+  /**
+   * Handles user registration by checking if the provided email is unique and then registering the user.
+   * @param authData Partial user data containing email, username, and password for registration.
+   * @returns An Observable<boolean> indicating whether the registration attempt was successful.
+   */
   register(authData: Partial<UserType>): Observable<boolean> {
     const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
 
     // Check if the email already exists
-    const emailExists = storedUsers.some((u: UserType) => u.email === authData.email);
+    const emailExists = storedUsers.some(
+      (u: UserType) => u.email === authData.email
+    );
     if (emailExists) {
       console.error('Registration failed: Email already exists');
+      this.snackbar.show('Registration failed: Email already exists');
       return of(false);
     }
 
     // Register the user if the email is unique
     if (authData.email && authData.username && authData.password) {
       const uuid = uuidv4();
-      const createdAt = new Date()
-      storedUsers.push({ email: authData.email, username: authData.username, password: authData.password, uuid, createdAt });
+      const createdAt = new Date();
+      storedUsers.push({
+        email: authData.email,
+        username: authData.username,
+        password: authData.password,
+        uuid,
+        createdAt,
+      });
       localStorage.setItem('users', JSON.stringify(storedUsers));
-      // console.log('Stored Users after registration:', storedUsers); 
-      // Log the stored users array after registration
-      return of(true);
+      return of(true); // Return an observable of true indicating successful registration
     } else {
       console.error('Registration failed: Invalid data');
-      return of(false);
+      this.snackbar.show('Registration failed: Invalid data');
+      return of(false); // Return an observable of false indicating unsuccessful registration
     }
   }
 
+  /**
+   * Creates user data for favorites based on provided user data.
+   * @param userData Partial user data containing username, email, and UUID.
+   */
   createUsersData(userData: Partial<UserType>): void {
-    // Retrieve existing usersData array from localStorage or initialize it if it doesn't exist
-    let usersData: UserFavouriteType[] = JSON.parse(localStorage.getItem('usersData') || '[]');
+    let usersData: UserFavouriteType[] = JSON.parse(
+      localStorage.getItem('usersData') || '[]'
+    );
 
-    // Check if the provided userData has a valid uuid
     if (userData.uuid) {
-      // Check if the provided uuid already exists in usersData
-      const existingUser = usersData.find(user => user.uuid === userData.uuid);
+      const existingUser = usersData.find(
+        (user) => user.uuid === userData.uuid
+      );
 
       if (!existingUser) {
-        // Create a new entry for userData
         const newUserEntry = {
           username: userData.username || '',
           email: userData.email || '',
           uuid: userData.uuid || '',
           favourites: {
             movies: [],
-            tv: []
-          } // Initialize favourite as an empty array
+            tv: [],
+          }, // Initialize favourites as an empty array
         };
-
-        // Push the new user entry to the usersData array
         usersData.push(newUserEntry);
-
-        // Save the updated usersData array back to localStorage
         localStorage.setItem('usersData', JSON.stringify(usersData));
       } else {
         console.log('User with the provided UUID already exists in usersData');
@@ -106,6 +125,9 @@ export class AuthService {
     }
   }
 
+  /**
+   * Handles user logout by removing the token and user data from local storage.
+   */
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

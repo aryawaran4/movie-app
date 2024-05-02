@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 //service
 import { AuthGuardService } from './shared/services/auth/auth-guard.service';
-import { AuthLoginGuardService } from './shared/services/auth/auth-login-guard.service';
 
 //component
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -22,14 +21,12 @@ const routes: Routes = [
   },
   {
     path: 'landing-page',
-    component: LandingPageComponent,
-    canActivate: [AuthLoginGuardService],
+    component: LandingPageComponent,    
     loadChildren: () => import('./landing-page/landing-page.module').then(m => m.LandingPageModule)
   },
   {
     path: 'login',
-    component: LoginComponent,
-    canActivate: [AuthLoginGuardService],
+    component: LoginComponent,    
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {

@@ -20,7 +20,7 @@
           </ng-container>
         </ng-container>
 
-        <ng-container *ngIf="trends !== undefined && trends.length === 0">
+        <ng-container *ngIf="trends !== undefined && trends.length === 0 || trendsErr === true">
           <ng-container *ngIf="empty">
             <ng-container *ngTemplateOutlet="empty"></ng-container>
           </ng-container>
@@ -34,7 +34,7 @@
             </div>
             <div class="slide-info" [routerLink]="isSmallScreen ? ['/', trendShow.media_type, trendShow.id] : null">
               <div class="slide-info-area">
-                <div class="genre-list">
+                <div class="genre-list" *ngIf="genresMovie && genresTv">
                   <div class="genre font-medium txt-02" *ngFor="let genreId of trendShow.genre_ids">
                     {{ getGenreName(genreId, trendShow.media_type) }}
                   </div>
@@ -98,7 +98,7 @@
             </ng-container>
           </ng-container>
 
-          <ng-container *ngIf="popularMovies !== undefined && popularMovies.length === 0">
+          <ng-container *ngIf="popularMovies !== undefined && popularMovies.length === 0 || movieErr === true">
             <ng-container *ngIf="empty">
               <ng-container *ngTemplateOutlet="empty"></ng-container>
             </ng-container>
@@ -142,19 +142,19 @@
       </div>
       <div class="card-slider-wrap">
         <div class="card-slider-area debug-slick">
-          <ng-container *ngIf="popularMovies === undefined">
+          <ng-container *ngIf="popularTvShows === undefined">
             <ng-container *ngIf="loading">
               <ng-container *ngTemplateOutlet="loading"></ng-container>
             </ng-container>
           </ng-container>
 
-          <ng-container *ngIf="popularMovies !== undefined && popularMovies.length === 0">
+          <ng-container *ngIf="popularTvShows !== undefined && popularTvShows.length === 0 || tvErr === true">
             <ng-container *ngIf="empty">
               <ng-container *ngTemplateOutlet="empty"></ng-container>
             </ng-container>
           </ng-container>
 
-          <ng-container *ngIf="popularMovies && popularMovies.length > 0">
+          <ng-container *ngIf="popularTvShows && popularTvShows.length > 0">
             <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="sectionSlideConfig">
               <div ngxSlickItem *ngFor="let show of popularTvShows" class="slide">
                 <div class="slide-area">
