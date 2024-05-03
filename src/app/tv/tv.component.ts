@@ -8,26 +8,30 @@ import { GlobalMovieService } from '../shared/services/global-movie/global-movie
 
 // type
 import { UserType } from '../shared/types/auth.type';
-import { TvType, FavouriteType, UserFavouriteType } from '../shared/types/movie.type';
+import {
+  TvType,
+  FavouriteType,
+  UserFavouriteType,
+} from '../shared/types/movie.type';
 
 @Component({
   selector: 'app-tv',
   templateUrl: './tv.component.html',
-  styleUrls: ['./tv.component.scss']
+  styleUrls: ['./tv.component.scss'],
 })
 export class TvComponent {
   showNavbar = true;
   elementsArray!: NodeListOf<Element>;
   userInfo!: UserType;
 
-  TopRatedTvs: TvType[] = []
-  newTopRatedTvs!: TvType[]
+  TopRatedTvs: TvType[] = [];
+  newTopRatedTvs!: TvType[];
 
   favourite!: FavouriteType;
-  usersData!: UserFavouriteType
+  usersData!: UserFavouriteType;
 
-  currentPage = 1
-  loading = false
+  currentPage = 1;
+  loading = false;
 
   constructor(
     private globalService: GlobalService,
@@ -35,14 +39,14 @@ export class TvComponent {
     public tvService: TvService,
     private snackbar: SnackbarService,
     private renderer: Renderer2,
-    private element: ElementRef,
+    private element: ElementRef
   ) {
-    this.userInfo = this.globalService.getMe()
-    this.usersData = this.globalService.getUsersData()
+    this.userInfo = this.globalService.getMe();
+    this.usersData = this.globalService.getUsersData();
   }
 
   ngOnInit() {
-    this.getTopRatedTvs(this.currentPage)
+    this.getTopRatedTvs(this.currentPage);
   }
 
   // Listen for scroll events on the window
@@ -64,8 +68,8 @@ export class TvComponent {
   }
 
   /**
- * Fetches the next page of top-rated movies and adds them to the existing list.
- */
+   * Fetches the next page of top-rated movies and adds them to the existing list.
+   */
   fetchNextPage() {
     // Check if not already loading
     if (!this.loading) {
@@ -94,24 +98,28 @@ export class TvComponent {
    * Fades in elements when they come into view.
    */
   fadeIn() {
-    // Loop through each element in the elementsArray
-    for (let i = 0; i < this.elementsArray.length; i++) {
-      // Get the current element
-      const elem = this.elementsArray[i];
-      // Calculate the distance of the element from the top of the viewport
-      const distInView = elem.getBoundingClientRect().top - window.innerHeight + 20;
-      // If the element is in view (above the bottom of the viewport)
-      if (distInView < 0) {
-        // Add the 'inView' class to the element to trigger the fade-in animation
-        this.renderer.addClass(elem, 'inView');
+    // Ensure that elementsArray is not null or undefined before proceeding
+    if (this.elementsArray) {
+      // Loop through each element in the elementsArray
+      for (let i = 0; i < this.elementsArray.length; i++) {
+        // Get the current element
+        const elem = this.elementsArray[i];
+        // Calculate the distance of the element from the top of the viewport
+        const distInView =
+          elem.getBoundingClientRect().top - window.innerHeight + 20;
+        // If the element is in view (above the bottom of the viewport)
+        if (distInView < 0) {
+          // Add the 'inView' class to the element to trigger the fade-in animation
+          this.renderer.addClass(elem, 'inView');
+        }
       }
     }
   }
 
   /**
- * Fetches a list of top-rated TV shows from the API and adds them to the existing list.
- * @param pageNumber The page number for pagination.
- */
+   * Fetches a list of top-rated TV shows from the API and adds them to the existing list.
+   * @param pageNumber The page number for pagination.
+   */
   async getTopRatedTvs(pageNumber: number) {
     // Show loading indicator
     this.snackbar.showLoading(true);
@@ -153,11 +161,11 @@ export class TvComponent {
   }
 
   /**
- * Toggles the favorite status for a show.
- * @param showId The ID of the show.
- * @param mediaType The type of media (movie or TV).
- * @returns A Promise that resolves once the favorite status is toggled.
- */
+   * Toggles the favorite status for a show.
+   * @param showId The ID of the show.
+   * @param mediaType The type of media (movie or TV).
+   * @returns A Promise that resolves once the favorite status is toggled.
+   */
   async toggleFavorite(showId: number, mediaType: string): Promise<void> {
     // Check if the user is logged in
     if (this.globalService.getToken()) {
@@ -167,10 +175,18 @@ export class TvComponent {
         // Check if the show is already a favorite
         if (this.isFavorite(showId, mediaType)) {
           // Remove the show from favorites
-          await this.movieService.removeFavourite(this.userInfo.uuid, showId, mediaType);
+          await this.movieService.removeFavourite(
+            this.userInfo.uuid,
+            showId,
+            mediaType
+          );
         } else {
           // Add the show to favorites
-          await this.movieService.addFavourite(this.userInfo.uuid, showId, mediaType);
+          await this.movieService.addFavourite(
+            this.userInfo.uuid,
+            showId,
+            mediaType
+          );
         }
         // Update usersData after adding or removing favorite
         this.usersData = this.globalService.getUsersData();
@@ -210,5 +226,4 @@ export class TvComponent {
     // Return false if user data is not available or show is not a favorite
     return false;
   }
-
 }
