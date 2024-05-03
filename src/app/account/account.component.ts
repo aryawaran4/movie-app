@@ -51,17 +51,20 @@ export class AccountComponent {
    * Fades in elements when they come into view.
    */
   fadeIn() {
-    // Loop through each element in the elementsArray
-    for (let i = 0; i < this.elementsArray.length; i++) {
-      // Get the current element
-      const elem = this.elementsArray[i];
-      // Calculate the distance of the element from the top of the viewport
-      const distInView =
-        elem.getBoundingClientRect().top - window.innerHeight + 20;
-      // If the element is in view (above the bottom of the viewport)
-      if (distInView < 0) {
-        // Add the 'inView' class to the element to trigger the fade-in animation
-        this.renderer.addClass(elem, 'inView');
+    // Ensure that elementsArray is not null or undefined before proceeding
+    if (this.elementsArray) {
+      // Loop through each element in the elementsArray
+      for (let i = 0; i < this.elementsArray.length; i++) {
+        // Get the current element
+        const elem = this.elementsArray[i];
+        // Calculate the distance of the element from the top of the viewport
+        const distInView =
+          elem.getBoundingClientRect().top - window.innerHeight + 20;
+        // If the element is in view (above the bottom of the viewport)
+        if (distInView < 0) {
+          // Add the 'inView' class to the element to trigger the fade-in animation
+          this.renderer.addClass(elem, 'inView');
+        }
       }
     }
   }

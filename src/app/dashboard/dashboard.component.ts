@@ -10,40 +10,47 @@ import { VideoDialogService } from '../shared/template/video-dialog/video-dialog
 import { DashboardService } from './dashboard.service';
 
 // type
-import { FavouriteType, GenresType, MovieType, TvType, UserFavouriteType, MediaType } from '../shared/types/movie.type';
+import {
+  FavouriteType,
+  GenresType,
+  MovieType,
+  TvType,
+  UserFavouriteType,
+  MediaType,
+} from '../shared/types/movie.type';
 import { UserType } from '../shared/types/auth.type';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
   showNavbar = true;
   isSmallScreen: boolean = false;
   elementsArray!: NodeListOf<Element>;
 
-  userInfo!: UserType
+  userInfo!: UserType;
 
   trends!: MediaType[];
   searchArray!: MediaType[];
-  popularMovies!: MovieType[]
-  popularTvShows!: TvType[]
+  popularMovies!: MovieType[];
+  popularTvShows!: TvType[];
   favourite!: FavouriteType;
-  usersData!: UserFavouriteType
+  usersData!: UserFavouriteType;
 
-  genresMovie!: GenresType
-  genresTv!: GenresType
+  genresMovie!: GenresType;
+  genresTv!: GenresType;
 
-  initialPage = 1
+  initialPage = 1;
 
-  trendsErr = false
-  movieErr = false
-  tvErr = false
+  trendsErr = false;
+  movieErr = false;
+  tvErr = false;
 
   searchForm = new FormGroup({
     search: new FormControl('', Validators.required),
-  })
+  });
 
   constructor(
     private globalService: GlobalService,
@@ -55,42 +62,53 @@ export class DashboardComponent {
     private router: Router,
     private videoDialogService: VideoDialogService
   ) {
-    this.userInfo = this.globalService.getMe()
-    this.usersData = this.globalService.getUsersData()
+    this.userInfo = this.globalService.getMe();
+    this.usersData = this.globalService.getUsersData();
   }
 
   ngOnInit() {
-    this.getGenres()
-    this.onResize('')
-    this.getTrending()
-    this.getPopularMovies()
-    this.getPopularTvShows()
+    this.getGenres();
+    this.onResize('');
+    this.getTrending();
+    this.getPopularMovies();
+    this.getPopularTvShows();
   }
 
   // ***SLICK***
   mainSlides = [];
   mainSlideConfig = {
-    "slidesToShow": 1, "slidesToScroll": 1, 'arrows': false, 'autoplay': true, 'autoplaySpeed': 7000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    autoplay: true,
+    autoplaySpeed: 7000,
   };
 
   sectionSlides = [];
   sectionSlideConfig = {
-    "slidesToShow": 7, "slidesToScroll": 2, 'arrows': true, 'infinite': true, adaptiveHeight: true, centerMode: true, variableWidth: true, initialSlide: 7,
+    slidesToShow: 7,
+    slidesToScroll: 2,
+    arrows: true,
+    infinite: true,
+    adaptiveHeight: true,
+    centerMode: true,
+    variableWidth: true,
+    initialSlide: 7,
   };
 
   updateSlickShow() {
     if (window.innerWidth < 768) {
-      this.sectionSlideConfig.slidesToShow = 1
+      this.sectionSlideConfig.slidesToShow = 1;
     } else {
-      this.sectionSlideConfig.slidesToShow = 7
+      this.sectionSlideConfig.slidesToShow = 7;
     }
   }
   // ***SLICK***
 
   /**
- * Listens for scroll events on the window and triggers the fadeIn method.
- * @param event The scroll event.
- */
+   * Listens for scroll events on the window and triggers the fadeIn method.
+   * @param event The scroll event.
+   */
   @HostListener('window:scroll', ['$event'])
   onScroll(event: any) {
     this.fadeIn();
@@ -115,19 +133,23 @@ export class DashboardComponent {
   }
 
   /**
- * Fades in elements when they come into view.
- */
+   * Fades in elements when they come into view.
+   */
   fadeIn() {
-    // Loop through each element in the elementsArray
-    for (let i = 0; i < this.elementsArray.length; i++) {
-      // Get the current element
-      const elem = this.elementsArray[i];
-      // Calculate the distance of the element from the top of the viewport
-      const distInView = elem.getBoundingClientRect().top - window.innerHeight + 20;
-      // If the element is in view (above the bottom of the viewport)
-      if (distInView < 0) {
-        // Add the 'inView' class to the element to trigger the fade-in animation
-        this.renderer.addClass(elem, 'inView');
+    // Ensure that elementsArray is not null or undefined before proceeding
+    if (this.elementsArray) {
+      // Loop through each element in the elementsArray
+      for (let i = 0; i < this.elementsArray.length; i++) {
+        // Get the current element
+        const elem = this.elementsArray[i];
+        // Calculate the distance of the element from the top of the viewport
+        const distInView =
+          elem.getBoundingClientRect().top - window.innerHeight + 20;
+        // If the element is in view (above the bottom of the viewport)
+        if (distInView < 0) {
+          // Add the 'inView' class to the element to trigger the fade-in animation
+          this.renderer.addClass(elem, 'inView');
+        }
       }
     }
   }
@@ -158,8 +180,8 @@ export class DashboardComponent {
   }
 
   /**
- * Performs a search based on the provided search query and updates the component's state.
- */
+   * Performs a search based on the provided search query and updates the component's state.
+   */
   async search() {
     // Show loading indicator while performing the search
     this.snackbar.showLoading(true);
@@ -171,7 +193,10 @@ export class DashboardComponent {
         // Check if the search query is not empty
         if (formValue.search) {
           // Perform the multi-search using the search query and initial page number
-          const search = await this.movieService.fetchMultiSearch(formValue.search, this.initialPage);
+          const search = await this.movieService.fetchMultiSearch(
+            formValue.search,
+            this.initialPage
+          );
           // Store the search results in the searchArray property
           this.searchArray = search.results;
           // If no results found, show a message to the user
@@ -220,8 +245,8 @@ export class DashboardComponent {
   }
 
   /**
- * Fetches popular movies and updates the component's state.
- */
+   * Fetches popular movies and updates the component's state.
+   */
   async getPopularMovies() {
     // Show loading indicator
     this.snackbar.showLoading(true);
@@ -288,11 +313,11 @@ export class DashboardComponent {
   }
 
   /**
- * Toggles the favorite status for a show.
- * @param showId The ID of the show.
- * @param mediaType The type of media (movie or TV).
- * @returns A Promise that resolves once the favorite status is toggled.
- */
+   * Toggles the favorite status for a show.
+   * @param showId The ID of the show.
+   * @param mediaType The type of media (movie or TV).
+   * @returns A Promise that resolves once the favorite status is toggled.
+   */
   async toggleFavorite(showId: number, mediaType: string): Promise<void> {
     // Check if the user is logged in
     if (this.globalService.getToken()) {
@@ -302,10 +327,18 @@ export class DashboardComponent {
         // Check if the show is already a favorite
         if (this.isFavorite(showId, mediaType)) {
           // Remove the show from favorites
-          await this.movieService.removeFavourite(this.userInfo.uuid, showId, mediaType);
+          await this.movieService.removeFavourite(
+            this.userInfo.uuid,
+            showId,
+            mediaType
+          );
         } else {
           // Add the show to favorites
-          await this.movieService.addFavourite(this.userInfo.uuid, showId, mediaType);
+          await this.movieService.addFavourite(
+            this.userInfo.uuid,
+            showId,
+            mediaType
+          );
         }
         // Update usersData after adding or removing favorite
         this.usersData = this.globalService.getUsersData();
@@ -347,10 +380,10 @@ export class DashboardComponent {
   }
 
   /**
- * Retrieves movie and TV genres concurrently using Promise.all.
- * Stores fetched genres in component properties.
- * @returns A Promise that resolves once genres are fetched and stored.
- */
+   * Retrieves movie and TV genres concurrently using Promise.all.
+   * Stores fetched genres in component properties.
+   * @returns A Promise that resolves once genres are fetched and stored.
+   */
   async getGenres() {
     // Show loading indicator while fetching genres
     this.snackbar.showLoading(true);
@@ -358,7 +391,7 @@ export class DashboardComponent {
       // Fetch movie and TV genres concurrently using Promise.all
       const [movieGenres, tvGenres] = await Promise.all([
         this.movieService.getGenresList('movie'),
-        this.movieService.getGenresList('tv')
+        this.movieService.getGenresList('tv'),
       ]);
       // Store fetched genres in component properties
       this.genresMovie = movieGenres;
@@ -382,13 +415,14 @@ export class DashboardComponent {
   getGenreName(genreId: number, mediaType: string): string {
     try {
       // Determine which genre list to use based on media type
-      const genresList = mediaType === 'movie' ? this.genresMovie : this.genresTv;
+      const genresList =
+        mediaType === 'movie' ? this.genresMovie : this.genresTv;
       // Check if genre list or genres array is not available
       if (!genresList || !genresList.genres) {
         throw new Error('Genres list is not available.');
       }
       // Find the genre object with matching ID
-      const genre = genresList.genres.find(genre => genre.id === genreId);
+      const genre = genresList.genres.find((genre) => genre.id === genreId);
 
       // Throw error if genre is not found
       if (!genre) {
@@ -402,5 +436,4 @@ export class DashboardComponent {
       return 'Unknown Genre';
     }
   }
-
 }

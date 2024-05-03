@@ -1,6 +1,11 @@
 import { Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 
 // service
 import { GlobalService } from '../shared/services/global.service';
@@ -14,24 +19,24 @@ import { UserType } from '../shared/types/auth.type';
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
-  styleUrls: ['./search-result.component.scss']
+  styleUrls: ['./search-result.component.scss'],
 })
 export class SearchResultComponent {
   showNavbar = true;
   elementsArray!: NodeListOf<Element>;
-  searchArray: MediaType[] = []
+  searchArray: MediaType[] = [];
   newSearchArray!: MediaType[];
-  usersData!: UserFavouriteType
-  userInfo!: UserType
+  usersData!: UserFavouriteType;
+  userInfo!: UserType;
 
   query: string | null = null;
 
-  currentPage = 1
-  loading = false
+  currentPage = 1;
+  loading = false;
 
   searchForm = new FormGroup({
     search: new FormControl('', Validators.required),
-  })
+  });
 
   constructor(
     private globalService: GlobalService,
@@ -43,18 +48,18 @@ export class SearchResultComponent {
     private activatedRouter: ActivatedRoute,
     private formBuilder: FormBuilder
   ) {
-    this.userInfo = this.globalService.getMe()
-    this.usersData = this.globalService.getUsersData()
+    this.userInfo = this.globalService.getMe();
+    this.usersData = this.globalService.getUsersData();
   }
 
   ngOnInit() {
     // Subscribe to query parameters changes
-    this.activatedRouter.queryParams.subscribe(params => {
+    this.activatedRouter.queryParams.subscribe((params) => {
       // Retrieve the search query from query parameters
       this.query = params['query'];
       // Initialize the search form with the retrieved query
       this.searchForm = this.formBuilder.group({
-        search: [this.query]
+        search: [this.query],
       });
     });
     // Perform the initial search with the current page number
@@ -62,10 +67,10 @@ export class SearchResultComponent {
   }
 
   /**
- * Event handler for the window scroll event.
- * Initiates the fadeIn animation and fetches the next page of search results if scrolled to the bottom.
- * @param event The scroll event object.
- */
+   * Event handler for the window scroll event.
+   * Initiates the fadeIn animation and fetches the next page of search results if scrolled to the bottom.
+   * @param event The scroll event object.
+   */
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     // Trigger the fadeIn animation
@@ -109,20 +114,28 @@ export class SearchResultComponent {
    * Adds 'inView' class to elements that are within the viewport.
    */
   fadeIn() {
-    for (let i = 0; i < this.elementsArray.length; i++) {
-      const elem = this.elementsArray[i];
-      const distInView = elem.getBoundingClientRect().top - window.innerHeight + 20;
-      if (distInView < 0) {
-        // Add 'inView' class to elements within the viewport
-        this.renderer.addClass(elem, 'inView');
+    // Ensure that elementsArray is not null or undefined before proceeding
+    if (this.elementsArray) {
+      // Loop through each element in the elementsArray
+      for (let i = 0; i < this.elementsArray.length; i++) {
+        // Get the current element
+        const elem = this.elementsArray[i];
+        // Calculate the distance of the element from the top of the viewport
+        const distInView =
+          elem.getBoundingClientRect().top - window.innerHeight + 20;
+        // If the element is in view (above the bottom of the viewport)
+        if (distInView < 0) {
+          // Add the 'inView' class to the element to trigger the fade-in animation
+          this.renderer.addClass(elem, 'inView');
+        }
       }
     }
   }
 
   /**
- * Scrolls through the search results to load more items based on the current page.
- * @param currentPage The current page of search results.
- */
+   * Scrolls through the search results to load more items based on the current page.
+   * @param currentPage The current page of search results.
+   */
   async scrollSearch(currentPage: number) {
     // Show loading indicator
     this.snackbar.showLoading(true);
@@ -134,7 +147,10 @@ export class SearchResultComponent {
         // Check if search query exists
         if (formValue.search) {
           // Fetch search results for the current page
-          const search = await this.movieService.fetchMultiSearch(formValue.search, currentPage);
+          const search = await this.movieService.fetchMultiSearch(
+            formValue.search,
+            currentPage
+          );
           // Store new search results
           this.newSearchArray = search.results;
           // Check if new search results exist
@@ -147,7 +163,8 @@ export class SearchResultComponent {
           this.searchArray.push(...this.newSearchArray);
           // Trigger fade-in animation for new search results
           setTimeout(() => {
-            this.elementsArray = this.element.nativeElement.querySelectorAll('.animated-fade-in');
+            this.elementsArray =
+              this.element.nativeElement.querySelectorAll('.animated-fade-in');
             this.fadeIn();
           }, 500);
         }
@@ -180,14 +197,18 @@ export class SearchResultComponent {
         // Check if search query exists
         if (formValue.search) {
           // Fetch search results for the current page
-          const search = await this.movieService.fetchMultiSearch(formValue.search, this.currentPage);
+          const search = await this.movieService.fetchMultiSearch(
+            formValue.search,
+            this.currentPage
+          );
           // Store new search results
           this.newSearchArray = search.results;
           // Add new search results to the search array
           this.searchArray.push(...this.newSearchArray);
           // Trigger fade-in animation for new search results
           setTimeout(() => {
-            this.elementsArray = this.element.nativeElement.querySelectorAll('.animated-fade-in');
+            this.elementsArray =
+              this.element.nativeElement.querySelectorAll('.animated-fade-in');
             this.fadeIn();
           }, 500);
           // Show notification if no results found
@@ -210,11 +231,11 @@ export class SearchResultComponent {
   }
 
   /**
- * Toggles the favorite status for a show.
- * @param showId The ID of the show.
- * @param mediaType The type of media (movie or TV).
- * @returns A Promise that resolves once the favorite status is toggled.
- */
+   * Toggles the favorite status for a show.
+   * @param showId The ID of the show.
+   * @param mediaType The type of media (movie or TV).
+   * @returns A Promise that resolves once the favorite status is toggled.
+   */
   async toggleFavorite(showId: number, mediaType: string): Promise<void> {
     // Check if the user is logged in
     if (this.globalService.getToken()) {
@@ -224,10 +245,18 @@ export class SearchResultComponent {
         // Check if the show is already a favorite
         if (this.isFavorite(showId, mediaType)) {
           // Remove the show from favorites
-          await this.movieService.removeFavourite(this.userInfo.uuid, showId, mediaType);
+          await this.movieService.removeFavourite(
+            this.userInfo.uuid,
+            showId,
+            mediaType
+          );
         } else {
           // Add the show to favorites
-          await this.movieService.addFavourite(this.userInfo.uuid, showId, mediaType);
+          await this.movieService.addFavourite(
+            this.userInfo.uuid,
+            showId,
+            mediaType
+          );
         }
         // Update usersData after adding or removing favorite
         this.usersData = this.globalService.getUsersData();
@@ -267,5 +296,4 @@ export class SearchResultComponent {
     // Return false if user data is not available or show is not a favorite
     return false;
   }
-
 }
